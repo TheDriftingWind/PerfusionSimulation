@@ -1,0 +1,81 @@
+<template name="student">
+  {{#if currentUser}}
+    <div class="text-center">
+      <h3>Student Controls</h3> 
+    </div>
+    <div class="page-header text-center">
+      <h4>Drug Admin.</h4> 
+    </div>
+
+    <div class = "row btn-row">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="hepaSlider"></div>
+        <span id="hepaAmount">Heparin: {{hepaAmount}}</span> <span>U/kg</span>
+      </div>
+    </div>
+    <div class = "row btn-row">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="phenSlider"></div>
+        <span id="phenAmount">Phenyl: {{phenAmount}}</span> <span>&#956;g</span>
+      </div>
+    </div>
+    <div class = "row btn-row">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="nahcoSlider"></div>
+        <span id="nahcoAmount">NaHCO<sub>3</sub>: {{nahcoAmount}}</span> <span>mEq</span>
+      </div>
+    </div>
+    <div class = "row btn-row">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+         <div class="lidoSlider"></div>
+        <span id="lidoAmount">Lido: {{lidoAmount}}</span> <span>mg</span>
+      </div>
+    </div>
+    <div class = "row btn-row">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="magSlider"></div>
+        <span id="magAmount">Mag: {{magAmount}}</span> <span>g</span>
+      </div>
+    </div>
+    <div class = "row btn-row">
+      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 center-block">
+          <button id="clear" class="btn btn-danger center-block">Clear Selection</button>
+      </div>
+      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 center-block">   
+          <button id="administer" class="btn btn-primary center-block">Administer Drugs</button>
+      </div>
+    </div>
+
+    <div class="page-header text-center" style="margin-top: 45px;">
+      <h4>Gas Flow</h4> 
+    </div>
+
+    <div class="row btn-row">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <button id="sweepUp" class="btn btn-default incr-btn-style"><span class="glyphicon glyphicon-arrow-up"></span></button>
+        <span>Sweep {{sweep}} lpm</span>
+        <button id="sweepDown" class="btn btn-default incr-btn-style"><span class="glyphicon glyphicon-arrow-down"></span></button>
+      </div>
+    </div>
+    <div class = "row btn-row">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <button id="fioUp" class="btn btn-default incr-btn-style"><span class="glyphicon glyphicon-arrow-up"></span></button>
+        <span>FiO2 {{fio}} lpm</span>
+        <button id="fioDown" class="btn btn-default incr-btn-style"><span class="glyphicon glyphicon-arrow-down"></span></button>
+      </div>
+    </div>
+    <!-- Testing purposes -->
+    <!-- <div>
+      {{nahcoAmountdb}}
+      {{nahcoBol}}
+    </div> -->
+    <!-- <div class="row btn-row"> -->
+      <!-- <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <button id="logout" class="btn btn-primary center-block" style="margin-top: 45px;">Logout</button>
+      </div> -->
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <button id="return" class="btn btn-primary center-block" style="margin-top: 45px;">Waiting Room</button>
+      </div>
+    <!-- </div> -->
+  {{/if}}
+</template>

@@ -18,7 +18,7 @@ $(document).ready(function() {
                }
             };
             var title = {
-               text: 'Live random data'   
+               text: 'Random Stuffs'   
             };   
             var xAxis = {
                type: 'datetime',

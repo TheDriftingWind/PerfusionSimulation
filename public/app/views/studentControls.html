@@ -1,0 +1,23 @@
+<template name="studentControls">
+	<div class = "row btn-row">
+	  <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 col-xs-offset-1 col-sm-offset-1 col-md-offset-1 col-lg-offset-1">
+	    <div class="svo2Slider"></div>
+	    <span id="svo2Amount">SVO<sub>2</sub>: {{svo2Amount}}</span> <span>%</span>
+	  </div>
+	  <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+	    <div class="bladTempSlider"></div>
+	    <span id="BladTempAmount">Temp: {{bladTempAmount}}</span>
+	  </div>
+	</div>
+	<div class="row btn-row">
+		{{#if pump}}
+		<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 col-xs-offset-2 col-sm-offset-2 col-md-offset-2 col-lg-offset-2">
+			<span id="pumpValue">Pump: </span><span id="pumpValue" style="color:red;"><b>ON</b></span>
+		</div>
+		{{else}}
+		<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 col-xs-offset-2 col-sm-offset-2 col-md-offset-2 col-lg-offset-2">
+			<span id="pumpValue">Pump: </span><span id="pumpValue">OFF</span>
+		</div>
+		{{/if}}
+	</div>
+</template>

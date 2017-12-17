@@ -1,0 +1,76 @@
+<template name="pmd">
+  <div class="pmd">
+    {{#with testingSession}}
+      <div class="col-xs-9 col-sm-9 col-md-9 col-lg 9 pmd-div-left">
+        <div class="row pmd-row pmd-abp">
+          <span class="pmd-title-text">ABP</span>
+          <div class="pmdGraph" style="margin-top: -38px; margin-left: 39px;">
+            {{> highchartsHelper chartId="abpChart" chartWidth="100%" charHeight="100%" chartObject=abpChart}}
+          </div>
+        </div>
+        <div class="row pmd-row pmd-svo2">
+          <span class="pmd-title-text">SVO<sub>2</sub></span>
+          <div class="pmdGraph" style="margin-top: -38px; margin-left: 39px;">
+            {{> highchartsHelper chartId="svo2Chart" chartWidth="100%" charHeight="100%" chartObject=svo2Chart}}
+          </div>
+        </div>
+        <div class="row pmd-row pmd-map">
+          <span class="pmd-title-text">MAP</span>
+          <div class="pmdGraph" style="margin-top: -38px; margin-left: 39px;">
+            {{> highchartsHelper chartId="mapChart" chartWidth="100%" charHeight="100%" chartObject=mapChart}}
+          </div>
+        </div>
+        <div class="row pmd-row pmd-ecg2" style="margin-top: 20px;">
+          <span class="pmd-title-text">ECG <!-- #2 --></span><br>
+          <img src="{{heartRateHelper hr}}" class="ecgLong">
+        </div>
+        <div class="row pmd-row pmd-cvp" style="margin-top: 50px;">
+          <span class="pmd-title-text">CVP</span> <br>
+          <span id="cvp-value" class="pmd-value-text">{{cvp}}</span><br>mmHg
+          <div class="pmdGraph" style="margin-top: -95px; margin-left: 39px;">
+            {{> highchartsHelper chartId="cvpChart" chartWidth="100%" charHeight="100%" chartObject=cvpChart}}
+          </div>
+        </div>
+        <div class="row pmd-row pmd-capno" style="margin-top: 20px;">
+          <span class="pmd-title-text">Capnograph</span> <br>
+          <span id="cap-value" class="pmd-value-text">{{cap}}</span> <br>%
+          <div id="cap" class="pmdGraph" style="margin-top: -95px; margin-left: 39px;">
+            {{> highchartsHelper chartId="capChart" chartWidth="100%" charHeight="100%" chartObject=capChart}}
+          </div>
+        </div>
+        <div class="row pmd-row pmd-ecg1">
+          <!-- <span class="pmd-title-text">ECG #1</span> <br> -->
+          <!-- <img src="{{heartRateHelper hr}}" class="ecgShort"> -->
+        </div>
+      </div>
+
+      <div class="col-xs-3 col-sm-3 col-md-3 col-lg 3 pmd-div-right">
+        <div class="row pmd-row pmd-abp">
+          <span id="abp-value" class="pmd-value-text">{{abp}} / {{abpHelper abp}}</span> mmHg
+        </div>
+        <div class="row pmd-row pmd-svo2">
+          <span id="svo2-value" class="pmd-value-text">{{svo2}}</span> %
+        </div>
+        <div class="row pmd-row pmd-map">
+          <span id="map-value" class="pmd-value-text">{{map}}</span> mmHg
+        </div>
+        <div class="row pmd-row pmd-bis">
+          <span class="pmd-title-text">BIS</span> <br>
+          <span id="bis-value" class="pmd-value-text">{{bis}}</span>
+        </div>
+        <div class="row pmd-row pmd-alp">
+          <span class="pmd-title-text">ALP</span> <br>
+          <span id="alp-value" class="pmd-value-text">{{alp}}</span> mmHg
+        </div>
+        <div class="row pmd-row pmd-temps">
+          <span class="pmd-title-text">Temperatures</span> <br>
+          <span id="bladtemp-value" class="pmd-value-text">{{bladTemp}}</span> ºC / <span id="esotemp-value" class="pmd-value-text">{{esoTemp}}</span> ºC
+        </div>
+        <div class="row pmd-row pmd-ecg2">
+          Empty because the ECG image will extend all the way over to this side!
+        </div>
+      </div>
+      {{/with}}
+    </div>
+
+</template>

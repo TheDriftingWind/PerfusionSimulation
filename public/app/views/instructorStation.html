@@ -1,0 +1,20 @@
+<!-- This template is an aggregator of the three component templates of the instructor station -->
+<template name="instructorstation">
+  <div class="row">
+    <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+      <div class="vitals">
+      	{{> vitalMonitor}}
+      </div>
+      	<br>
+      	{{> heartRateButtons}}
+        <div class="studentActions">
+          {{> studentActions}}
+        </div>
+    </div>
+    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+      {{> instructorIncr}}
+      {{> instructorEmerg}}
+    </div>
+  </div>
+
+</template>

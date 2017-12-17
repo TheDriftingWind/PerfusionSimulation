@@ -1,0 +1,27 @@
+<template name="portal">
+
+  <h1>Student Portal</h1>
+
+  <table class="table table-bordered table-hover">
+    <thead>
+      <th>Test #</th>
+      <th>Test Topic</th>
+      <th>View Results</th>
+    </thead>
+    <tbody>
+      {{#each getStudentTests}}
+        {{> studentPortalRow}}
+      {{/each}}
+    </tbody>
+  </table>
+  {{> upload_bootstrap }}
+
+</template>
+
+<template name="studentPortalRow">
+  <tr>
+    <td>Number</td>
+    <td>{{testName}}</td>
+    <td><a href="{{pathFor 'results'}}">{{this._id}}</a></td>
+  </tr>
+</template>

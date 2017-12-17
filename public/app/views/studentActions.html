@@ -1,0 +1,21 @@
+<template name="studentActions">
+	<div class="page-header col-xs=12 col-sm-12 col-md-12 col-lg-12" style="text-align: center;">
+        <h4>Student Actions</h4>
+	</div>
+	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="text-align:center;">
+	{{#each getMessages}}
+        Student Administered <b class="studentActionsBold">{{amount}}{{units}}</b> of <b class="studentActionsBold">{{name}}</b> 
+        <br>
+        
+  {{/each}}
+  {{> sAlert}}
+  {{alert}}
+
+
+  	</div>
+</template>
+<!-- 
+{{#if magBol}}
+        {{> sAlert}}
+        {{alert}}
+      {{/if}} -->

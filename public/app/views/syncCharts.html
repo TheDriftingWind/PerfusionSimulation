@@ -1,0 +1,219 @@
+<div class="row">
+   <style>
+      .button#b1{
+      background-color: #4CAF50;
+      border: none;
+      color: white;
+      padding: 10px 10px;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 4px 2px;
+      cursor: pointer;
+      position: absolute; right: 0;
+      margin-right: 24%;
+      }
+      .button#b2 {
+      background-color: #bd0f1c;
+      border: none;
+      color: white;
+      padding: 10px 10px;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 4px 2px;
+      cursor: pointer;
+      position: absolute; right: 0;
+      }
+   </style>
+   <div class="col-lg-5 col-md-5 col-lg-offset-1 col-md-offset-1">
+      <p style="font-size:30px; color:#bd0f1c; text-align: center"><b>Data Portal<b></p>
+   </div>
+   <div class="col-lg-5 col-md-5">
+      <button class="button" id=b1><i class="fa fa-users" style="font-size:16px; "></i> Waiting Room</button>
+      <button class="button" id="b2"><i class="fa fa-download" style="font-size:16px; "></i> Export Data</button>
+   </div>
+</div>
+<hr>
+<div class="row">
+    <div class="col-lg-6 col-md-6" style="padding-left: 5%">
+        <h3> Instructor Input to Student Drug Administration </h3>
+       <div id = "syncContainer" ng-controller="chartController">
+          <script>
+             /*
+             The purpose of this demo is to demonstrate how multiple charts on the same page can be linked
+             through DOM and Highcharts events and API methods. It takes a standard Highcharts config with a
+             small variation for each data set, and a mouse/touch event handler to bind the charts together.
+             */
+             
+             
+             
+             /**
+             * In order to synchronize tooltips and crosshairs, override the
+             * built-in events with handlers defined on the parent element.
+             */
+             $(document).ready(function() {
+               $(window).ready(function() {
+                   $('#syncContainer').bind('mousemove touchmove touchstart', function (e) {
+                       for (let i = 0; i < Highcharts.charts.length; i++) {
+                           let chart = Highcharts.charts[i];
+             let event = chart.pointer.normalize(e.originalEvent); // Find coordinates within the chart
+             let point = chart.series[0].searchPoint(event, true); // Get the hovered point
+             
+             if (point) {
+               point.highlight(e);
+             }
+             }
+             });
+             /**
+             * Override the reset function, we don't need to hide the tooltips and crosshairs.
+             */
+             Highcharts.Pointer.prototype.reset = function () {
+               return undefined;
+             };
+             
+             /**
+             * Highlight a point by showing tooltip, setting hover state and draw crosshair
+             */
+             Highcharts.Point.prototype.highlight = function (event) {
+             this.onMouseOver(); // Show the hover marker
+             this.series.chart.tooltip.refresh(this); // Show the tooltip
+             this.series.chart.xAxis[0].drawCrosshair(event, this); // Show the crosshair
+             };
+             
+             /**
+             * Synchronize zooming through the setExtremes event handler.
+             */
+             function syncExtremes(e) {
+               var thisChart = this.chart;
+             
+             if (e.trigger !== 'syncExtremes') { // Prevent feedback loop
+               Highcharts.each(Highcharts.charts, function (chart) {
+                   if (chart !== thisChart) {
+                     if (chart.xAxis[0].setExtremes) { // It is null while updating
+                       chart.xAxis[0].setExtremes(e.min, e.max, undefined, false, { trigger: 'syncExtremes' });
+                   }
+               }
+             });
+             }
+             }
+             
+             // Get the data. The contents of the data file can be viewed at
+             // https://github.com/highcharts/highcharts/blob/master/samples/data/activity.json
+             var activity = $('[ng-controller="chartController"]').scope().getFormattedChartData();
+             console.log(activity);
+             $.each(activity.datasets, function (i, dataset) {
+             
+             // Add X values
+             dataset.data = Highcharts.map(dataset.data, function (val, j) {
+               return [activity.xData[j], val];
+             });
+             
+             $('<div class="chart">')
+             .appendTo('#syncContainer')
+             .highcharts({
+               chart: {
+                         marginLeft: 40, // Keep all charts left aligned
+                         spacingTop: 10,
+                         spacingBottom: 10,
+                         width: 550,
+                         height: 100
+                     },
+                     title: {
+                       text: dataset.name,
+                       align: 'left',
+                       margin: 0,
+                       x: 30
+                   },
+                   credits: {
+                       enabled: false
+                   },
+                   legend: {
+                       enabled: false
+                   },
+                   xAxis: {
+                       crosshair: true,
+                       events: {
+                           setExtremes: syncExtremes
+                       },
+                       labels: {
+                           format: '{value} seconds'
+                       }
+                   },
+                   yAxis: {
+                       title: {
+                           text: null
+                       }
+                   },
+                   tooltip: {
+                       positioner: function () {
+                           return {
+                                 x: this.chart.chartWidth - this.label.width, // right aligned
+                                 y: 10 // align to title
+                             };
+                         },
+                         borderWidth: 0,
+                         backgroundColor: 'none',
+                         pointFormat: '{point.y}',
+                         headerFormat: '',
+                         shadow: false,
+                         style: {
+                           fontSize: '18px'
+                       },
+                       valueDecimals: dataset.valueDecimals
+                   },
+                   series: [{
+                       data: dataset.data,
+                       name: dataset.name,
+                       type: dataset.type,
+                       color: Highcharts.getOptions().colors[i],
+                       fillOpacity: 0.3,
+                       tooltip: {
+                           valueSuffix: ' ' + dataset.unit
+                       }
+                   }]
+               });
+             });
+             });
+             });
+          </script>
+       </div>
+    </div>
+   <div class="col-lg-6 col-md-6" id="interventionContainer">
+      <style>
+         table, th, td {
+         border: 1px solid black;
+         padding: 5px;
+         }
+         table {
+         width:90%;
+         border-spacing: 5px;
+         }
+         table#t01 tr:nth-child(even) {
+         background-color: #eee;
+         }
+         table#t01 tr:nth-child(odd) {
+         background-color:#fff;
+         }
+         table#t01 th {
+         background-color: grey;
+         color: white;
+         }
+      </style>
+      <h3> Medication Intervention Data </h3>
+      <br>
+      <table id="t01" ng-controller="chartController">
+         <tr>
+            <th>Medication</th>
+            <th>Dose</th>
+            <th>Time Administered</th>
+         </tr>
+         <tr ng-repeat="administration in administrations">
+            <td> {{ administration.drug }} </td>
+            <td> {{ administration.dose }} </td>
+            <td> {{ administration.time }} </td>
+         </tr>
+      </table>
+   </div>
+</div>
+<hr>

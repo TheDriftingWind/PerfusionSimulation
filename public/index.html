@@ -17,30 +17,23 @@
 	<script src = "https://code.highcharts.com/highcharts.js"></script>
 </head>
 <body>
-	
-	<div>Hey there.</div>
+	<!-- <div ng-include="'app/views/nav.html'"></div> -->
 	<div ng-view></div>
-<!-- 	<div id = "chartContainer" style = "width: 550px; height: 400px; margin: 0 auto"></div>
- -->
 
-
-	<!-- <script src = "js/highchart.js"></script> -->
 	<!-- Main Angular Module -->
 	<script src="app/app.js"></script>
 	<script src="app/app.config.js"></script>
 	<script src="app/app.routes.js"></script>
 
 	<!-- Controllers -->
-	<script src="app/controllers/testController.js"></script>
 	<script src="app/controllers/chartController.js"></script>
-	<!-- <script src="app/controllers/checkInController.js"></script>
-	<script src="app/controllers/directionsController.js"></script>
-	<script src="app/controllers/shelterController.js"></script>
- -->
+	<script src="app/controllers/navController.js"></script>
+	<script src="app/controllers/loginController.js"></script>
+	<script src="app/controllers/sessionController.js"></script>
+
 	<!-- Services -->
-	<!-- <script src="app/services/googleMapsFactory.js"></script>
-	<script src="app/services/geolocationFactory.js"></script>
-	<script src="app/services/checkInFactory.js"></script>
-	<script src="app/services/shelterFactory.js"></script> -->
+	<script src="app/services/sessionFactory.js"></script>
+	<script src="app/services/administrationFactory.js"></script>
+
 </body>
 </html>

@@ -1,0 +1,99 @@
+<template name="vitalMonitor">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="row">
+          <div class="col-sm-9">
+            <!-- <span class="ecgLabel">ECG</span>
+            <div class="chart" style="margin-top: -25px; margin-left: 60px;" id="ecg"></div> -->
+            {{#if $eq ecgGif 1}}
+             <img class="ecgGif" id="NSRGif" src="NSR2.gif">
+            {{/if}}
+            {{#if $eq ecgGif 2}}
+             <img class="ecgGif" id="fasterGif" src ="Faster.gif">
+            {{/if}}
+            {{#if $eq ecgGif 3}}
+             <img class="ecgGif" id="flatlineGif" src ="Flatline.gif">
+            {{/if}}
+            {{#if $eq ecgGif 4}}
+             <img class="ecgGif" id="slowerGif" src ="Slower.gif">
+            {{/if}}
+            {{#if $eq ecgGif 5}}
+             <img class="ecgGif" id="FibGif" src ="VFib.gif">
+            {{/if}}
+          </div>
+          <!-- <div class="col-sm-3">
+            <span class="hrLabel">HR&nbsp;{{bisValue}}</span>
+          </div> -->
+        </div>
+        <div class="row">
+          <div class="col-sm-9">
+        	  <span class="abpLabel">ABP</span>
+        	  <div class="chart" style="margin-top: -25px; margin-left: 60px;" id="abp"></div>
+          </div>
+          <div class="col-sm-3">
+            <span class="abpVal">{{abpValue1}} / {{abpValue2}} mmHg</span>
+            <br>
+            <span class="mapVal"> {{mapValue}} mmHg</span>
+
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-9">
+         	  <span class="svo2Label">SVO<sub>2</sub></span>
+            <div class="chart" style="margin-top: -25px; margin-left: 60px;" id="svo2"></div>
+          </div>
+          <div class="col-sm-3">
+            <span class="svo2Val">{{svo2Value}}%</span>
+          </div>
+        </div>
+        <!-- <div class="row">
+          <div class="col-sm-9">
+            <span class="mapLabel">MAP</span>
+            <div class="chart" style="margin-top: -25px; margin-left: 60px;" id="map"></div>
+          </div>
+          <div class="col-sm-3">
+            <span class="mapVal"> {{mapValue}} mmHg</span>
+          </div>
+        </div> -->
+        <div class="row">
+          <div class="col-sm-9">
+            <span class="cvpLabel">CVP</span>
+            <br>
+            <span class="cvpNumber">{{cvpValue}}</span>
+            <br>
+            <span class="cvpUnit">mmHg</span>
+            <div class="chart" style="margin-top: -75px; margin-left: 60px;" id="cvp"></div>
+          </div>
+          <div class="col-sm-3">
+            <span class="alpLabel">ALP</span>
+            <br>
+            <span class="alpVal">{{alpValue}} mmHg</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-9">
+            <span class="capLabel">CAPN</span>
+            <br>
+            <span class="capVal">{{capnValue}}</span>
+            <br>
+            <span class="capUnit">mmHg</span>
+            <!-- <div class="chart" style="margin-top: -50px; margin-left: 60px;" id="cap"></div> -->
+            {{#if pump}}
+            <img style="margin-top: -50px; margin-left: 70px;" class="capGif" id="ecgGif" src ="CapnographFlat.gif">
+            {{else}}
+            <img style="margin-top: -50px; margin-left: 70px;" class="capGif" id="ecgGif" src ="Capnograph.gif">
+            {{/if}}
+          </div>
+          <div class="col-sm-3">
+            <span class="tempLabel">Temp &nbsp;</span>
+            <span class="tempVal">{{bTempValue}}&#8451; / {{eTempValue}}&#8451;</span>
+          </div>
+          <div class="row">
+            <div class="col-sm-3 col-sm-offset-9" style="margin-top:-35px;">
+              <span class="bisLabel">BIS&nbsp;{{bisValue}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</template>
