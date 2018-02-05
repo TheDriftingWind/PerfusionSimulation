@@ -4,9 +4,9 @@ var https = require('https');
 var request = require('request');
 const baseUrl = 'https://api.mlab.com/api/1/';
 const dbName = 'perfusion-simulation';
-const key = '3uytyPKXCcUK5QN5wWVr0d78DAw1uPvs';
+const key = '8Cdq_FGDWsgXwB_oHPpnKByHWT3mkB5m';
 const collection = 'Session';
-const temp = 'https://api.mlab.com/api/1/databases/perfusion-simulation/collections/Session?apiKey=3uytyPKXCcUK5QN5wWVr0d78DAw1uPvs';
+const temp = 'https://api.mlab.com/api/1/databases/perfusion-simulation/collections/Session?apiKey=8Cdq_FGDWsgXwB_oHPpnKByHWT3mkB5m';
 
 router.get('/', function(req, res){
     https.get(temp, (httpRes) => {

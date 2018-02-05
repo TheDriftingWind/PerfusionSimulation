@@ -5,7 +5,7 @@ var request = require('request');
 const baseUrl = 'https://api.mlab.com/api/1/';
 const dbName = 'perfusion-simulation';
 const key = '3uytyPKXCcUK5QN5wWVr0d78DAw1uPvs';
-const temp = 'https://api.mlab.com/api/1/databases/perfusion-simulation/collections/Administration?apiKey=3uytyPKXCcUK5QN5wWVr0d78DAw1uPvs';
+const temp = 'https://api.mlab.com/api/1/databases/perfusion-simulation/collections/Administration?apiKey=8Cdq_FGDWsgXwB_oHPpnKByHWT3mkB5m';
 
 router.get('/', function(req, res){
     https.get(temp, (httpRes) => {

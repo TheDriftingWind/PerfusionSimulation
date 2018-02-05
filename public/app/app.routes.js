@@ -6,7 +6,7 @@ routeConfigSettings.$inject = ['$routeProvider'];
 
 function routeConfigSettings($routeProvider){
 	$routeProvider.when('/', {
-		templateUrl: 'app/views/login.html',
+		templateUrl: 'app/views/instructorIncr.html',
 		controller: 'loginController'
 	})
 	.when('/chart', {
