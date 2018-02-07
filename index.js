@@ -13,7 +13,7 @@ var chatSocket = require('./sockets/sessionSocket');
 
 
 var app = express();
-	
+
 app.use(morgan('dev'))
 	.use(express.static('public'))
 	.use(cookieParser()) // read cookies (needed for auth)
@@ -27,4 +27,3 @@ var server = app.listen(port, function() {
 	console.log('Sever running at localhost:' + port);
 	chatSocket(server);
 });
-	
