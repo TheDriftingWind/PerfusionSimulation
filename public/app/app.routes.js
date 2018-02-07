@@ -13,6 +13,10 @@ function routeConfigSettings($routeProvider){
 		templateUrl: 'app/views/highchart.html',
 		controller: 'chartController'
 	})
+	.when('/test', {
+		templateUrl: 'app/views/test.html',
+		controller: 'TestController'
+	})
 	.when('/sync', {
 		templateUrl: 'app/views/syncCharts.html',
 		controller: 'chartController'
