@@ -10,19 +10,39 @@ function initSocket(server){
 		
 		console.log('made socket connection', socket.id);
 
-	    socket.on('v1', function(data){
+	    socket.on('abp', function(data){
 	    	console.log(data.value)
-	        io.sockets.emit('v1', data);
+	        io.sockets.emit('abp', data);
 	    });
 
-	    socket.on('v2', function(data){
+	    socket.on('cap', function(data){
 	    	console.log(data.value)
-	        io.sockets.emit('v2', data);
+	        io.sockets.emit('cap', data);
 	    });
 
-	    socket.on('v3', function(data){
+	    socket.on('bis', function(data){
 	    	console.log(data.value)
-	        io.sockets.emit('v3', data);
+	        io.sockets.emit('bis', data);
+	    });
+
+	    socket.on('svo2', function(data){
+	    	console.log(data.value)
+	        io.sockets.emit('svo2', data);
+	    });
+
+	    socket.on('bld', function(data){
+	    	console.log(data.value)
+	        io.sockets.emit('bld', data);
+	    });
+
+	    socket.on('eso', function(data){
+	    	console.log(data.value)
+	        io.sockets.emit('eso', data);
+	    });
+
+	    socket.on('cvp', function(data){
+	    	console.log(data.value)
+	        io.sockets.emit('cvp', data);
 	    });
 
 	    socket.on('disconnect', function(data){

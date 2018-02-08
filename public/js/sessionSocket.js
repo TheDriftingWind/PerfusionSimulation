@@ -1,57 +1,114 @@
 // Make connection
 var socket = io.connect(window.location.href);
 // Query DOM
-var v1 = document.getElementById('v1'),
-      v2 = document.getElementById('v2'),
-      v3 = document.getElementById('v3');
+var abp = document.getElementById('abp'),
+      cap = document.getElementById('cap'),
+      bis = document.getElementById('bis'),
+      bld = document.getElementById('bld'),
+      svo2 = document.getElementById('svo2'),
+      eso = document.getElementById('eso'),
+      cvp = document.getElementById('cvp');
 
-var v1Up = document.getElementById('v1Up'),
-      v1Down = document.getElementById('v1Down');
+var abpUp = document.getElementById('abpUp'),
+      abpDown = document.getElementById('abpDown');
 
-var v2Up = document.getElementById('v2Up'),
-      v2Down = document.getElementById('v2Down');
+var capUp = document.getElementById('capUp'),
+      capDown = document.getElementById('capDown');
 
-var v3Up = document.getElementById('v3Up'),
-      v3Down = document.getElementById('v3Down');
+var bisUp = document.getElementById('bisUp'),
+      bisDown = document.getElementById('bisDown');
 
+var bladTempDown = document.getElementById('bladTempDown'),
+      bladTempUp = document.getElementById('bladTempUp');
+
+var svo2Up = document.getElementById('svo2Up'),
+      svo2Down = document.getElementById('svo2Down');
+
+var esoTempUp = document.getElementById('esoTempUp'),
+      esoTempDown = document.getElementById('esoTempDown');
+
+var cvpUp = document.getElementById('cvpUp'),
+      cvpDown = document.getElementById('cvpDown');
 
 // Emit events
-v1Up.addEventListener('click', function(){
-  socket.emit('v1', {value: v1.textContent * 1 + 10});
+abpUp.addEventListener('click', function(){
+  socket.emit('abp', {value: abp.textContent * 1 + 10});
 });
-v1Down.addEventListener('click', function(){
-  socket.emit('v1', {value: v1.textContent * 1 - 10});
-});
-
-v2Up.addEventListener('click', function(){
-  socket.emit('v2', {value: v2.textContent * 1 + 20});
-});
-v2Down.addEventListener('click', function(){
-  socket.emit('v2', {value: v2.textContent * 1 - 20});
+abpDown.addEventListener('click', function(){
+  socket.emit('abp', {value: abp.textContent * 1 - 10});
 });
 
-v3Up.addEventListener('click', function(){
-  socket.emit('v3', {value: v3.textContent * 1 + 30});
+capUp.addEventListener('click', function(){
+  socket.emit('cap', {value: cap.textContent * 1 + 10});
 });
-v3Down.addEventListener('click', function(){
-  socket.emit('v3', {value: v3.textContent * 1- 30});
+capDown.addEventListener('click', function(){
+  socket.emit('cap', {value: cap.textContent * 1 - 10});
+});
+
+bisUp.addEventListener('click', function(){
+  socket.emit('bis', {value: bis.textContent * 1 + 10});
+});
+bisDown.addEventListener('click', function(){
+  socket.emit('bis', {value: bis.textContent * 1- 10});
+});
+
+bladTempUp.addEventListener('click', function(){
+  socket.emit('bld', {value: bld.textContent * 1 + 10});
+});
+bladTempDown.addEventListener('click', function(){
+  socket.emit('bld', {value: bld.textContent * 1 - 10});
+});
+
+svo2Up.addEventListener('click', function(){
+  socket.emit('svo2', {value: svo2.textContent * 1 + 10});
+});
+svo2Down.addEventListener('click', function(){
+  socket.emit('svo2', {value: svo2.textContent * 1 - 10});
+});
+
+esoTempUp.addEventListener('click', function(){
+  socket.emit('eso', {value: eso.textContent * 1 + 10});
+});
+esoTempDown.addEventListener('click', function(){
+  socket.emit('eso', {value: eso.textContent * 1- 10});
+});
+
+cvpUp.addEventListener('click', function(){
+  socket.emit('cvp', {value: cvp.textContent * 1 + 10});
+});
+cvpDown.addEventListener('click', function(){
+  socket.emit('cvp', {value: cvp.textContent * 1 - 10});
 });
 
 
 // Listen for events
-socket.on('v1', function(data){
-      console.log(data.value)
-      v1.textContent = data.value;
+socket.on('abp', function(data){
+      abp.textContent = data.value;
 });
 
-socket.on('v2', function(data){
-      console.log(data.value)
-      v2.textContent = data.value;
+socket.on('cap', function(data){
+      cap.textContent = data.value;
 });
 
-socket.on('v3', function(data){
-      console.log(data.value)
-      v3.textContent = data.value;
+socket.on('bis', function(data){
+      bis.textContent = data.value;
 });
+
+socket.on('bld', function(data){
+      bld.textContent = data.value;
+});
+
+socket.on('svo2', function(data){
+      svo2.textContent = data.value;
+});
+
+socket.on('eso', function(data){
+      eso.textContent = data.value;
+});
+
+socket.on('cvp', function(data){
+      cvp.textContent = data.value;
+});
+
 
 
