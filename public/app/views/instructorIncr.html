@@ -35,64 +35,237 @@
 </div>
 <div class="page-header"></div>
 
-<dir class="col-lg-6 col-md-6">
-   <div class="incrBtn">
-   <div class="" style="text-align: left;">
-      <h3 style="margin-bottom: 0">Instructor Controls</h3>
-   </div>
-   <div class="page-header" style="text-align: left;">
-      <h4>Vital Sign Control</h4>
-   </div>
-   <script>
-      $(document).ready(function(){
-          $('[data-toggle="tooltip"]').tooltip();
-      });
-   </script>
-   <div class="row btn-row">
-      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-         <button id="abpUp" class="btn btn-default incr-btn-style"><span class="glyphicon glyphicon-plus"><b>10</b></span></button>
-         <!--<span class="tooltip">ABP</span>-->
-         <a href="#" data-toggle="tooltip" title="0 - 200mmHg">ABP</a>: <span id="abp">0</span>
-         <button id="abpDown" class="btn btn-default incr-btn-style"><span class="glyphicon glyphicon-minus"><b>10</b></span></button>
-      </div>
-      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-         <button id="svo2Up" class="btn btn-default incr-btn-style"><span class="glyphicon glyphicon-plus"><b>5</b></span></button>
-         <!--  <span>SVO<sub>2</sub></span>-->
-         <a href="#" data-toggle="tooltip" title="25% - 100%">SVO<sub>2</sub></a>: <span id="svo2">0</span>
-         <button id="svo2Down" class="btn btn-default incr-btn-style"><span class="glyphicon glyphicon-minus"><b>5</b></span></button>
-      </div>
-   </div>
-   <div class="row btn-row">
-      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-         <button id="capUp" class="btn btn-default incr-btn-style"><span class="glyphicon glyphicon-plus"><b>5</b></span></button>
-         <a href="#" data-toggle="tooltip" title="0 - 60mmHg">Cap</a>: <span id="cap">0</span>
-         <button id="capDown" class="btn btn-default incr-btn-style"><span class="glyphicon glyphicon-minus"><b>5</b></span></button>
-      </div>
-      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-         <button id="cvpUp" class="btn btn-default incr-btn-style"><span class="glyphicon glyphicon-plus"><b>1</b></span></button>
-         <a href="#" data-toggle="tooltip" title="0 - 6mmHg">CVP</a>: <span id="cvp">0</span>
-         <button id="cvpDown" class="btn btn-default incr-btn-style"><span class="glyphicon glyphicon-minus"><b>1</b></span></button>
-      </div>
-   </div>
-   <div class="row btn-row">
-      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-         <button id="bisUp" class="btn btn-default incr-btn-style"><span class="glyphicon glyphicon-plus"><b>1</b></span></button>
-         <a href="#" data-toggle="tooltip" title="0 - 100">BIS</a>: <span id="bis">0</span>
-         <button id="bisDown" class="btn btn-default incr-btn-style"><span class="glyphicon glyphicon-minus"><b>1</b></span></button>
-      </div>
-      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-         <button id="esoTempUp" class="btn btn-default incr-btn-style"><span class="glyphicon glyphicon-plus"><b>1</b></span></button>
-         <a href="#" data-toggle="tooltip" title="36℃ - 38℃">ESO</a>: <span id="eso">0</span>
-         <button id="esoTempDown" class="btn btn-default incr-btn-style  "><span class="glyphicon glyphicon-minus"><b>1</b></span></button>
-      </div>
-   </div>
-   <div class="row btn-row">
-      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-         <!--col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xs-offset-3 col-sm-offset-3 col-md-offset-3 col-lg-offset-3-->
-         <button id="bladTempUp" class="btn btn-default incr-btn-style"><span class="glyphicon glyphicon-plus"><b>1</b></span></button>
-         <a href="#" data-toggle="tooltip" title="33.2℃ - 38.2℃">BLD</a>: <span id="bld">0</span>
-         <button id="bladTempDown" class="btn btn-default incr-btn-style"><span class="glyphicon glyphicon-minus"><b>1</b></span></button>
-      </div>
+<div class="col-lg-12 col-md-12" style="">
+  <div class="col-lg-7 col-md-7" style="float:right;border-style: solid;
+border-width: 1px;">
+<div class="" style="text-align: center;">
+<h3 style="margin: 0;float:center;"><b>Instructor Controls</b></h3>
+</div>
+<dir class="col-lg-6 col-md-6" style="float:right;">
+
+  <div class="incrBtn" style="float:right;">
+
+
+<div class="page-header" style="text-align: center;">
+  <h4 style="text-align:left;margin:0;">Vital Sign Controls</h4>
+</div>
+<script>
+$(document).ready(function(){
+  $('[data-toggle="tooltip"]').tooltip();
+});
+</script>
+<!--<div class="row btn-row" style="float:right;">-->
+
+  <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10" style="float:center; width:100%;">
+    <button id="abpUp" class="btn btn-danger incr-btn-style"><span class="glyphicon glyphicon-minus-sign"><b> 10</b></span></button>
+    <!--<span class="tooltip">ABP</span>-->
+    <a href="http://localhost:8080/#" data-toggle="tooltip" title="" data-original-title="Def.">ABP</a><span>: 0</span>
+    <button id="abpDown" class="btn btn-success incr-btn-style"><span class="glyphicon glyphicon-plus-sign"><b> 10</b></span></button>
+  <br>
+<div class="badge" style="width:63%;">0-200mmHg</div>
+  </div>
+  <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9" style="float:center;">
+    <br>
+    <button id="svo2Up" class="btn btn-danger incr-btn-style"><span class="glyphicon glyphicon-minus-sign"><b> 5</b></span></button>
+  <!--  <span>SVO<sub>2</sub></span>-->
+    <a href="http://localhost:8080/#" data-toggle="tooltip" title="" data-original-title="25% - 100%">SVO<sub>2</sub></a><span>: 0</span>
+    <button id="svo2Down" class="btn btn-success incr-btn-style"><span class="glyphicon glyphicon-plus-sign"><b> 5</b></span></button>
+<div class="badge" style="width:83%;">25% - 100%</div>
+  </div>
+
+
+
+  <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9" style="float:center;">
+    <br>
+    <button id="capUp" class="btn btn-danger incr-btn-style"><span class="glyphicon glyphicon-minus-sign"><b> 5</b></span></button>
+    <a href="http://localhost:8080/#" data-toggle="tooltip" title="" data-original-title="0 - 60mmHg">Cap</a><span> : 0</span>
+    <button id="capDown" class="btn btn-success incr-btn-style"><span class="glyphicon glyphicon-plus-sign"><b> 5</b></span></button>
+    <div class="badge" style="width:83%;">0 - 60mmHg</div>
+  </div>
+
+
+  <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9" style="float:center;">
+    <br>
+    <button id="cvpUp" class="btn btn-danger incr-btn-style"><span class="glyphicon glyphicon-minus-sign"><b> 1</b></span></button>
+    <a href="http://localhost:8080/#" data-toggle="tooltip" title="" data-original-title="0 - 6mmHg">Cap</a><span> : 0</span>
+    <button id="cvpDown" class="btn btn-success incr-btn-style"><span class="glyphicon glyphicon-plus-sign"><b> 1</b></span></button>
+    <div class="badge" style="width:83%;">0 - 6mmHg</div>
+  </div>
+
+
+
+
+
+  <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9" style="float:center;">
+    <br>
+    <button id="bisUp" class="btn btn-danger incr-btn-style"><span class="glyphicon glyphicon-minus-sign"><b> 1</b></span></button>
+    <a href="http://localhost:8080/#" data-toggle="tooltip" title="" data-original-title="0 - 100">BIS</a><span> : 0</span>
+    <button id="bisDown" class="btn btn-success incr-btn-style"><span class="glyphicon glyphicon-plus-sign"><b> 1</b></span></button>
+    <div class="badge" style="width:83%;">0 - 100</div>
+  </div>
+  <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9" style="float:center;">
+    <br>
+    <button id="esoTempUp" class="btn btn-danger incr-btn-style"><span class="glyphicon glyphicon-minus-sign"><b> 1</b></span></button>
+    <a href="http://localhost:8080/#" data-toggle="tooltip" title="" data-original-title="36℃ - 38℃">ESO</a><span> : 0</span>
+    <button id="esoTempDown" class="btn btn-success incr-btn-style  "><span class="glyphicon glyphicon-plus-sign"><b> 1</b></span></button>
+    <div class="badge" style="width:83%;">36℃ - 38℃</div>
+  </div>
+
+
+
+
+
+  <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9" style="float:center;margin-bottom:15px;">
+    <br>
+    <!--col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xs-offset-3 col-sm-offset-3 col-md-offset-3 col-lg-offset-3-->
+    <button id="bladTempUp" class="btn btn-danger incr-btn-style"><span class="glyphicon glyphicon-minus-sign"><b> 1</b></span></button>
+    <a href="http://localhost:8080/#" data-toggle="tooltip" title="" data-original-title="33.2℃ - 38.2℃">BLD</a><span> : 0</span>
+    <button id="bladTempDown" class="btn btn-success incr-btn-style"><span class="glyphicon glyphicon-plus-sign"><b> 1</b></span></button>
+    <div class="badge" style="width:83%;">33.2℃ - 38.2℃</div>
+  </div>
+
+<br>
+<br>
+
+</div>
+
+
+<div>
+<div class="page-header" style="text-align: center;">
+<br>
+<br>
+  <h4 style="text-align:left;margin-bottom:0;">ECG Controls</h4>
+</div>
+<div class="btn-group-vertical" style="margin-left:50px;">
+<button type="button" class="btn btn-primary">Normal</button>
+<button type="button" class="btn btn-primary">Slower</button>
+<button type="button" class="btn btn-primary">Faster</button>
+<button type="button" class="btn btn-primary">Flatline</button>
+<button type="button" class="btn btn-primary">Fibbrillation</button>
+</div>
+
+
+</div>
+
 </dir>
+
+<div class="col-lg-6 col-md-6" style="float:right;">
+<div class="col-xs-9 col-sm-9 col-md-9 col-lg-9" style="float:right;margin-bottom:5px;">
+<div class="page-header" style="text-align: center;margin:0;">
+<br>
+<br>
+  <h4 style="text-align:left;margin:0;">Emergency Scenarios</h4>
+</div>
+<div class="btn-group-vertical" style="float:center;">
+<br>
+<button type="button" class="btn btn-danger">Oxyfail</button>
+<button type="button" class="btn btn-danger">Anesthfail</button>
+<button type="button" class="btn btn-danger">InadAnticoag</button>
+<button type="button" class="btn btn-danger">IntravasHemo</button>
+
+</div>
+</div>
+
+<div class="col-xs-9 col-sm-9 col-md-9 col-lg-9" style="float:right;margin-bottom:5px;">
+
+
+<div class="page-header" style="text-align: left;">
+<h4 style="text-align:left;margin:0;">Mechanical Controls</h4>
+</div>
+<!--col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xs-offset-3 col-sm-offset-3 col-md-offset-3 col-lg-offset-3-->
+<span>Pump :</span>
+<br>
+<button class="btn btn-danger incr-btn-style">Off</button>
+<button class="btn btn-success incr-btn-style">On</button>
+</div>
+<div class="col-xs-9 col-sm-9 col-md-9 col-lg-9" style="float:right;margin-bottom:15px;">
+<br>
+<!--col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xs-offset-3 col-sm-offset-3 col-md-offset-3 col-lg-offset-3-->
+<span>Reservoir Valves :</span>
+<br>
+<button class="btn btn-danger incr-btn-style">Close</button>
+<button class="btn btn-success incr-btn-style">Open</button>
+</div>
+<div class="col-xs-9 col-sm-9 col-md-9 col-lg-9" style="float:right;margin-bottom:15px;">
+<br>
+<div class="btn-group-vertical" style="margin-left:0;">
+<span>Scenarios :</span>
+<button type="button" class="btn btn-warning">Blood Vol. Loss</button>
+<button type="button" class="btn btn-warning">Art. Dissection</button>
+<button type="button" class="btn btn-warning">Vaso. Dilation</button>
+<button type="button" class="btn btn-warning">Bypass</button>
+
+</div>
+</div>
+<div class="col-xs-9 col-sm-9 col-md-9 col-lg-9" style="float:right;margin-bottom:15px;">
+<br>
+<!--col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xs-offset-3 col-sm-offset-3 col-md-offset-3 col-lg-offset-3-->
+<span>Pressure :</span>
+<br>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+.slidecontainer {
+  width: 100%;
+}
+
+.slider {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 15px;
+  border-radius: 5px;
+  background: #d3d3d3;
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+}
+
+.slider:hover {
+  opacity: 1;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: #4CAF50;
+  cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: #4CAF50;
+  cursor: pointer;
+}
+</style>
+
+
+
+
+
+<div class="" "slidecontainer"="">
+<input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+<p>Value: <span id="demo">50</span></p>
+</div>
+
+<script>
+var slider = document.getElementById("myRange");
+var output = document.getElementById("demo");
+output.innerHTML = slider.value;
+
+slider.oninput = function() {
+output.innerHTML = this.value;
+}
+</script>
+
+</div>
+</div>
+</div>
+
 </div>
 <script src="../js/sessionSocket.js"></script>
