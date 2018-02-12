@@ -1,14 +1,20 @@
+<link href="https://fonts.googleapis.com/css?family=Exo" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <div class="row">
 <style>
+*{
+  font-family: 'Exo', sans-serif;
+
+}
    .button#b1{
    background-color: #4CAF50;
    border: none;
    color: white;
-   padding: 10px 10px;
+   padding: 4px;
    text-decoration: none;
    display: inline-block;
    font-size: 16px;
-   margin: 4px 2px;
+   margin:6px;
    cursor: pointer;
    position: absolute; right: 0;
    margin-right: 24%;
@@ -17,21 +23,30 @@
    background-color: #bd0f1c;
    border: none;
    color: white;
-   padding: 10px 10px;
+   padding: 4px;
    text-decoration: none;
    display: inline-block;
    font-size: 16px;
-   margin: 4px 2px;
+   margin:6px;
    cursor: pointer;
    position: absolute; right: 0;
+
+   }
+   button:hover{
+     border-radius: 10px;
+
+   }
+   #group1:hover{
+     border-radius: 10px;
+
    }
 </style>
 <div class="col-lg-5 col-md-5 col-lg-offset-1 col-md-offset-1">
-   <p style="font-size:30px; color:#bd0f1c; text-align: center"><b>Instructor Station<b></p>
+   <p style="font-size:30px; color:#bd0f1c; text-align: center;"><b><i class="material-icons" style="font-size:36px">local_hospital</i> Instructor Station<b></p>
 </div>
 <div class="col-lg-5 col-md-5">
-   <button class="button" id=b1><i class="fa fa-users" style="font-size:16px; "></i> Waiting Room</button>
-   <button class="button" id="b2"><i class="fa fa-download" style="font-size:16px; "></i> Export Data</button>
+   <button class="button" id="b1"><i class="material-icons" style="font-size:20px; ">group</i> Waiting Room</button>
+   <button class="button" id="b2"><span class="glyphicon glyphicon-download"style="font-size:20px;"></span> Export Data</button>
 </div>
 <div class="page-header"></div>
 
@@ -39,15 +54,16 @@
   <div class="col-lg-7 col-md-7" style="float:right;border-style: solid;
 border-width: 1px;">
 <div class="" style="text-align: center;">
-<h3 style="margin: 0;float:center;"><b>Instructor Controls</b></h3>
+<h3 style="margin: 0;float:center;padding:5px;"><b>Controls</b></h3>
 </div>
-<dir class="col-lg-6 col-md-6" style="float:right;">
-
-  <div class="incrBtn" style="float:right;">
+<dir class="col-lg-6 col-md-6" style="float:right;margin:0;padding:0px;">
+<!--incrBtn-->
+  <div class="col-lg-11 " style="float:right;border-style: solid;
+border-width: 1px;">
 
 
 <div class="page-header" style="text-align: center;">
-  <h4 style="text-align:left;margin:0;">Vital Sign Controls</h4>
+  <h3 style="text-align:center;margin:0;">Vital Sign Controls</h3>
 </div>
 <script>
 $(document).ready(function(){
@@ -57,91 +73,136 @@ $(document).ready(function(){
 <!--<div class="row btn-row" style="float:right;">-->
 
   <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10" style="float:center; width:100%;">
-    <button id="abpUp" class="btn btn-danger incr-btn-style"><span class="glyphicon glyphicon-minus-sign"><b> 10</b></span></button>
+    <button id="abpUp" class="btn btn-danger incr-btn-style" style="width:33.3%;"><span class="glyphicon glyphicon-minus-sign" style="font-size:20px;"><b>10</b></span></button>
     <!--<span class="tooltip">ABP</span>-->
-    <a href="http://localhost:8080/#" data-toggle="tooltip" title="" data-original-title="Def.">ABP</a><span>: 0</span>
-    <button id="abpDown" class="btn btn-success incr-btn-style"><span class="glyphicon glyphicon-plus-sign"><b> 10</b></span></button>
+    <a href="http://localhost:8080/#" data-toggle="tooltip" title="" data-original-title="Arterial Blood Pressure" style="font-size:20px;display:inline-block; width:30%;text-align:center;">ABP<span style="font-size:20px;">: 0</span></a>
+    <button id="abpDown" class="btn btn-success incr-btn-style"style="width:33.3%;" ><span class="glyphicon glyphicon-plus-sign" style="font-size:20px;"><b>10</b></span></button>
   <br>
-<div class="badge" style="width:63%;">0-200mmHg</div>
+
+<div class="badge" style="width:100%;font-size:16px;">0-200mmHg</div>
+<hr style="display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #000;
+    margin: 1em 0;
+    padding: 0; ">
   </div>
-  <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9" style="float:center;">
+
+  <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10" style="float:center;width:100%;">
     <br>
-    <button id="svo2Up" class="btn btn-danger incr-btn-style"><span class="glyphicon glyphicon-minus-sign"><b> 5</b></span></button>
+    <button id="svo2Up" class="btn btn-danger incr-btn-style"style="width:33.3%;"><span class="glyphicon glyphicon-minus-sign"style="font-size:20px;"><b>5</b></span></button>
   <!--  <span>SVO<sub>2</sub></span>-->
-    <a href="http://localhost:8080/#" data-toggle="tooltip" title="" data-original-title="25% - 100%">SVO<sub>2</sub></a><span>: 0</span>
-    <button id="svo2Down" class="btn btn-success incr-btn-style"><span class="glyphicon glyphicon-plus-sign"><b> 5</b></span></button>
-<div class="badge" style="width:83%;">25% - 100%</div>
+    <a href="http://localhost:8080/#" data-toggle="tooltip" title="" data-original-title="Venous Oxygen Saturation"style="font-size:20px;display:inline-block; width:30%;text-align:center;">SVO<sub>2</sub><span>:0</span></a>
+    <button id="svo2Down" class="btn btn-success incr-btn-style"style="width:33.3%;"><span class="glyphicon glyphicon-plus-sign" style="font-size:20px;"><b>5</b></span></button>
+<div class="badge" style="width:100%;font-size:16px;">25% - 100%</div>
+<hr style="display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #000;
+    margin: 1em 0;
+    padding: 0; ">
   </div>
 
 
 
-  <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9" style="float:center;">
+  <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10" style="float:center;width:100%;">
     <br>
-    <button id="capUp" class="btn btn-danger incr-btn-style"><span class="glyphicon glyphicon-minus-sign"><b> 5</b></span></button>
-    <a href="http://localhost:8080/#" data-toggle="tooltip" title="" data-original-title="0 - 60mmHg">Cap</a><span> : 0</span>
-    <button id="capDown" class="btn btn-success incr-btn-style"><span class="glyphicon glyphicon-plus-sign"><b> 5</b></span></button>
-    <div class="badge" style="width:83%;">0 - 60mmHg</div>
+    <button id="capUp" class="btn btn-danger incr-btn-style"style="width:33.3%;"><span class="glyphicon glyphicon-minus-sign"style="font-size:20px;"><b>5</b></span></button>
+    <a href="http://localhost:8080/#" data-toggle="tooltip" title="" data-original-title="Capnohraph"style="font-size:20px;display:inline-block; width:30%;text-align:center;">CAP<span> : 0</span></a>
+    <button id="capDown" class="btn btn-success incr-btn-style" style="width:33.3%;"><span class="glyphicon glyphicon-plus-sign"style="font-size:20px;"><b>5</b></span></button>
+    <div class="badge" style="width:100%;font-size:16px;">0 - 60mmHg</div>
+    <hr style="display: block;
+        height: 1px;
+        border: 0;
+        border-top: 1px solid #000;
+        margin: 1em 0;
+        padding: 0; ">
+
   </div>
-
-
-  <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9" style="float:center;">
+  <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10" style="float:center;width:100%;">
     <br>
-    <button id="cvpUp" class="btn btn-danger incr-btn-style"><span class="glyphicon glyphicon-minus-sign"><b> 1</b></span></button>
-    <a href="http://localhost:8080/#" data-toggle="tooltip" title="" data-original-title="0 - 6mmHg">Cap</a><span> : 0</span>
-    <button id="cvpDown" class="btn btn-success incr-btn-style"><span class="glyphicon glyphicon-plus-sign"><b> 1</b></span></button>
-    <div class="badge" style="width:83%;">0 - 6mmHg</div>
+    <button id="cvpUp" class="btn btn-danger incr-btn-style"style="width:33.3%;"><span class="glyphicon glyphicon-minus-sign"style="font-size:20px;"><b>1</b></span></button>
+    <a href="http://localhost:8080/#" data-toggle="tooltip" title="" data-original-title="Central Venous Pressure"style="font-size:20px;display:inline-block; width:30%;text-align:center;">CVP<span> : 0</span></a>
+    <button id="cvpDown" class="btn btn-success incr-btn-style"style="width:33.3%;"><span class="glyphicon glyphicon-plus-sign"style="font-size:20px;"><b>1</b></span></button>
+    <div class="badge" style="width:100%;font-size:16px;">0 - 6mmHg</div>
+    <hr style="display: block;
+        height: 1px;
+        border: 0;
+        border-top: 1px solid #000;
+        margin: 1em 0;
+        padding: 0; ">
   </div>
 
 
 
 
 
-  <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9" style="float:center;">
+
+
+  <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10" style="float:center;width:100%;">
     <br>
-    <button id="bisUp" class="btn btn-danger incr-btn-style"><span class="glyphicon glyphicon-minus-sign"><b> 1</b></span></button>
-    <a href="http://localhost:8080/#" data-toggle="tooltip" title="" data-original-title="0 - 100">BIS</a><span> : 0</span>
-    <button id="bisDown" class="btn btn-success incr-btn-style"><span class="glyphicon glyphicon-plus-sign"><b> 1</b></span></button>
-    <div class="badge" style="width:83%;">0 - 100</div>
+    <button id="bisUp" class="btn btn-danger incr-btn-style"style="width:33.3%;"><span class="glyphicon glyphicon-minus-sign"style="font-size:20px;"><b>1</b></span></button>
+    <a href="http://localhost:8080/#" data-toggle="tooltip" title="" data-original-title="Bispectral Analysis"style="font-size:20px;display:inline-block; width:30%;text-align:center;">BIS<span> : 0</span></a>
+    <button id="bisDown" class="btn btn-success incr-btn-style"style="width:33.3%;"><span class="glyphicon glyphicon-plus-sign"style="font-size:20px;"><b>1</b></span></button>
+    <div class="badge" style="width:100%;font-size:16px;">0 - 100</div>
+    <hr style="display: block;
+        height: 1px;
+        border: 0;
+        border-top: 1px solid #000;
+        margin: 1em 0;
+        padding: 0; ">
   </div>
-  <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9" style="float:center;">
+  <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10" style="float:center;width:100%;">
     <br>
-    <button id="esoTempUp" class="btn btn-danger incr-btn-style"><span class="glyphicon glyphicon-minus-sign"><b> 1</b></span></button>
-    <a href="http://localhost:8080/#" data-toggle="tooltip" title="" data-original-title="36℃ - 38℃">ESO</a><span> : 0</span>
-    <button id="esoTempDown" class="btn btn-success incr-btn-style  "><span class="glyphicon glyphicon-plus-sign"><b> 1</b></span></button>
-    <div class="badge" style="width:83%;">36℃ - 38℃</div>
+    <button id="esoTempUp" class="btn btn-danger incr-btn-style"style="width:33.3%;"><span class="glyphicon glyphicon-minus-sign"style="font-size:20px;"><b>1</b></span></button>
+    <a href="http://localhost:8080/#" data-toggle="tooltip" title="" data-original-title="Esophageal Temperature"style="font-size:20px;display:inline-block; width:30%;text-align:center;">ESO<span> : 0</span></a>
+    <button id="esoTempDown" class="btn btn-success incr-btn-style  "style="width:33.3%;"><span class="glyphicon glyphicon-plus-sign"style="font-size:20px;"><b>1</b></span></button>
+    <div class="badge" style="width:100%;font-size:16px;">36℃ - 38℃</div>
+    <hr style="display: block;
+        height: 1px;
+        border: 0;
+        border-top: 1px solid #000;
+        margin: 1em 0;
+        padding: 0; ">
   </div>
 
 
 
 
 
-  <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9" style="float:center;margin-bottom:15px;">
+  <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10" style="float:center;width:100%;">
     <br>
     <!--col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xs-offset-3 col-sm-offset-3 col-md-offset-3 col-lg-offset-3-->
-    <button id="bladTempUp" class="btn btn-danger incr-btn-style"><span class="glyphicon glyphicon-minus-sign"><b> 1</b></span></button>
-    <a href="http://localhost:8080/#" data-toggle="tooltip" title="" data-original-title="33.2℃ - 38.2℃">BLD</a><span> : 0</span>
-    <button id="bladTempDown" class="btn btn-success incr-btn-style"><span class="glyphicon glyphicon-plus-sign"><b> 1</b></span></button>
-    <div class="badge" style="width:83%;">33.2℃ - 38.2℃</div>
+    <button id="bladTempUp" class="btn btn-danger incr-btn-style"style="width:33.3%;"><span class="glyphicon glyphicon-minus-sign"style="font-size:20px;"><b>1</b></span></button>
+    <a href="http://localhost:8080/#" data-toggle="tooltip" title="" data-original-title="Bladder Temperature"style="font-size:20px;display:inline-block; width:30%;text-align:center;">BLD<span> : 0</span></a>
+    <button id="bladTempDown" class="btn btn-success incr-btn-style"style="width:33.3%;"><span class="glyphicon glyphicon-plus-sign"style="font-size:20px;"><b>1</b></span></button>
+    <div class="badge" style="width:100%;font-size:16px;">33.2℃ - 38.2℃</div>
+
   </div>
 
-<br>
-<br>
+</br>
 
 </div>
 
 
-<div>
-<div class="page-header" style="text-align: center;">
-<br>
-<br>
-  <h4 style="text-align:left;margin-bottom:0;">ECG Controls</h4>
+<div class="col-lg-11 " style="float:right;border-style: solid;
+border-width: 1px;margin-top:5px;">
+<div class="page-header" style="text-align: center;margin:0;">
+</br>
+  <h3 style="text-align:center;margin-bottom:0;">ECG Controls</h3>
 </div>
-<div class="btn-group-vertical" style="margin-left:50px;">
-<button type="button" class="btn btn-primary">Normal</button>
-<button type="button" class="btn btn-primary">Slower</button>
-<button type="button" class="btn btn-primary">Faster</button>
-<button type="button" class="btn btn-primary">Flatline</button>
-<button type="button" class="btn btn-primary">Fibbrillation</button>
+</br>
+<div class="btn-group-vertical" style="width:100%; font-size:20px;padding:0px;;">
+<button id="group1"type="button" class="btn btn-primary"style="font-size:20px;">Normal</button>
+</br>
+<button id="group1"type="button" class="btn btn-primary"style="font-size:20px;">Slower</button>
+</br>
+<button id="group1"type="button" class="btn btn-primary"style="font-size:20px;">Faster</button>
+</br>
+<button id="group1"type="button" class="btn btn-primary"style="font-size:20px;">Flatline</button>
+</br>
+<button id="group1"type="button" class="btn btn-primary"style="font-size:20px;">Fibbrillation</button>
+</br>
 </div>
 
 
@@ -149,58 +210,69 @@ $(document).ready(function(){
 
 </dir>
 
-<div class="col-lg-6 col-md-6" style="float:right;">
-<div class="col-xs-9 col-sm-9 col-md-9 col-lg-9" style="float:right;margin-bottom:5px;">
+
+<div class="col-lg-6 col-md-6" style="float:right;padding:0px;">
+<div class="col-xs-11 col-sm-11 col-md-11 col-lg-11" style="float:right;border-style: solid;
+border-width: 1px;">
 <div class="page-header" style="text-align: center;margin:0;">
-<br>
-<br>
-  <h4 style="text-align:left;margin:0;">Emergency Scenarios</h4>
+</br>
+</br>
+  <h3 style="text-align:center;margin:0;">Emergency Scenarios</h3>
 </div>
-<div class="btn-group-vertical" style="float:center;">
+<div  class="btn-group-vertical" style="display:block;text-align:center;font-size:20px;">
 <br>
-<button type="button" class="btn btn-danger">Oxyfail</button>
-<button type="button" class="btn btn-danger">Anesthfail</button>
-<button type="button" class="btn btn-danger">InadAnticoag</button>
-<button type="button" class="btn btn-danger">IntravasHemo</button>
+<button id="group1" type="button" class="btn btn-danger"style="font-size:20px;">Oxyfail</button>
+</br>
+<button id="group1"type="button" class="btn btn-danger"style="font-size:20px;">Anesthfail</button>
+</br>
+<button id="group1"type="button" class="btn btn-danger"style="font-size:20px;">InadAnticoag</button>
+</br>
+<button id="group1"type="button" class="btn btn-danger"style="font-size:20px;">IntravasHemo</button>
+</br>
 
 </div>
 </div>
+<div class="col-xs-11 col-sm-11 col-md-11 col-lg-11" style="border-style: solid;
+border-width: 1px;float:right;margin-top:5px;">
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="float:center;text-align:center;">
 
-<div class="col-xs-9 col-sm-9 col-md-9 col-lg-9" style="float:right;margin-bottom:5px;">
 
-
-<div class="page-header" style="text-align: left;">
-<h4 style="text-align:left;margin:0;">Mechanical Controls</h4>
+<div class="page-header" style="text-align:center;">
+<h3 style="text-align:center;margin:0;">Mechanical Controls</h3>
 </div>
 <!--col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xs-offset-3 col-sm-offset-3 col-md-offset-3 col-lg-offset-3-->
-<span>Pump :</span>
-<br>
-<button class="btn btn-danger incr-btn-style">Off</button>
-<button class="btn btn-success incr-btn-style">On</button>
+<span style="font-size:20px;">Pump: </span>
+
+<button class="btn btn-danger incr-btn-style"style="font-size:20px;">Off</button>
+<button class="btn btn-success incr-btn-style"style="font-size:20px;">On</button>
+</br>
 </div>
-<div class="col-xs-9 col-sm-9 col-md-9 col-lg-9" style="float:right;margin-bottom:15px;">
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="float:right; padding:0; text-align:center;">
 <br>
 <!--col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xs-offset-3 col-sm-offset-3 col-md-offset-3 col-lg-offset-3-->
-<span>Reservoir Valves :</span>
-<br>
-<button class="btn btn-danger incr-btn-style">Close</button>
-<button class="btn btn-success incr-btn-style">Open</button>
+<span style="font-size:19px;">All Valves: </span>
+
+<button class="btn btn-danger incr-btn-style"style="font-size:20px;">Close</button>
+<button class="btn btn-success incr-btn-style"style="font-size:20px;">Open</button>
 </div>
-<div class="col-xs-9 col-sm-9 col-md-9 col-lg-9" style="float:right;margin-bottom:15px;">
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="float:center; text-align:center; margin-bottom:15px;">
 <br>
-<div class="btn-group-vertical" style="margin-left:0;">
-<span>Scenarios :</span>
-<button type="button" class="btn btn-warning">Blood Vol. Loss</button>
-<button type="button" class="btn btn-warning">Art. Dissection</button>
-<button type="button" class="btn btn-warning">Vaso. Dilation</button>
-<button type="button" class="btn btn-warning">Bypass</button>
+<div class="btn-group-vertical" style="margin-left:0; text-align:center;width:100%;">
+<span style="font-size:20px;">Scenarios :</span>
+<button id="group1"type="button" class="btn btn-warning"style="font-size:20px;">Blood Vol. Loss</button>
+</br>
+<button id="group1"type="button" class="btn btn-warning"style="font-size:20px;">Art. Dissection</button>
+</br>
+<button id="group1"type="button" class="btn btn-warning"style="font-size:20px;">Vaso. Dilation</button>
+</br>
+<button id="group1"type="button" class="btn btn-warning"style="font-size:20px;">Bypass</button>
 
 </div>
 </div>
-<div class="col-xs-9 col-sm-9 col-md-9 col-lg-9" style="float:right;margin-bottom:15px;">
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="float:center;text-align:center;">
 <br>
 <!--col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xs-offset-3 col-sm-offset-3 col-md-offset-3 col-lg-offset-3-->
-<span>Pressure :</span>
+<span style="font-size:20px;text-align:center;">Pressure :</span>
 <br>
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -250,7 +322,8 @@ $(document).ready(function(){
 
 <div class="" "slidecontainer"="">
 <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
-<p>Value: <span id="demo">50</span></p>
+<p style="font-size:20px;text-align:center;">Value: <span id="demo">50</span></p>
+</div>
 </div>
 
 <script>
