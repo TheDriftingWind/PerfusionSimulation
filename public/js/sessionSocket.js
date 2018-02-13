@@ -1,5 +1,7 @@
 // Make connection
 var socket = io.connect(window.location.href);
+
+var vitals;
 // Query DOM
 var abp = document.getElementById('abp'),
       cap = document.getElementById('cap'),
@@ -32,10 +34,14 @@ var cvpUp = document.getElementById('cvpUp'),
 
 // Emit events
 abpUp.addEventListener('click', function(){
-  socket.emit('abp', {value: abp.textContent * 1 + 10});
+  abp.textContent = abp.textContent * 1 + 10;
+  vitals.abp = abp.textContent;
+  socket.emit('vitals', vitals);
 });
 abpDown.addEventListener('click', function(){
-  socket.emit('abp', {value: abp.textContent * 1 - 10});
+  abp.textContent = abp.textContent * 1 - 10;
+  vitals.abp = abp.textContent;
+  socket.emit('vitals', vitals);
 });
 
 capUp.addEventListener('click', function(){
@@ -81,34 +87,15 @@ cvpDown.addEventListener('click', function(){
 });
 
 
-// Listen for events
-socket.on('abp', function(data){
-      abp.textContent = data.value;
+socket.on('vitals', function(data){
+      vitals = data;
+      var series = Highcharts.charts[0].series[0];
+      var x = 25, y = data.abp;
+      let shift = series.data.length > 100;
+      console.log(series)
+      series.addPoint([new Date().getTime() * 1000, y * 1], true, shift);
 });
 
-socket.on('cap', function(data){
-      cap.textContent = data.value;
-});
-
-socket.on('bis', function(data){
-      bis.textContent = data.value;
-});
-
-socket.on('bld', function(data){
-      bld.textContent = data.value;
-});
-
-socket.on('svo2', function(data){
-      svo2.textContent = data.value;
-});
-
-socket.on('eso', function(data){
-      eso.textContent = data.value;
-});
-
-socket.on('cvp', function(data){
-      cvp.textContent = data.value;
-});
 
 
 
