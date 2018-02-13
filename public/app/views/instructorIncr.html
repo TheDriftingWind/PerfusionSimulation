@@ -47,7 +47,8 @@
 <div class="page-header"></div>
 <div class="col-lg-12 col-md-12" style="">
   <div class="col-lg-5 col-md-5">
-    <div id="container"><script src="../js/abp.js"></script></div>
+    <div id="abpContainer"><script src="../js/abp.js"></script></div>
+    <div id="svo2Container"><script src="../js/svo2.js"></script></div>
   </div>
   <div class="col-lg-7 col-md-7" style="float:right; background-color:#fff;">
 <div class="" style="text-align: center;">
@@ -72,7 +73,7 @@ $(document).ready(function(){
   <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10" style="float:center; width:100%;">
     <button id="abpDown" class="btn btn-danger incr-btn-style" style="width:33.3%;"><span class="glyphicon glyphicon-minus-sign" style="font-size:20px;"><b>10</b></span></button>
     <!--<span class="tooltip">ABP</span>-->
-    <a href="http://localhost:8080/#" data-toggle="tooltip" title="" data-original-title="Arterial Blood Pressure" style="font-size:20px;display:inline-block; width:30%;text-align:center;">ABP: <span style="font-size:20px;" id="abp">0</span></a>
+    <a href="http://localhost:8080/#" data-toggle="tooltip" title="" data-original-title="Arterial Blood Pressure" style="font-size:20px;display:inline-block; width:30%;text-align:center;">ABP: <span style="font-size:20px;" id="abp">120</span></a>
     <button id="abpUp" class="btn btn-success incr-btn-style"style="width:33.3%;" ><span class="glyphicon glyphicon-plus-sign" style="font-size:20px;"><b>10</b></span></button>
   <br>
 
@@ -87,10 +88,10 @@ $(document).ready(function(){
 
   <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10" style="float:center;width:100%;">
     <br>
-    <button id="svo2Up" class="btn btn-danger incr-btn-style"style="width:33.3%;"><span class="glyphicon glyphicon-minus-sign"style="font-size:20px;"><b>5</b></span></button>
+    <button id="svo2Down" class="btn btn-danger incr-btn-style"style="width:33.3%;"><span class="glyphicon glyphicon-minus-sign"style="font-size:20px;"><b>5</b></span></button>
   <!--  <span>SVO<sub>2</sub></span>-->
-    <a href="http://localhost:8080/#" data-toggle="tooltip" title="" data-original-title="Venous Oxygen Saturation"style="font-size:20px;display:inline-block; width:30%;text-align:center;">SVO<sub>2</sub><span>:0</span></a>
-    <button id="svo2Down" class="btn btn-success incr-btn-style"style="width:33.3%;"><span class="glyphicon glyphicon-plus-sign" style="font-size:20px;"><b>5</b></span></button>
+    <a href="http://localhost:8080/#" data-toggle="tooltip" title="" data-original-title="Venous Oxygen Saturation"style="font-size:20px;display:inline-block; width:30%;text-align:center;">SVO<sub>2</sub>: <span id="svo2">75</span></a>
+    <button id="svo2Up" class="btn btn-success incr-btn-style"style="width:33.3%;"><span class="glyphicon glyphicon-plus-sign" style="font-size:20px;"><b>5</b></span></button>
 <div class="badge" style="width:100%;font-size:16px;">25% - 100%</div>
 <hr style="display: block;
     height: 1px;

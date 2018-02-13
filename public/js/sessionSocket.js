@@ -34,12 +34,12 @@ var cvpUp = document.getElementById('cvpUp'),
 
 // Emit events
 abpUp.addEventListener('click', function(){
-  abp.textContent = abp.textContent * 1 + 10;
+  abp.textContent = abp.textContent * 1 + 10 > 200 ? 200 : abp.textContent * 1 + 10;
   vitals.abp = abp.textContent;
   socket.emit('vitals', vitals);
 });
 abpDown.addEventListener('click', function(){
-  abp.textContent = abp.textContent * 1 - 10;
+  abp.textContent = abp.textContent * 1 - 10 < 0 ? 0 : abp.textContent * 1 - 10;
   vitals.abp = abp.textContent;
   socket.emit('vitals', vitals);
 });
@@ -66,10 +66,14 @@ bladTempDown.addEventListener('click', function(){
 });
 
 svo2Up.addEventListener('click', function(){
-  socket.emit('svo2', {value: svo2.textContent * 1 + 10});
+  svo2.textContent = svo2.textContent * 1 + 5 > 100 ? 100 : svo2.textContent * 1 + 5;
+  vitals.svo2 = svo2.textContent;
+  socket.emit('vitals', vitals);
 });
 svo2Down.addEventListener('click', function(){
-  socket.emit('svo2', {value: svo2.textContent * 1 - 10});
+  svo2.textContent = svo2.textContent * 1 - 5 < 25 ? 25 : svo2.textContent * 1 - 5;
+  vitals.svo2 = svo2.textContent;
+  socket.emit('vitals', vitals);
 });
 
 esoTempUp.addEventListener('click', function(){
@@ -89,11 +93,13 @@ cvpDown.addEventListener('click', function(){
 
 socket.on('vitals', function(data){
       vitals = data;
-      var series = Highcharts.charts[0].series[0];
-      var x = 25, y = data.abp;
-      let shift = series.data.length > 100;
-      console.log(series)
-      series.addPoint([new Date().getTime() * 1000, y * 1], true, shift);
+      let time = new Date().getTime();
+      var abpSeries = Highcharts.charts[0].series[0];
+      let abpPoint = Math.random() * ((data.abp * 1 + 5) - (data.abp * 1 - 5)) + (data.abp * 1 - 5);
+      abpSeries.addPoint([time, abpPoint], true, abpSeries.data.length > 100);
+      let svo2Point = Math.random() * ((data.svo2 * 1 + 2.5) - (data.svo2 * 1 - 2.5)) + (data.svo2 * 1 - 2.5);
+      var svo2Series = Highcharts.charts[1].series[0];
+      svo2Series.addPoint([time, svo2Point], true, svo2Series.data.length > 100);
 });
 
 

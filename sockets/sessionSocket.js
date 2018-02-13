@@ -2,10 +2,10 @@ var socket = require('socket.io');
 var request = require('request');
 
 var vitals  = {
-	abp: 0,
+	abp: 120,
 	cap: 0,
 	bis: 0,
-	svo2: 0,
+	svo2: 75,
 	bld: 0,
 	eso: 0,
 	cvp: 0
@@ -19,7 +19,6 @@ function initSocket(server){
 		console.log('made socket connection', socket.id);
 		socket.emit('vitals', vitals)
 		socket.on('vitals', function(data){
-	    	console.log(vitals)
 	    	vitals = data;
 	    });
 

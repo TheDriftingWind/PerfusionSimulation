@@ -4,7 +4,7 @@ Highcharts.setOptions({
     }
 });
 
-Highcharts.chart('abpContainer', {
+Highcharts.chart('svo2Container', {
     chart: {
             defaultSeriesType: 'spline',
             events: {
@@ -23,7 +23,7 @@ Highcharts.chart('abpContainer', {
             enabled: false
         },
         title: {
-            text: 'ABP',
+            text: 'SVO2',
             align: 'left'
         },
         xAxis: {
@@ -36,11 +36,11 @@ Highcharts.chart('abpContainer', {
         yAxis: {
             minPadding: 0.2,
             maxPadding: 0.2,
-            tickInterval: 100,
-            min: 0,
-            max: 200,
+            tickInterval: 25,
+            min: 25,
+            max: 100,
             title: {
-                text: 'mmHg',
+                text: '%',
             }
         },
         credits: {
