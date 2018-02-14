@@ -28,7 +28,8 @@ var abpDisplay = document.getElementById('abpDisplay'),
     bldDisplay = document.getElementById('bldDisplay'),
     svo2Display = document.getElementById('svo2Display'),
     esoDisplay = document.getElementById('esoDisplay'),
-    cvpDisplay = document.getElementById('cvpDisplay');
+    cvpDisplay = document.getElementById('cvpDisplay'),
+    ecgDisplay = document.getElementById('ecgDisplay');
 
 
 var abpUp = document.getElementById('abpUp'),
@@ -183,26 +184,34 @@ ecgNormal.addEventListener('click', function(){
   interval = 20;
   min = 1;
   max = 3;
+  ecgDisplay.textContent = 1.0;
 });
 ecgSlow.addEventListener('click', function(){
   interval = 30;
   min = 1;
   max = 3;
+  ecgDisplay.textContent = 2.0;
+
 });
 ecgFast.addEventListener('click', function(){
   interval = 10;
   min = 1;
   max = 3;
+  ecgDisplay.textContent = 0.5;
+
 });
 ecgFlat.addEventListener('click', function(){
   interval = 99;
   min = 0;
   max = 1;
+  ecgDisplay.textContent = '-';
+
 });
 ecgFib.addEventListener('click', function(){
   interval = 5;
   min = 5;
   max = 1;
+  ecgDisplay.textContent = 0.1;
 });
 
 
