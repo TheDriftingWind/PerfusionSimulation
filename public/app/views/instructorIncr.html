@@ -60,6 +60,11 @@
          <div class="col-lg-3 col-md-3" style="border-style: solid;
             border-width: 1px; background-color:#eff1f4; border-radius:100px;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
             <h4><span id="svo2Display">0</span> %</h4>
+
+         </div>
+         <div class="col-lg-9 col-md-9" >
+      <img id="loadingImage" src="../images/NSR.gif"style="display: ;" />
+      <img id="loadingImage2" src="../images/Slower.gif" style="display:none;" />
          </div>
       </div>
       <div class="col-lg-7 col-md-7" style="float:right; background-color:#fff;">
@@ -177,9 +182,24 @@
                </div>
                </br>
                <div class="btn-group-vertical" style="width:100%; font-size:20px;padding:0px;;">
-                  <button id="group1"type="button" class="btn btn-primary"style="font-size:20px;">Normal</button>
+                 <script type="text/javascript">
+<!--
+    function showImage(clicked_id){
+      if(group1){
+        document.getElementById('loadingImage').style.display="none";
+        document.getElementById('loadingImage2').style.display="";
+      }else if (group2) {
+        document.getElementById('loadingImage').style.display="";
+        document.getElementById('loadingImage2').style.display="none";
+      }
+    }
+
+    -->
+
+    </script>
+                  <button id="group1" onclick="showImage(this.id);" type="button" class="btn btn-primary"style="font-size:20px;">Normal</button>
                   </br>
-                  <button id="group1"type="button" class="btn btn-primary"style="font-size:20px;">Slower</button>
+                  <button id="group2"type="button" onclick="showImage(this.id);" class="btn btn-primary"style="font-size:20px;">Slower</button>
                   </br>
                   <button id="group1"type="button" class="btn btn-primary"style="font-size:20px;">Faster</button>
                   </br>
