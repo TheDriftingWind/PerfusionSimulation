@@ -7,6 +7,11 @@ var ecgSlow = document.getElementById('ecgFast');
 var ecgFlat = document.getElementById('ecgFlat');
 var ecgFib = document.getElementById('ecgFib');
 
+var oxyfail = document.getElementById('oxyfail');
+var anesthfail = document.getElementById('anesthfail');
+var inadAnticoag = document.getElementById('inadAnticoag');
+var intravasHemo = document.getElementById('intravasHemo');
+
 var vitals;
 // Query DOM
 var abpCtrl = document.getElementById('abpCtrl'),
@@ -178,6 +183,21 @@ ecgFlat.addEventListener('click', function(){
   ecgContainer.src = '../images/Flatline.gif';
 });
 ecgFib.addEventListener('click', function(){
+  ecgContainer.src = '../images/VFib.gif';
+});
+
+oxyfail.addEventListener('click', function(){
+  ecgContainer.src = '../images/VFib.gif';
+});
+anesthfail.addEventListener('click', function(){
+  svo2Ctrl.textContent = 30;
+  vitals.svo2 = svo2Ctrl.textContent;
+  socket.emit('vitals', vitals);
+});
+inadAnticoag.addEventListener('click', function(){
+  ecgContainer.src = '../images/VFib.gif';
+});
+intravasHemo.addEventListener('click', function(){
   ecgContainer.src = '../images/VFib.gif';
 });
 
