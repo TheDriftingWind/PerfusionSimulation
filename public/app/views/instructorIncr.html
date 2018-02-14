@@ -61,6 +61,20 @@
             border-width: 1px; background-color:#eff1f4; border-radius:100px;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
             <h4><span id="svo2Display">0</span> %</h4>
          </div>
+         <div class="col-lg-9 col-md-9" style="" id="capContainer">
+            <script src="../js/cap.js"></script>
+         </div>
+         <div class="col-lg-3 col-md-3" style="border-style: solid;
+            border-width: 1px; background-color:#eff1f4; border-radius:100px;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+            <h4><span id="capDisplay">0</span> mmHg</h4>
+         </div>
+         <div class="col-lg-9 col-md-9" id="cvpContainer">
+            <script src="../js/cvp.js"></script>
+         </div>
+         <div class="col-lg-3 col-md-3" style="border-style: solid;
+            border-width: 1px; background-color:#eff1f4; border-radius:100px;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+            <h4><span id="cvpDisplay">0</span> mmHg</h4>
+         </div>
       </div>
       <div class="col-lg-7 col-md-7" style="float:right; background-color:#fff;">
          <div class="" style="text-align: center;">
@@ -109,9 +123,9 @@
                </div>
                <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10" style="float:center;width:100%;">
                   <br>
-                  <button id="capUp" class="btn btn-danger incr-btn-style"style="width:33.3%;"><span class="glyphicon glyphicon-minus-sign"style="font-size:20px;"><b>5</b></span></button>
-                  <a href="http://localhost:8080/#" data-toggle="tooltip" title="" data-original-title="Capnohraph"style="font-size:20px;display:inline-block; width:30%;text-align:center;">CAP<span> : 0</span></a>
-                  <button id="capDown" class="btn btn-success incr-btn-style" style="width:33.3%;"><span class="glyphicon glyphicon-plus-sign"style="font-size:20px;"><b>5</b></span></button>
+                  <button id="capDown" class="btn btn-danger incr-btn-style"style="width:33.3%;"><span class="glyphicon glyphicon-minus-sign"style="font-size:20px;"><b>5</b></span></button>
+                  <a href="http://localhost:8080/#" data-toggle="tooltip" title="" data-original-title="Capnohraph"style="font-size:20px;display:inline-block; width:30%;text-align:center;">CAP: <span id="capCtrl">35</span></a>
+                  <button id="capUp" class="btn btn-success incr-btn-style" style="width:33.3%;"><span class="glyphicon glyphicon-plus-sign" style="font-size:20px;"><b>5</b></span></button>
                   <div class="badge" style="width:100%;font-size:16px;">0 - 60mmHg</div>
                   <hr style="display: block;
                      height: 1px;
@@ -122,10 +136,10 @@
                </div>
                <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10" style="float:center;width:100%;">
                   <br>
-                  <button id="cvpUp" class="btn btn-danger incr-btn-style"style="width:33.3%;"><span class="glyphicon glyphicon-minus-sign"style="font-size:20px;"><b>1</b></span></button>
-                  <a href="http://localhost:8080/#" data-toggle="tooltip" title="" data-original-title="Central Venous Pressure"style="font-size:20px;display:inline-block; width:30%;text-align:center;">CVP<span> : 0</span></a>
-                  <button id="cvpDown" class="btn btn-success incr-btn-style"style="width:33.3%;"><span class="glyphicon glyphicon-plus-sign"style="font-size:20px;"><b>1</b></span></button>
-                  <div class="badge" style="width:100%;font-size:16px;">0 - 6mmHg</div>
+                  <button id="cvpDown" class="btn btn-danger incr-btn-style"style="width:33.3%;"><span class="glyphicon glyphicon-minus-sign"style="font-size:20px;"><b>1</b></span></button>
+                  <a href="http://localhost:8080/#" data-toggle="tooltip" title="" data-original-title="Central Venous Pressure" style="font-size:20px;display:inline-block; width:30%;text-align:center;">CVP: <span id="cvpCtrl">2</span></a>
+                  <button id="cvpUp" class="btn btn-success incr-btn-style"style="width:33.3%;"><span class="glyphicon glyphicon-plus-sign"style="font-size:20px;"><b>1</b></span></button>
+                  <div class="badge" style="width:100%;font-size:16px;">0 - 20mmHg</div>
                   <hr style="display: block;
                      height: 1px;
                      border: 0;
@@ -135,10 +149,10 @@
                </div>
                <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10" style="float:center;width:100%;">
                   <br>
-                  <button id="bisUp" class="btn btn-danger incr-btn-style"style="width:33.3%;"><span class="glyphicon glyphicon-minus-sign"style="font-size:20px;"><b>1</b></span></button>
-                  <a href="http://localhost:8080/#" data-toggle="tooltip" title="" data-original-title="Bispectral Analysis"style="font-size:20px;display:inline-block; width:30%;text-align:center;">BIS<span> : 0</span></a>
-                  <button id="bisDown" class="btn btn-success incr-btn-style"style="width:33.3%;"><span class="glyphicon glyphicon-plus-sign"style="font-size:20px;"><b>1</b></span></button>
-                  <div class="badge" style="width:100%;font-size:16px;">0 - 100</div>
+                  <button id="bisDown" class="btn btn-danger incr-btn-style"style="width:33.3%;"><span class="glyphicon glyphicon-minus-sign"style="font-size:20px;"><b>3</b></span></button>
+                  <a href="http://localhost:8080/#" data-toggle="tooltip" title="" data-original-title="Bispectral Analysis"style="font-size:20px;display:inline-block; width:30%;text-align:center;">BIS: <span id="bisCtrl">50</span></a>
+                  <button id="bisUp" class="btn btn-success incr-btn-style" style="width:33.3%;"><span class="glyphicon glyphicon-plus-sign" style="font-size:20px;"><b>3</b></span></button>
+                  <div class="badge" style="width:100%;font-size:16px;">15 - 65</div>
                   <hr style="display: block;
                      height: 1px;
                      border: 0;
@@ -148,10 +162,10 @@
                </div>
                <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10" style="float:center;width:100%;">
                   <br>
-                  <button id="esoTempUp" class="btn btn-danger incr-btn-style"style="width:33.3%;"><span class="glyphicon glyphicon-minus-sign"style="font-size:20px;"><b>1</b></span></button>
-                  <a href="http://localhost:8080/#" data-toggle="tooltip" title="" data-original-title="Esophageal Temperature"style="font-size:20px;display:inline-block; width:30%;text-align:center;">ESO<span> : 0</span></a>
-                  <button id="esoTempDown" class="btn btn-success incr-btn-style  "style="width:33.3%;"><span class="glyphicon glyphicon-plus-sign"style="font-size:20px;"><b>1</b></span></button>
-                  <div class="badge" style="width:100%;font-size:16px;">36℃ - 38℃</div>
+                  <button id="esoTempDown" class="btn btn-danger incr-btn-style"style="width:33.3%;"><span class="glyphicon glyphicon-minus-sign"style="font-size:20px;"><b>1</b></span></button>
+                  <a href="http://localhost:8080/#" data-toggle="tooltip" title="" data-original-title="Esophageal Temperature" style="font-size:20px;display:inline-block; width:30%;text-align:center;">ESO: <span id="esoCtrl">37</span></a>
+                  <button id="esoTempUp" class="btn btn-success incr-btn-style  "style="width:33.3%;"><span class="glyphicon glyphicon-plus-sign"style="font-size:20px;"><b>1</b></span></button>
+                  <div class="badge" style="width:100%;font-size:16px;">18℃ - 38℃</div>
                   <hr style="display: block;
                      height: 1px;
                      border: 0;
@@ -162,10 +176,10 @@
                <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10" style="float:center;width:100%;">
                   <br>
                   <!--col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xs-offset-3 col-sm-offset-3 col-md-offset-3 col-lg-offset-3-->
-                  <button id="bladTempUp" class="btn btn-danger incr-btn-style"style="width:33.3%;"><span class="glyphicon glyphicon-minus-sign"style="font-size:20px;"><b>1</b></span></button>
-                  <a href="http://localhost:8080/#" data-toggle="tooltip" title="" data-original-title="Bladder Temperature"style="font-size:20px;display:inline-block; width:30%;text-align:center;">BLD<span> : 0</span></a>
-                  <button id="bladTempDown" class="btn btn-success incr-btn-style"style="width:33.3%;"><span class="glyphicon glyphicon-plus-sign"style="font-size:20px;"><b>1</b></span></button>
-                  <div class="badge" style="width:100%;font-size:16px;">33.2℃ - 38.2℃</div>
+                  <button id="bladTempDown" class="btn btn-danger incr-btn-style"style="width:33.3%;"><span class="glyphicon glyphicon-minus-sign"style="font-size:20px;"><b>1</b></span></button>
+                  <a href="http://localhost:8080/#" data-toggle="tooltip" title="" data-original-title="Bladder Temperature" style="font-size:20px;display:inline-block; width:30%;text-align:center;">BLD: <span id="bldCtrl">37</span></a>
+                  <button id="bladTempUp" class="btn btn-success incr-btn-style"style="width:33.3%;"><span class="glyphicon glyphicon-plus-sign"style="font-size:20px;"><b>1</b></span></button>
+                  <div class="badge" style="width:100%;font-size:16px;">18℃ - 38.2℃</div>
                </div>
                </br>
             </div>

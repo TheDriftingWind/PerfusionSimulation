@@ -3,12 +3,12 @@ var request = require('request');
 
 var vitals  = {
 	abp: 120,
-	cap: 0,
-	bis: 0,
+	cap: 35,
+	bis: 50,
 	svo2: 75,
-	bld: 0,
-	eso: 0,
-	cvp: 0
+	bld: 37,
+	eso: 37,
+	cvp: 2
 }
 
 function initSocket(server){

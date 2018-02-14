@@ -4,15 +4,21 @@ var socket = io.connect(window.location.href);
 var vitals;
 // Query DOM
 var abpCtrl = document.getElementById('abpCtrl'),
-      cap = document.getElementById('cap'),
-      bis = document.getElementById('bis'),
-      bld = document.getElementById('bld'),
+      capCtrl = document.getElementById('capCtrl'),
+      bisCtrl = document.getElementById('bisCtrl'),
+      bldCtrl = document.getElementById('bldCtrl'),
       svo2Ctrl = document.getElementById('svo2Ctrl'),
-      eso = document.getElementById('eso'),
-      cvp = document.getElementById('cvp');
+      esoCtrl = document.getElementById('esoCtrl'),
+      cvpCtrl = document.getElementById('cvpCtrl');
 
 var abpDisplay = document.getElementById('abpDisplay'),
-    svo2Display = document.getElementById('svo2Display');
+    capDisplay = document.getElementById('capDisplay'),
+    bisDisplay = document.getElementById('bisDisplay'),
+    bldDisplay = document.getElementById('bldDisplay'),
+    svo2Display = document.getElementById('svo2Display'),
+    esoDisplay = document.getElementById('esoDisplay'),
+    cvpDisplay = document.getElementById('cvpDisplay');
+
 
 var abpUp = document.getElementById('abpUp'),
       abpDown = document.getElementById('abpDown');
@@ -48,64 +54,109 @@ abpDown.addEventListener('click', function(){
 });
 
 capUp.addEventListener('click', function(){
-  socket.emit('cap', {value: cap.textContent * 1 + 10});
+  capCtrl.textContent = capCtrl.textContent * 1 + 5 > 60 ? 60 : capCtrl.textContent * 1 + 5;
+  vitals.cap = capCtrl.textContent;
+  socket.emit('vitals', vitals);
 });
 capDown.addEventListener('click', function(){
-  socket.emit('cap', {value: cap.textContent * 1 - 10});
+  capCtrl.textContent = capCtrl.textContent * 1 - 5 < 0 ? 0 : capCtrl.textContent * 1 - 5;
+  vitals.cap = capCtrl.textContent;
+  socket.emit('vitals', vitals);
 });
 
 bisUp.addEventListener('click', function(){
-  socket.emit('bis', {value: bis.textContent * 1 + 10});
+  bisCtrl.textContent = bisCtrl.textContent * 1 + 3 > 65 ? 65 : bisCtrl.textContent * 1 + 3;
+  vitals.bis = bisCtrl.textContent;
+  socket.emit('vitals', vitals);
 });
 bisDown.addEventListener('click', function(){
-  socket.emit('bis', {value: bis.textContent * 1- 10});
+  bisCtrl.textContent = bisCtrl.textContent * 1 - 3 < 15 ? 15 : bisCtrl.textContent * 1 - 3;
+  vitals.bis = bisCtrl.textContent;
+  socket.emit('vitals', vitals);
 });
 
 bladTempUp.addEventListener('click', function(){
-  socket.emit('bld', {value: bld.textContent * 1 + 10});
+  bldCtrl.textContent = bldCtrl.textContent * 1 + 1 > 38 ? 38 : bldCtrl.textContent * 1 + 1;
+  vitals.bld = bldCtrl.textContent;
+  socket.emit('vitals', vitals);
 });
 bladTempDown.addEventListener('click', function(){
-  socket.emit('bld', {value: bld.textContent * 1 - 10});
+  bldCtrl.textContent = bldCtrl.textContent * 1 - 1 < 18 ? 18 : bldCtrl.textContent * 1 - 1;
+  vitals.bld = bldCtrl.textContent;
+  socket.emit('vitals', vitals);
 });
 
 svo2Up.addEventListener('click', function(){
-  svo2.textContent = svo2.textContent * 1 + 5 > 100 ? 100 : svo2.textContent * 1 + 5;
-  vitals.svo2 = svo2.textContent;
+  svo2Ctrl.textContent = svo2Ctrl.textContent * 1 + 5 > 100 ? 100 : svo2Ctrl.textContent * 1 + 5;
+  vitals.svo2 = svo2Ctrl.textContent;
   socket.emit('vitals', vitals);
 });
 svo2Down.addEventListener('click', function(){
-  svo2.textContent = svo2.textContent * 1 - 5 < 25 ? 25 : svo2.textContent * 1 - 5;
-  vitals.svo2 = svo2.textContent;
+  svo2Ctrl.textContent = svo2Ctrl.textContent * 1 - 5 < 25 ? 25 : svo2Ctrl.textContent * 1 - 5;
+  vitals.svo2 = svo2Ctrl.textContent;
   socket.emit('vitals', vitals);
 });
 
 esoTempUp.addEventListener('click', function(){
-  socket.emit('eso', {value: eso.textContent * 1 + 10});
+  esoCtrl.textContent = esoCtrl.textContent * 1 + 1 > 38 ? 38 : esoCtrl.textContent * 1 + 1;
+  vitals.eso = esoCtrl.textContent;
+  socket.emit('vitals', vitals);
 });
 esoTempDown.addEventListener('click', function(){
-  socket.emit('eso', {value: eso.textContent * 1- 10});
+  esoCtrl.textContent = esoCtrl.textContent * 1 - 1 < 18 ? 18 : esoCtrl.textContent * 1 - 1;
+  vitals.eso = esoCtrl.textContent;
+  socket.emit('vitals', vitals);
 });
 
 cvpUp.addEventListener('click', function(){
-  socket.emit('cvp', {value: cvp.textContent * 1 + 10});
+  cvpCtrl.textContent = cvpCtrl.textContent * 1 + 1 > 20 ? 20 : cvpCtrl.textContent * 1 + 1;
+  vitals.cvp = cvpCtrl.textContent;
+  socket.emit('vitals', vitals);
 });
 cvpDown.addEventListener('click', function(){
-  socket.emit('cvp', {value: cvp.textContent * 1 - 10});
+  cvpCtrl.textContent = cvpCtrl.textContent * 1 - 1 < 0 ? 0 : cvpCtrl.textContent * 1 - 1;
+  vitals.cvp = cvpCtrl.textContent;
+  socket.emit('vitals', vitals);
 });
 
 
 socket.on('vitals', function(data){
       vitals = data;
       let time = new Date().getTime();
-      var abpSeries = Highcharts.charts[0].series[0];
-      let abpPoint = Math.random() * ((data.abp * 1 + 5) - (data.abp * 1 - 5)) + (data.abp * 1 - 5);
-      abpSeries.addPoint([time, abpPoint], true, abpSeries.data.length > 100);
-      let svo2Point = Math.random() * ((data.svo2 * 1 + 2.5) - (data.svo2 * 1 - 2.5)) + (data.svo2 * 1 - 2.5);
-      var svo2Series = Highcharts.charts[1].series[0];
-      svo2Series.addPoint([time, svo2Point], true, svo2Series.data.length > 100);
 
-      abpDisplay.textContent = Math.round(abpPoint * 100) / 100;
-      svo2Display.textContent = Math.round(svo2Point * 100) / 100;
+      let abpSeries = Highcharts.charts[0].series[0];
+      let svo2Series = Highcharts.charts[1].series[0];
+      let capSeries = Highcharts.charts[2].series[0];
+      let cvpSeries = Highcharts.charts[3].series[0];
+
+      let abpPoint = Math.random() * ((data.abp * 1 + 5) - (data.abp * 1 - 5)) + (data.abp * 1 - 5);
+      let svo2Point = Math.random() * ((data.svo2 * 1 + 2.5) - (data.svo2 * 1 - 2.5)) + (data.svo2 * 1 - 2.5);
+      let capPoint = Math.random() * ((data.cap * 1 + 2.5) - (data.cap * 1 - 2.5)) + (data.cap * 1 - 2.5);
+      let cvpPoint = Math.random() * ((data.cvp * 1 + 0.5) - (data.cvp * 1 - 0.5)) + (data.cvp * 1 - 0.5);
+      let bisPoint = Math.random() * ((data.bis * 1 + 1.5) - (data.bis * 1 - 1.5)) + (data.bis * 1 - 1.5);
+      let esoPoint = Math.random() * ((data.eso * 1 + 0.5) - (data.eso * 1 - 0.5)) + (data.eso * 1 - 0.5);
+      let bldPoint = Math.random() * ((data.bld * 1 + 0.5) - (data.bld * 1 - 0.5)) + (data.bld * 1 - 0.5);
+      
+      abpPoint = abpPoint > data.abp ? Math.min(Math.round(abpPoint * 100) / 100, 200) : Math.max(Math.round(abpPoint * 100) / 100, 0);
+      svo2Point = svo2Point > data.svo2 ? Math.min(Math.round(svo2Point * 100) / 100, 100) : Math.max(Math.round(svo2Point * 100) / 100, 25);
+      capPoint = capPoint > data.cap ? Math.min(Math.round(capPoint * 100) / 100, 70) : Math.max(Math.round(capPoint * 100) / 100, 0);
+      cvpPoint = cvpPoint > data.cvp ? Math.min(Math.round(cvpPoint * 100) / 100, 20) : Math.max(Math.round(cvpPoint * 100) / 100, 0);
+      bisPoint = bisPoint > data.bis ? Math.min(Math.round(bisPoint * 100) / 100, 65) : Math.max(Math.round(bisPoint * 100) / 100, 15);
+      esoPoint = esoPoint > data.eso ? Math.min(Math.round(esoPoint * 100) / 100, 38) : Math.max(Math.round(esoPoint * 100) / 100, 18);
+      bldPoint = bldPoint > data.bld ? Math.min(Math.round(bldPoint * 100) / 100, 38) : Math.max(Math.round(bldPoint * 100) / 100, 18);
+     
+      abpSeries.addPoint([time, abpPoint], true, abpSeries.data.length > 100);
+      svo2Series.addPoint([time, svo2Point], true, svo2Series.data.length > 100);
+      capSeries.addPoint([time, capPoint], true, capSeries.data.length > 100);
+      cvpSeries.addPoint([time, cvpPoint], true, cvpSeries.data.length > 100);
+
+      abpDisplay.textContent = abpPoint;
+      svo2Display.textContent = svo2Point;
+      capDisplay.textContent = capPoint;
+      cvpDisplay.textContent = cvpPoint;
+      // bisDisplay.textContent = bisPoint;
+      // esoDisplay.textContent = esoPoint;
+      // bldDisplay.textContent = bldPoint;
 });
 
 
