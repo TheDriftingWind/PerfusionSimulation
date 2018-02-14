@@ -2,8 +2,8 @@
 var socket = io.connect(window.location.href);
 var ecgContainer = document.getElementById('ecgContainer');
 var ecgNormal = document.getElementById('ecgNormal');
-var ecgFast = document.getElementById('ecgSlow');
-var ecgSlow = document.getElementById('ecgFast');
+var ecgFast = document.getElementById('ecgFast');
+var ecgSlow = document.getElementById('ecgSlow');
 var ecgFlat = document.getElementById('ecgFlat');
 var ecgFib = document.getElementById('ecgFib');
 
