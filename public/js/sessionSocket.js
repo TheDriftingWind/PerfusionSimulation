@@ -3,13 +3,16 @@ var socket = io.connect(window.location.href);
 
 var vitals;
 // Query DOM
-var abp = document.getElementById('abp'),
+var abpCtrl = document.getElementById('abpCtrl'),
       cap = document.getElementById('cap'),
       bis = document.getElementById('bis'),
       bld = document.getElementById('bld'),
-      svo2 = document.getElementById('svo2'),
+      svo2Ctrl = document.getElementById('svo2Ctrl'),
       eso = document.getElementById('eso'),
       cvp = document.getElementById('cvp');
+
+var abpDisplay = document.getElementById('abpDisplay'),
+    svo2Display = document.getElementById('svo2Display');
 
 var abpUp = document.getElementById('abpUp'),
       abpDown = document.getElementById('abpDown');
@@ -34,13 +37,13 @@ var cvpUp = document.getElementById('cvpUp'),
 
 // Emit events
 abpUp.addEventListener('click', function(){
-  abp.textContent = abp.textContent * 1 + 10 > 200 ? 200 : abp.textContent * 1 + 10;
-  vitals.abp = abp.textContent;
+  abpCtrl.textContent = abpCtrl.textContent * 1 + 10 > 200 ? 200 : abpCtrl.textContent * 1 + 10;
+  vitals.abp = abpCtrl.textContent;
   socket.emit('vitals', vitals);
 });
 abpDown.addEventListener('click', function(){
-  abp.textContent = abp.textContent * 1 - 10 < 0 ? 0 : abp.textContent * 1 - 10;
-  vitals.abp = abp.textContent;
+  abpCtrl.textContent = abpCtrl.textContent * 1 - 10 < 0 ? 0 : abpCtrl.textContent * 1 - 10;
+  vitals.abp = abpCtrl.textContent;
   socket.emit('vitals', vitals);
 });
 
@@ -100,6 +103,9 @@ socket.on('vitals', function(data){
       let svo2Point = Math.random() * ((data.svo2 * 1 + 2.5) - (data.svo2 * 1 - 2.5)) + (data.svo2 * 1 - 2.5);
       var svo2Series = Highcharts.charts[1].series[0];
       svo2Series.addPoint([time, svo2Point], true, svo2Series.data.length > 100);
+
+      abpDisplay.textContent = Math.round(abpPoint * 100) / 100;
+      svo2Display.textContent = Math.round(svo2Point * 100) / 100;
 });
 
 
