@@ -30,6 +30,10 @@ function initSocket(server){
 	setInterval(function(){
 		io.sockets.emit('vitals', vitals);
 	}, 2000);
+
+	setInterval(function(){
+		io.sockets.emit('ecg', {});
+	}, 1000);
 }
 
 

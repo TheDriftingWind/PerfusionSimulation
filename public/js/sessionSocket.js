@@ -135,10 +135,10 @@ socket.on('vitals', function(data){
       vitals = data;
       let time = new Date().getTime();
 
-      let abpSeries = Highcharts.charts[0].series[0];
-      let svo2Series = Highcharts.charts[1].series[0];
-      let capSeries = Highcharts.charts[2].series[0];
-      let cvpSeries = Highcharts.charts[3].series[0];
+      let abpSeries = Highcharts.charts[1].series[0];
+      let svo2Series = Highcharts.charts[2].series[0];
+      let capSeries = Highcharts.charts[3].series[0];
+      let cvpSeries = Highcharts.charts[4].series[0];
 
       let abpPoint = Math.random() * ((data.abp * 1 + 5) - (data.abp * 1 - 5)) + (data.abp * 1 - 5);
       let svo2Point = Math.random() * ((data.svo2 * 1 + 2.5) - (data.svo2 * 1 - 2.5)) + (data.svo2 * 1 - 2.5);
@@ -170,21 +170,41 @@ socket.on('vitals', function(data){
       bldDisplay.textContent = bldPoint;
 });
 
+socket.on('ecg', function(data){
+  genEcg()
+});
+
+var index = 1;
+var interval = 20;
+var min = 1;
+var max = 3;
+
 ecgNormal.addEventListener('click', function(){
-  ecgContainer.src = '../images/NSR.gif';
+  interval = 20;
+  min = 1;
+  max = 3;
 });
 ecgSlow.addEventListener('click', function(){
-  ecgContainer.src = '../images/Slower.gif';
+  interval = 30;
+  min = 1;
+  max = 3;
 });
 ecgFast.addEventListener('click', function(){
-  ecgContainer.src = '../images/Faster.gif';
+  interval = 10;
+  min = 1;
+  max = 3;
 });
 ecgFlat.addEventListener('click', function(){
-  ecgContainer.src = '../images/Flatline.gif';
+  interval = 99;
+  min = 0;
+  max = 1;
 });
 ecgFib.addEventListener('click', function(){
-  ecgContainer.src = '../images/VFib.gif';
+  interval = 5;
+  min = 5;
+  max = 1;
 });
+
 
 oxyfail.addEventListener('click', function(){
 });
@@ -195,8 +215,18 @@ inadAnticoag.addEventListener('click', function(){
 intravasHemo.addEventListener('click', function(){
 });
 
+function genEcg(){
+  let ecgSeries = Highcharts.charts[0].series[0];
 
-
+  for(let i = index; i < index + 10; i++){
+          ecgSeries.addPoint([i % interval == 0 ? 8 : Math.random() * (max - min) + min], false, ecgSeries.data.length > 100);
+  }    
+  Highcharts.charts[0].redraw()
+  index += 10;
+  if(index == 41){
+    index = 1;
+  }
+}
 
 
 

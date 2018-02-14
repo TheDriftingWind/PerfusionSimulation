@@ -1,53 +1,60 @@
-Highcharts.setOptions({
-    global: {
-        useUTC: false
-    }
-});
-
-Highcharts.chart('container', {
-    chart: {
-            defaultSeriesType: 'spline',
-            events: {
-
-            }, 
-            height: 150,
-        },
-        plotOptions: {
-            spline: {
-                marker: {
-                    enabled: false
-                }
-            }
-        },
-        exporting: {
-            enabled: false
-        },
-        title: {
-            text: 'Cap',
+Highcharts.chart('ecgContainer', {
+      chart: {
+            height: 150
+      },
+      title: {
+            text: 'ECG',
             align: 'left'
-        },
-        xAxis: {
-            type: 'datetime',
-            maxZoom: 20 * 1000,
-            labels: {
-                enabled: false
-            }
-        },
-        yAxis: {
-            minPadding: 0.2,
-            maxPadding: 0.2,
-            tickInterval: 15,
-            min: 0,
-            max: 60,
-            title: {
-                text: 'mmHg',
-            }
-        },
-        credits: {
+  },
+  credits: {
+      enabled: false
+  },
+  exporting: {
+      enabled: false
+  },
+  xAxis: {
+      labels: {
             enabled: false
-        },
-        series: [{
-            showInLegend: false,  
-            data: []
-        }]
+      }
+  },
+  yAxis: {
+      title: {
+          text: 'mm',
+      },
+      min: 0,
+      max: 10,
+      labels: {
+            enabled: false
+      }
+},
+plotOptions: {
+  series: {
+      label: {
+          enable: false
+    },
+}
+},
+
+series: [{
+showInLegend: false,    
+  data: (function () {
+            // generate an array of random data
+            var data = [];
+
+            for (i = 1; i <= 100; i++) {
+               var y;
+
+               if(i % 20 == 0){
+                  y = 8;
+               }else{
+                  y = Math.random() * (3 - 1) + 1
+               }
+
+                data.push([y]);
+            }
+            return data;
+        }())}]
 });
+
+
+
