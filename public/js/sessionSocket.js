@@ -165,9 +165,9 @@ socket.on('vitals', function(data){
       svo2Display.textContent = svo2Point;
       capDisplay.textContent = capPoint;
       cvpDisplay.textContent = cvpPoint;
-      // bisDisplay.textContent = bisPoint;
-      // esoDisplay.textContent = esoPoint;
-      // bldDisplay.textContent = bldPoint;
+      bisDisplay.textContent = bisPoint;
+      esoDisplay.textContent = esoPoint;
+      bldDisplay.textContent = bldPoint;
 });
 
 ecgNormal.addEventListener('click', function(){
@@ -187,18 +187,12 @@ ecgFib.addEventListener('click', function(){
 });
 
 oxyfail.addEventListener('click', function(){
-  ecgContainer.src = '../images/VFib.gif';
 });
 anesthfail.addEventListener('click', function(){
-  svo2Ctrl.textContent = 30;
-  vitals.svo2 = svo2Ctrl.textContent;
-  socket.emit('vitals', vitals);
 });
 inadAnticoag.addEventListener('click', function(){
-  ecgContainer.src = '../images/VFib.gif';
 });
 intravasHemo.addEventListener('click', function(){
-  ecgContainer.src = '../images/VFib.gif';
 });
 
 

@@ -47,13 +47,13 @@
    <div class="page-header"></div>
    <div class="col-lg-12 col-md-12" style="">
       <div class="col-lg-5 col-md-5">
-         <div class="col-lg-9 col-md-9 col-lg-offset-1 col-md-offset-1" >
+         <div class="col-lg-9 col-md-9 col-lg-offset-1 col-md-offset-1" style="padding-top:10px; padding-bottom: 5px;">
             <img id="ecgContainer" src="../images/NSR.gif"style="display: ;" />
          </div>
          <div class="col-lg-9 col-md-9" style="" id="abpContainer">
             <script src="../js/abp.js"></script>
          </div>
-         <div class="col-lg-3 col-md-3" style="border-style: solid;
+         <div class="col-lg-3 col-md-3" style="margin-top:10px;border-style: solid;
             border-width: 1px; background-color:#eff1f4; border-radius:100px;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
             <h4><span id="abpDisplay">0</span> mmHg</h4>
          </div>
@@ -74,11 +74,28 @@
          </div>
          <div class="col-lg-9 col-md-9" id="cvpContainer">
             <script src="../js/cvp.js"></script>
+
          </div>
          <div class="col-lg-3 col-md-3" style="border-style: solid;
             border-width: 1px; background-color:#eff1f4; border-radius:100px;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
             <h4><span id="cvpDisplay">0</span> mmHg</h4>
+
          </div>
+
+         <div class="col-lg-3 col-md-3 col-lg-offset-1 col-md-offset-1" style=" margin-top:30px;border-style: solid;
+            border-width: 1px; background-color:#eff1f4; border-radius:100px;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+
+            <h4>BIS: <span id="bisDisplay">0</span></h4>
+         </div>
+         <div class="col-lg-3 col-md-3 col-lg-offset-1 col-md-offset-1" style="margin-top:30px;border-style: solid;
+            border-width: 1px; background-color:#eff1f4; border-radius:100px;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); ">
+            <h4>ESO: <span id="esoDisplay">0</span> ℃</h4>
+         </div>
+         <div class="col-lg-3 col-md-3 col-lg-offset-1 col-md-offset-1" style="margin-top:30px;border-style: solid;
+            border-width: 1px; background-color:#eff1f4; border-radius:100px;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+            <h4>BLD: <span id="bldDisplay">0</span> ℃</h4>
+         </div>
+
       </div>
       <div class="col-lg-7 col-md-7" style="float:right; background-color:#fff;">
          <div class="" style="text-align: center;">
@@ -183,7 +200,7 @@
                   <button id="bladTempDown" class="btn btn-danger incr-btn-style"style="width:33.3%;"><span class="glyphicon glyphicon-minus-sign"style="font-size:20px;"><b>1</b></span></button>
                   <a href="http://localhost:8080/#" data-toggle="tooltip" title="" data-original-title="Bladder Temperature" style="font-size:20px;display:inline-block; width:30%;text-align:center;">BLD: <span id="bldCtrl">37</span></a>
                   <button id="bladTempUp" class="btn btn-success incr-btn-style"style="width:33.3%;"><span class="glyphicon glyphicon-plus-sign"style="font-size:20px;"><b>1</b></span></button>
-                  <div class="badge" style="width:100%;font-size:16px;">18℃ - 38.2℃</div>
+                  <div class="badge" style="width:100%;font-size:16px;">18℃ - 38℃</div>
                </div>
                </br>
             </div>
