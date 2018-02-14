@@ -1,5 +1,11 @@
 // Make connection
 var socket = io.connect(window.location.href);
+var ecgContainer = document.getElementById('ecgContainer');
+var ecgNormal = document.getElementById('ecgNormal');
+var ecgFast = document.getElementById('ecgSlow');
+var ecgSlow = document.getElementById('ecgFast');
+var ecgFlat = document.getElementById('ecgFlat');
+var ecgFib = document.getElementById('ecgFib');
 
 var vitals;
 // Query DOM
@@ -158,6 +164,24 @@ socket.on('vitals', function(data){
       // esoDisplay.textContent = esoPoint;
       // bldDisplay.textContent = bldPoint;
 });
+
+ecgNormal.addEventListener('click', function(){
+  ecgContainer.src = '../images/NSR.gif';
+});
+ecgSlow.addEventListener('click', function(){
+  ecgContainer.src = '../images/Slower.gif';
+});
+ecgFast.addEventListener('click', function(){
+  ecgContainer.src = '../images/Faster.gif';
+});
+ecgFlat.addEventListener('click', function(){
+  ecgContainer.src = '../images/Flatline.gif';
+});
+ecgFib.addEventListener('click', function(){
+  ecgContainer.src = '../images/VFib.gif';
+});
+
+
 
 
 
