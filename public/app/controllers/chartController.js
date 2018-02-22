@@ -15,11 +15,11 @@ function chartController($scope, SessionFactory, AdministrationFactoy){
 
 	function activate(){
 		SessionFactory.getSessions().then(function(res){
-			session = res[0];		
+			session = res[0];
 		});
 
 		AdministrationFactoy.getAdministrations().then(function(res){
-			$scope.administrations = res;		
+			$scope.administrations = res;
 		});
 	}
 

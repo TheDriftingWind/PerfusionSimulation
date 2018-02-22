@@ -12,7 +12,7 @@ var vitals  = {
 }
 
 function initSocket(server){
-	
+
 	var io = socket(server);
 
 	io.on('connection', function(socket){
@@ -29,7 +29,7 @@ function initSocket(server){
 
 	setInterval(function(){
 		io.sockets.emit('vitals', vitals);
-	}, 2000);
+	}, 1000);
 
 	setInterval(function(){
 		io.sockets.emit('ecg', {});
@@ -38,7 +38,3 @@ function initSocket(server){
 
 
 module.exports = initSocket;
-
-
-
-

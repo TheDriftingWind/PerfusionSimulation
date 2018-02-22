@@ -26,7 +26,7 @@ Highcharts.stockChart('container', {
                         y = Math.round(Math.random() * (30))
                      }
 
-                    series.addPoint([x, y], true, true); 
+                    series.addPoint([x, y], true, true);
                   }
                   index += 10;
                 }, 1000);
