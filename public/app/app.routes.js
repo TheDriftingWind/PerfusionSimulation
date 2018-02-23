@@ -31,5 +31,9 @@ function routeConfigSettings($routeProvider){
 		templateUrl: 'app/views/session.html',
 		controller: 'SessionController'
 	})
+	.when('/studentstation', {
+		templateUrl: 'app/views/studentstation.html',
+		
+	})
 	.otherwise('/')
 }
