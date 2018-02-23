@@ -1,26 +1,26 @@
 // Make connection
+var vitals = {};
 var socket = io.connect(window.location.href);
 var ecgContainer = document.getElementById('ecgContainer');
+
 var ecgNormal = document.getElementById('ecgNormal');
-var ecgFast = document.getElementById('ecgFast');
-var ecgSlow = document.getElementById('ecgSlow');
-var ecgFlat = document.getElementById('ecgFlat');
-var ecgFib = document.getElementById('ecgFib');
+    ecgFast = document.getElementById('ecgFast');
+    ecgSlow = document.getElementById('ecgSlow');
+    ecgFlat = document.getElementById('ecgFlat');
+    ecgFib = document.getElementById('ecgFib');
 
 var oxyfail = document.getElementById('oxyfail');
-var anesthfail = document.getElementById('anesthfail');
-var inadAnticoag = document.getElementById('inadAnticoag');
-var intravasHemo = document.getElementById('intravasHemo');
+    anesthfail = document.getElementById('anesthfail');
+    inadAnticoag = document.getElementById('inadAnticoag');
+    intravasHemo = document.getElementById('intravasHemo');
 
-var vitals;
-// Query DOM
 var abpCtrl = document.getElementById('abpCtrl'),
-      capCtrl = document.getElementById('capCtrl'),
-      bisCtrl = document.getElementById('bisCtrl'),
-      bldCtrl = document.getElementById('bldCtrl'),
-      svo2Ctrl = document.getElementById('svo2Ctrl'),
-      esoCtrl = document.getElementById('esoCtrl'),
-      cvpCtrl = document.getElementById('cvpCtrl');
+    capCtrl = document.getElementById('capCtrl'),
+    bisCtrl = document.getElementById('bisCtrl'),
+    bldCtrl = document.getElementById('bldCtrl'),
+    svo2Ctrl = document.getElementById('svo2Ctrl'),
+    esoCtrl = document.getElementById('esoCtrl'),
+    cvpCtrl = document.getElementById('cvpCtrl');
 
 var abpDisplay = document.getElementById('abpDisplay'),
     capDisplay = document.getElementById('capDisplay'),
@@ -33,25 +33,25 @@ var abpDisplay = document.getElementById('abpDisplay'),
 
 
 var abpUp = document.getElementById('abpUp'),
-      abpDown = document.getElementById('abpDown');
+    abpDown = document.getElementById('abpDown');
 
 var capUp = document.getElementById('capUp'),
-      capDown = document.getElementById('capDown');
+    capDown = document.getElementById('capDown');
 
 var bisUp = document.getElementById('bisUp'),
-      bisDown = document.getElementById('bisDown');
+    bisDown = document.getElementById('bisDown');
 
 var bladTempDown = document.getElementById('bladTempDown'),
-      bladTempUp = document.getElementById('bladTempUp');
+    bladTempUp = document.getElementById('bladTempUp');
 
 var svo2Up = document.getElementById('svo2Up'),
-      svo2Down = document.getElementById('svo2Down');
+    svo2Down = document.getElementById('svo2Down');
 
 var esoTempUp = document.getElementById('esoTempUp'),
-      esoTempDown = document.getElementById('esoTempDown');
+    esoTempDown = document.getElementById('esoTempDown');
 
 var cvpUp = document.getElementById('cvpUp'),
-      cvpDown = document.getElementById('cvpDown');
+    cvpDown = document.getElementById('cvpDown');
 
 // Emit events
 abpUp.addEventListener('click', function(){

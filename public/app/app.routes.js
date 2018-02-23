@@ -6,7 +6,7 @@ routeConfigSettings.$inject = ['$routeProvider'];
 
 function routeConfigSettings($routeProvider){
 	$routeProvider.when('/', {
-		templateUrl: 'app/views/instructorIncr.html',
+		templateUrl: 'app/views/instructorStation.html',
 		controller: 'loginController'
 	})
 	.when('/chart', {
@@ -32,8 +32,7 @@ function routeConfigSettings($routeProvider){
 		controller: 'SessionController'
 	})
 	.when('/studentstation', {
-		templateUrl: 'app/views/studentstation.html',
-		
+		templateUrl: 'app/views/studentStation.html',
 	})
 	.otherwise('/')
 }
