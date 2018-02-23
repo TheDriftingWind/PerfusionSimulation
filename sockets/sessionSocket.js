@@ -29,11 +29,11 @@ function initSocket(server){
 
 	setInterval(function(){
 		io.sockets.emit('vitals', vitals);
-	}, 2000);
+	}, 1000);
 
 	setInterval(function(){
 		io.sockets.emit('ecg', {});
-	}, 1000);
+	}, 100);
 }
 
 

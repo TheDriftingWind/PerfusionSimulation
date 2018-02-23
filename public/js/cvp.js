@@ -11,6 +11,9 @@ Highcharts.chart('cvpContainer', {
 
             }, 
             height: 150,
+             animation: {
+                duration: 2000                        
+            }
         },
         plotOptions: {
             spline: {

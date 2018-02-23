@@ -11,6 +11,9 @@ Highcharts.chart('capContainer', {
 
             }, 
             height: 150,
+             animation: {
+                duration: 2000                        
+            }
         },
         plotOptions: {
             spline: {

@@ -151,16 +151,16 @@ socket.on('vitals', function(data){
       
       abpPoint = abpPoint > data.abp ? Math.min(Math.round(abpPoint * 100) / 100, 200) : Math.max(Math.round(abpPoint * 100) / 100, 0);
       svo2Point = svo2Point > data.svo2 ? Math.min(Math.round(svo2Point * 100) / 100, 100) : Math.max(Math.round(svo2Point * 100) / 100, 25);
-      capPoint = capPoint > data.cap ? Math.min(Math.round(capPoint * 100) / 100, 70) : Math.max(Math.round(capPoint * 100) / 100, 0);
+      capPoint = capPoint > data.cap ? Math.min(Math.round(capPoint * 100) / 100, 60) : Math.max(Math.round(capPoint * 100) / 100, 0);
       cvpPoint = cvpPoint > data.cvp ? Math.min(Math.round(cvpPoint * 100) / 100, 20) : Math.max(Math.round(cvpPoint * 100) / 100, 0);
       bisPoint = bisPoint > data.bis ? Math.min(Math.round(bisPoint * 100) / 100, 65) : Math.max(Math.round(bisPoint * 100) / 100, 15);
       esoPoint = esoPoint > data.eso ? Math.min(Math.round(esoPoint * 100) / 100, 38) : Math.max(Math.round(esoPoint * 100) / 100, 18);
       bldPoint = bldPoint > data.bld ? Math.min(Math.round(bldPoint * 100) / 100, 38) : Math.max(Math.round(bldPoint * 100) / 100, 18);
      
-      abpSeries.addPoint([time, abpPoint], true, abpSeries.data.length > 100);
-      svo2Series.addPoint([time, svo2Point], true, svo2Series.data.length > 100);
-      capSeries.addPoint([time, capPoint], true, capSeries.data.length > 100);
-      cvpSeries.addPoint([time, cvpPoint], true, cvpSeries.data.length > 100);
+      abpSeries.addPoint([time, abpPoint], true, abpSeries.data.length > 30);
+      svo2Series.addPoint([time, svo2Point], true, svo2Series.data.length > 30);
+      capSeries.addPoint([time, capPoint], true, capSeries.data.length > 30);
+      cvpSeries.addPoint([time, cvpPoint], true, cvpSeries.data.length > 30);
 
       abpDisplay.textContent = abpPoint;
       svo2Display.textContent = svo2Point;
@@ -227,11 +227,9 @@ intravasHemo.addEventListener('click', function(){
 function genEcg(){
   let ecgSeries = Highcharts.charts[0].series[0];
 
-  for(let i = index; i < index + 10; i++){
-          ecgSeries.addPoint([i % interval == 0 ? 8 : Math.random() * (max - min) + min], false, ecgSeries.data.length > 100);
-  }    
-  Highcharts.charts[0].redraw()
-  index += 10;
+          ecgSeries.addPoint([index % interval == 0 ? 8 : Math.random() * (max - min) + min], true, ecgSeries.data.length > 100);   
+  //Highcharts.charts[0].redraw()
+  index ++;
   if(index == 41){
     index = 1;
   }

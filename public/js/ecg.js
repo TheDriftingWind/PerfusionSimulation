@@ -1,6 +1,9 @@
 Highcharts.chart('ecgContainer', {
       chart: {
-            height: 150
+            height: 150,
+            animation: {
+                duration: 50                        
+            }
       },
       title: {
             text: 'ECG',

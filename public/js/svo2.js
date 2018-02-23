@@ -11,6 +11,9 @@ Highcharts.chart('svo2Container', {
 
             }, 
             height: 150,
+            animation: {
+                duration: 2000                        
+            }
         },
         plotOptions: {
             spline: {
