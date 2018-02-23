@@ -12,7 +12,7 @@ var vitals  = {
 }
 
 function initSocket(server){
-	
+
 	var io = socket(server);
 
 	io.on('connection', function(socket){
@@ -38,7 +38,3 @@ function initSocket(server){
 
 
 module.exports = initSocket;
-
-
-
-

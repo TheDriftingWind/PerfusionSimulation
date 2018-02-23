@@ -6,7 +6,7 @@ TestController.$inject = ['$scope', '$location', '$window'];
 
 function TestController($scope, $location, $window){
 
-	
+
 	activate();
 
 	///////////
@@ -21,10 +21,3 @@ function TestController($scope, $location, $window){
 		$scope.mobile = check;
 	}
 }
-
-
-
-
-
-
-

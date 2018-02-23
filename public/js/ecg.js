@@ -39,7 +39,7 @@ plotOptions: {
 },
 
 series: [{
-showInLegend: false,    
+showInLegend: false,
   data: (function () {
             // generate an array of random data
             var data = [];
@@ -58,6 +58,3 @@ showInLegend: false,
             return data;
         }())}]
 });
-
-
-

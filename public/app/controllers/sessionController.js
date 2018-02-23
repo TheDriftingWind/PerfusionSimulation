@@ -26,7 +26,7 @@ function SessionController($scope, $location, $window, SessionFactory){
 			// $scope.Temp = res[0].Temp;
 			// $scope.BIS = res[0].BIS;
 			// $scope.LMP = res[0].LMP;
-			// $scope.FIO2 = res[0].FIO2;			
+			// $scope.FIO2 = res[0].FIO2;
 		});
 	}
 	function addSessions(){
@@ -43,10 +43,3 @@ function SessionController($scope, $location, $window, SessionFactory){
 	}
 
 }
-
-
-
-
-
-
-

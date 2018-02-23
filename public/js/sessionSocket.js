@@ -148,7 +148,7 @@ socket.on('vitals', function(data){
       let bisPoint = Math.random() * ((data.bis * 1 + 1.5) - (data.bis * 1 - 1.5)) + (data.bis * 1 - 1.5);
       let esoPoint = Math.random() * ((data.eso * 1 + 0.5) - (data.eso * 1 - 0.5)) + (data.eso * 1 - 0.5);
       let bldPoint = Math.random() * ((data.bld * 1 + 0.5) - (data.bld * 1 - 0.5)) + (data.bld * 1 - 0.5);
-      
+
       abpPoint = abpPoint > data.abp ? Math.min(Math.round(abpPoint * 100) / 100, 200) : Math.max(Math.round(abpPoint * 100) / 100, 0);
       svo2Point = svo2Point > data.svo2 ? Math.min(Math.round(svo2Point * 100) / 100, 100) : Math.max(Math.round(svo2Point * 100) / 100, 25);
       capPoint = capPoint > data.cap ? Math.min(Math.round(capPoint * 100) / 100, 60) : Math.max(Math.round(capPoint * 100) / 100, 0);
@@ -156,7 +156,7 @@ socket.on('vitals', function(data){
       bisPoint = bisPoint > data.bis ? Math.min(Math.round(bisPoint * 100) / 100, 65) : Math.max(Math.round(bisPoint * 100) / 100, 15);
       esoPoint = esoPoint > data.eso ? Math.min(Math.round(esoPoint * 100) / 100, 38) : Math.max(Math.round(esoPoint * 100) / 100, 18);
       bldPoint = bldPoint > data.bld ? Math.min(Math.round(bldPoint * 100) / 100, 38) : Math.max(Math.round(bldPoint * 100) / 100, 18);
-     
+
       abpSeries.addPoint([time, abpPoint], true, abpSeries.data.length > 30);
       svo2Series.addPoint([time, svo2Point], true, svo2Series.data.length > 30);
       capSeries.addPoint([time, capPoint], true, capSeries.data.length > 30);
@@ -226,14 +226,10 @@ intravasHemo.addEventListener('click', function(){
 
 function genEcg(){
   let ecgSeries = Highcharts.charts[0].series[0];
-
-          ecgSeries.addPoint([index % interval == 0 ? 8 : Math.random() * (max - min) + min], true, ecgSeries.data.length > 100);   
-  //Highcharts.charts[0].redraw()
+  ecgSeries.addPoint([index % interval == 0 ? 8 : Math.random() * (max - min) + min], true, ecgSeries.data.length > 100);   
   index ++;
+
   if(index == 41){
     index = 1;
   }
 }
-
-
-
