@@ -20,13 +20,17 @@
 
 </head>
 <body>
+	<script type="text/javascript">
+		var socket = io.connect(window.location.href);
+	</script>
 	<!-- <div ng-include="'app/views/nav.html'"></div> -->
 	<div ng-view></div>
-
+	<script type="text/javascript"></script>
 	<!-- Main Angular Module -->
 	<script src="app/app.js"></script>
 	<script src="app/app.config.js"></script>
 	<script src="app/app.routes.js"></script>
+	<script src="../js/sessionSocket.js"></script>
 
 	<!-- Controllers -->
 	<script src="app/controllers/chartController.js"></script>

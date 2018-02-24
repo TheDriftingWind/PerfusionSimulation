@@ -1,6 +1,5 @@
 // Make connection
 var vitals = {};
-var socket = io.connect(window.location.href);
 var ecgContainer = document.getElementById('ecgContainer');
 
 var ecgNormal = document.getElementById('ecgNormal');
@@ -133,42 +132,24 @@ cvpDown.addEventListener('click', function(){
 
 
 socket.on('vitals', function(data){
-      vitals = data;
       let time = new Date().getTime();
-
       let abpSeries = Highcharts.charts[1].series[0];
       let svo2Series = Highcharts.charts[2].series[0];
       let capSeries = Highcharts.charts[3].series[0];
       let cvpSeries = Highcharts.charts[4].series[0];
 
-      let abpPoint = Math.random() * ((data.abp * 1 + 5) - (data.abp * 1 - 5)) + (data.abp * 1 - 5);
-      let svo2Point = Math.random() * ((data.svo2 * 1 + 2.5) - (data.svo2 * 1 - 2.5)) + (data.svo2 * 1 - 2.5);
-      let capPoint = Math.random() * ((data.cap * 1 + 2.5) - (data.cap * 1 - 2.5)) + (data.cap * 1 - 2.5);
-      let cvpPoint = Math.random() * ((data.cvp * 1 + 0.5) - (data.cvp * 1 - 0.5)) + (data.cvp * 1 - 0.5);
-      let bisPoint = Math.random() * ((data.bis * 1 + 1.5) - (data.bis * 1 - 1.5)) + (data.bis * 1 - 1.5);
-      let esoPoint = Math.random() * ((data.eso * 1 + 0.5) - (data.eso * 1 - 0.5)) + (data.eso * 1 - 0.5);
-      let bldPoint = Math.random() * ((data.bld * 1 + 0.5) - (data.bld * 1 - 0.5)) + (data.bld * 1 - 0.5);
+      abpSeries.addPoint([time, data.abp], true, abpSeries.data.length > 30);
+      svo2Series.addPoint([time, data.svo2], true, svo2Series.data.length > 30);
+      capSeries.addPoint([time, data.cap], true, capSeries.data.length > 30);
+      cvpSeries.addPoint([time, data.cvp], true, cvpSeries.data.length > 30);
 
-      abpPoint = abpPoint > data.abp ? Math.min(Math.round(abpPoint * 100) / 100, 200) : Math.max(Math.round(abpPoint * 100) / 100, 0);
-      svo2Point = svo2Point > data.svo2 ? Math.min(Math.round(svo2Point * 100) / 100, 100) : Math.max(Math.round(svo2Point * 100) / 100, 25);
-      capPoint = capPoint > data.cap ? Math.min(Math.round(capPoint * 100) / 100, 60) : Math.max(Math.round(capPoint * 100) / 100, 0);
-      cvpPoint = cvpPoint > data.cvp ? Math.min(Math.round(cvpPoint * 100) / 100, 20) : Math.max(Math.round(cvpPoint * 100) / 100, 0);
-      bisPoint = bisPoint > data.bis ? Math.min(Math.round(bisPoint * 100) / 100, 65) : Math.max(Math.round(bisPoint * 100) / 100, 15);
-      esoPoint = esoPoint > data.eso ? Math.min(Math.round(esoPoint * 100) / 100, 38) : Math.max(Math.round(esoPoint * 100) / 100, 18);
-      bldPoint = bldPoint > data.bld ? Math.min(Math.round(bldPoint * 100) / 100, 38) : Math.max(Math.round(bldPoint * 100) / 100, 18);
-
-      abpSeries.addPoint([time, abpPoint], true, abpSeries.data.length > 30);
-      svo2Series.addPoint([time, svo2Point], true, svo2Series.data.length > 30);
-      capSeries.addPoint([time, capPoint], true, capSeries.data.length > 30);
-      cvpSeries.addPoint([time, cvpPoint], true, cvpSeries.data.length > 30);
-
-      abpDisplay.textContent = abpPoint;
-      svo2Display.textContent = svo2Point;
-      capDisplay.textContent = capPoint;
-      cvpDisplay.textContent = cvpPoint;
-      bisDisplay.textContent = bisPoint;
-      esoDisplay.textContent = esoPoint;
-      bldDisplay.textContent = bldPoint;
+      abpDisplay.textContent = data.abp;
+      svo2Display.textContent = data.svo2;
+      capDisplay.textContent = data.cap;
+      cvpDisplay.textContent = data.cvp;
+      bisDisplay.textContent = data.bis;
+      esoDisplay.textContent = data.eso;
+      bldDisplay.textContent = data.bld;
 });
 
 socket.on('ecg', function(data){
