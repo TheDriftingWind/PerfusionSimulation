@@ -4,7 +4,7 @@ Highcharts.setOptions({
     }
 });
 
-Highcharts.chart('svo2Container', {
+window.myData.charts[$("#svo2Script").data('arg1')].svo2 = new Highcharts.chart('svo2Container', {
     chart: {
             defaultSeriesType: 'spline',
             events: {
@@ -54,3 +54,4 @@ Highcharts.chart('svo2Container', {
             data: []
         }]
 });
+

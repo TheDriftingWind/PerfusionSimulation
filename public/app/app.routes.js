@@ -33,6 +33,8 @@ function routeConfigSettings($routeProvider){
 	})
 	.when('/studentstation', {
 		templateUrl: 'app/views/studentStation.html',
+		controller: 'studentController'
+
 	})
 	.otherwise('/')
 }

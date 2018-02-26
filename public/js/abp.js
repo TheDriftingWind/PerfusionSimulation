@@ -4,7 +4,7 @@ Highcharts.setOptions({
     }
 });
 
-Highcharts.chart('abpContainer', {
+window.myData.charts[$("#abpScript").data('arg1')].abp = new Highcharts.chart('abpContainer', {
     chart: {
             defaultSeriesType: 'spline',
             events: {

@@ -1,4 +1,4 @@
-Highcharts.chart('ecgContainer', {
+window.myData.charts[$("#ecgScript").data('arg1')].ecg = new Highcharts.chart('ecgContainer', {
       chart: {
             height: 150,
             animation: {
@@ -58,3 +58,4 @@ showInLegend: false,
             return data;
         }())}]
 });
+

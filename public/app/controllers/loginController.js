@@ -5,7 +5,6 @@ angular
 loginController.$inject = ['$scope', '$location'];
 
 function loginController($scope, $location){
-
 	activate();
 
 	///////////

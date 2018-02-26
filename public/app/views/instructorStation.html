@@ -1,3 +1,5 @@
+<div id="instructorContainer">
+<script src="../js/instructorSocket.js"></script>
 <link href="https://fonts.googleapis.com/css?family=Exo" rel="stylesheet">
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <div class="row">
@@ -48,56 +50,55 @@
    <div class="col-lg-12 col-md-12" style="">
       <div class="col-lg-5 col-md-5">
          <div class="col-lg-9 col-md-9" style="" id="ecgContainer">
-            <script src="../js/ecg.js"></script>
+            <script id="ecgScript" src="../js/ecg.js" data-arg1='prof'></script>
          </div>
          <div class="col-lg-3 col-md-3" style="margin-top:10px;border-style: solid;
             border-width: 1px; background-color:#eff1f4; border-radius:100px;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
-            <h4><span id="ecgDisplay">1.0</span> second(s)</h4>
+            <h4><span id="profEcgDisplay">1.0</span> second(s)</h4>
          </div>
          <div class="col-lg-9 col-md-9" style="" id="abpContainer">
-            <script src="../js/abp.js"></script>
+            <script id="abpScript" src="../js/abp.js" data-arg1='prof'></script>
          </div>
          <div class="col-lg-3 col-md-3" style="margin-top:10px;border-style: solid;
             border-width: 1px; background-color:#eff1f4; border-radius:100px;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
-            <h4><span id="abpDisplay">0</span> mmHg</h4>
+            <h4><span id="profAbpDisplay">0</span> mmHg</h4>
          </div>
          <div class="col-lg-9 col-md-9" id="svo2Container">
-            <script src="../js/svo2.js"></script>
+            <script id="svo2Script" src="../js/svo2.js" data-arg1='prof'></script>
          </div>
          <div class="col-lg-3 col-md-3" style="border-style: solid;
             border-width: 1px; background-color:#eff1f4; border-radius:100px;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
-            <h4><span id="svo2Display">0</span> %</h4>
+            <h4><span id="profSvo2Display">0</span> %</h4>
 
          </div>
          <div class="col-lg-9 col-md-9" style="" id="capContainer">
-            <script src="../js/cap.js"></script>
+            <script id="capScript" src="../js/cap.js" data-arg1='prof'></script>
          </div>
          <div class="col-lg-3 col-md-3" style="border-style: solid;
             border-width: 1px; background-color:#eff1f4; border-radius:100px;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
-            <h4><span id="capDisplay">0</span> mmHg</h4>
+            <h4><span id="profCapDisplay">0</span> mmHg</h4>
          </div>
          <div class="col-lg-9 col-md-9" id="cvpContainer">
-            <script src="../js/cvp.js"></script>
-
+            <script id="cvpScript" src="../js/cvp.js" data-arg1='prof'></script>
          </div>
          <div class="col-lg-3 col-md-3" style="border-style: solid;
             border-width: 1px; background-color:#eff1f4; border-radius:100px;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
-            <h4><span id="cvpDisplay">0</span> mmHg</h4>
+            <h4><span id="profCvpDisplay">0</span> mmHg</h4>
 
          </div>
 
          <div class="col-lg-3 col-md-3 col-lg-offset-1 col-md-offset-1" style=" margin-top:17px;border-style: solid;
             border-width: 1px; background-color:#eff1f4; border-radius:100px;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
 
-            <h4>BIS: <span id="bisDisplay">0</span></h4>
+            <h4>BIS: <span id="profBisDisplay">0</span></h4>
          </div>
          <div class="col-lg-3 col-md-3 col-lg-offset-1 col-md-offset-1" style="margin-top:17px;border-style: solid;
             border-width: 1px; background-color:#eff1f4; border-radius:100px;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); ">
-            <h4>ESO: <span id="esoDisplay">0</span> ℃</h4>
+            <h4>ESO: <span id="profEsoDisplay">0</span> ℃</h4>
          </div>
          <div class="col-lg-3 col-md-3 col-lg-offset-1 col-md-offset-1" style="margin-top:17px;border-style: solid;
             border-width: 1px; background-color:#eff1f4; border-radius:100px;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
-            <h4>BLD: <span id="bldDisplay">0</span> ℃</h4>
+            <h4>BLD: <span id="profBldDisplay">0</span> ℃</h4>
          </div>
 
       </div>
@@ -386,4 +387,7 @@
    </div>
 </div>
 </div>
-<script src="../js/sessionSocket.js"></script>
+</div>
+
+
+

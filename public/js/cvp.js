@@ -3,8 +3,7 @@ Highcharts.setOptions({
         useUTC: false
     }
 });
-
-Highcharts.chart('cvpContainer', {
+window.myData.charts[$("#cvpScript").data('arg1')].cvp = new Highcharts.chart('cvpContainer', {
     chart: {
             defaultSeriesType: 'spline',
             events: {
