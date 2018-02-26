@@ -1,4 +1,3 @@
-<div id="studentContainer">
 <link href="https://fonts.googleapis.com/css?family=Exo" rel="stylesheet">
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <div class="row">
@@ -39,7 +38,7 @@
       }
    </style>
    <div class="col-lg-5 col-md-5 col-lg-offset-1 col-md-offset-1">
-      <p style="font-size:30px; color:#bd0f1c; text-align: center;"><b><i class="material-icons" style="font-size:36px">local_hospital</i> Student Station<b></p>
+      <p style="font-size:30px; color:#bd0f1c; text-align: center;"><b><i class="material-icons" style="font-size:36px">local_hospital</i> Instructor Station<b></p>
    </div>
    <div class="col-lg-5 col-md-5">
       <button class="button" id="b1"><i class="material-icons" style="font-size:20px; ">group</i> Waiting Room</button>
@@ -49,50 +48,56 @@
    <div class="col-lg-12 col-md-12" style="">
       <div class="col-lg-5 col-md-5">
          <div class="col-lg-9 col-md-9" style="" id="ecgContainer">
+            <script src="../js/ecg.js"></script>
          </div>
          <div class="col-lg-3 col-md-3" style="margin-top:10px;border-style: solid;
             border-width: 1px; background-color:#eff1f4; border-radius:100px;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
-            <h4><span id="stuEcgDisplay">1.0</span> second(s)</h4>
+            <h4><span id="ecgDisplay">1.0</span> second(s)</h4>
          </div>
          <div class="col-lg-9 col-md-9" style="" id="abpContainer">
+            <script src="../js/abp.js"></script>
          </div>
          <div class="col-lg-3 col-md-3" style="margin-top:10px;border-style: solid;
             border-width: 1px; background-color:#eff1f4; border-radius:100px;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
-            <h4><span id="stuAbpDisplay">0</span> mmHg</h4>
+            <h4><span id="abpDisplay">0</span> mmHg</h4>
          </div>
          <div class="col-lg-9 col-md-9" id="svo2Container">
+            <script src="../js/svo2.js"></script>
          </div>
          <div class="col-lg-3 col-md-3" style="border-style: solid;
             border-width: 1px; background-color:#eff1f4; border-radius:100px;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
-            <h4><span id="stuSvo2Display">0</span> %</h4>
+            <h4><span id="svo2Display">0</span> %</h4>
 
          </div>
          <div class="col-lg-9 col-md-9" style="" id="capContainer">
+            <script src="../js/cap.js"></script>
          </div>
          <div class="col-lg-3 col-md-3" style="border-style: solid;
             border-width: 1px; background-color:#eff1f4; border-radius:100px;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
-            <h4><span id="stuCapDisplay">0</span> mmHg</h4>
+            <h4><span id="capDisplay">0</span> mmHg</h4>
          </div>
          <div class="col-lg-9 col-md-9" id="cvpContainer">
+            <script src="../js/cvp.js"></script>
+
          </div>
          <div class="col-lg-3 col-md-3" style="border-style: solid;
             border-width: 1px; background-color:#eff1f4; border-radius:100px;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
-            <h4><span id="stuCvpDisplay">0</span> mmHg</h4>
+            <h4><span id="cvpDisplay">0</span> mmHg</h4>
 
          </div>
 
          <div class="col-lg-3 col-md-3 col-lg-offset-1 col-md-offset-1" style=" margin-top:17px;border-style: solid;
             border-width: 1px; background-color:#eff1f4; border-radius:100px;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
 
-            <h4>BIS: <span id="stuBisDisplay">0</span></h4>
+            <h4>BIS: <span id="bisDisplay">0</span></h4>
          </div>
          <div class="col-lg-3 col-md-3 col-lg-offset-1 col-md-offset-1" style="margin-top:17px;border-style: solid;
             border-width: 1px; background-color:#eff1f4; border-radius:100px;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); ">
-            <h4>ESO: <span id="stuEsoDisplay">0</span> ℃</h4>
+            <h4>ESO: <span id="esoDisplay">0</span> ℃</h4>
          </div>
          <div class="col-lg-3 col-md-3 col-lg-offset-1 col-md-offset-1" style="margin-top:17px;border-style: solid;
             border-width: 1px; background-color:#eff1f4; border-radius:100px;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
-            <h4>BLD: <span id="stuBldDisplay">0</span> ℃</h4>
+            <h4>BLD: <span id="bldDisplay">0</span> ℃</h4>
          </div>
 
       </div>
@@ -116,7 +121,7 @@
             <div class="col-lg-11 " style="float:right;border-style: solid;
                border-width: 1px; background-color:#eff1f4;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
                <div class="page-header" style="text-align: center;">
-                  <h3 style="text-align:center;margin:0;">Medication Controls</h3>
+                  <h3 style="text-align:center;margin:0;">Vital Sign Controls</h3>
                </div>
                <script>
                   $(document).ready(function(){
@@ -125,12 +130,12 @@
                </script>
                <!--<div class="row btn-row" style="float:right;">-->
                <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10" style="float:center; width:100%;">
-                  <button id="hepDown" class="btn btn-danger incr-btn-style" style="width:33.3%;"><span class="glyphicon glyphicon-minus-sign" style="font-size:20px;"><b>1,000</b></span></button>
+                  <button id="abpDown" class="btn btn-danger incr-btn-style" style="width:33.3%;"><span class="glyphicon glyphicon-minus-sign" style="font-size:20px;"> <b>10</b></span></button>
                   <!--<span class="tooltip">ABP</span>-->
-                  <a href="http://localhost:8080/#" data-toggle="tooltip" title="" data-original-title="Heparin" style="font-size:20px;display:inline-block; width:30%;text-align:center;">Heparin: <span style="font-size:20px;" id="hepCtrl">0</span></a>
-                  <button id="hepUp" class="btn btn-success incr-btn-style"style="width:33.3%;" ><span class="glyphicon glyphicon-plus-sign" style="font-size:20px;"><b>1,000</b></span></button>
+                  <a href="http://localhost:8080/#" data-toggle="tooltip" title="" data-original-title="Arterial Blood Pressure" style="font-size:20px;display:inline-block; width:30%;text-align:center;">ABP: <span style="font-size:20px;" id="abpCtrl">120</span></a>
+                  <button id="abpUp" class="btn btn-success incr-btn-style"style="width:33.3%;" ><span class="glyphicon glyphicon-plus-sign" style="font-size:20px;"> <b>10</b></span></button>
                   <br>
-                  <div class="badge" style="width:100%;font-size:16px;">0-80,000U</div>
+                  <div class="badge" style="width:100%;font-size:16px;">0-200mmHg</div>
                   <hr style="display: block;
                      height: 1px;
                      border: 0;
@@ -140,11 +145,11 @@
                </div>
                <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10" style="float:center;width:100%;">
                   <br>
-                  <button id="ph2Down" class="btn btn-danger incr-btn-style"style="width:33.3%;"><span class="glyphicon glyphicon-minus-sign"style="font-size:20px;"> <b>0.1</b></span></button>
+                  <button id="svo2Down" class="btn btn-danger incr-btn-style"style="width:33.3%;"><span class="glyphicon glyphicon-minus-sign"style="font-size:20px;"> <b>5</b></span></button>
                   <!--  <span>SVO<sub>2</sub></span>-->
-                  <a href="http://localhost:8080/#" data-toggle="tooltip" title="" data-original-title="Phenylephrine"style="font-size:20px;display:inline-block; width:30%;text-align:center;">Phenyl: <span id="phCtrl">0</span></a>
-                  <button id="phUp" class="btn btn-success incr-btn-style"style="width:33.3%;"><span class="glyphicon glyphicon-plus-sign" style="font-size:20px;"> <b>0.1</b></span></button>
-                  <div class="badge" style="width:100%;font-size:16px;">0-10mg</div>
+                  <a href="http://localhost:8080/#" data-toggle="tooltip" title="" data-original-title="Venous Oxygen Saturation"style="font-size:20px;display:inline-block; width:30%;text-align:center;">SVO<sub>2</sub>: <span id="svo2Ctrl">75</span></a>
+                  <button id="svo2Up" class="btn btn-success incr-btn-style"style="width:33.3%;"><span class="glyphicon glyphicon-plus-sign" style="font-size:20px;"> <b>5</b></span></button>
+                  <div class="badge" style="width:100%;font-size:16px;">25% - 100%</div>
                   <hr style="display: block;
                      height: 1px;
                      border: 0;
@@ -154,10 +159,10 @@
                </div>
                <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10" style="float:center;width:100%;">
                   <br>
-                  <button id="NaDown" class="btn btn-danger incr-btn-style"style="width:33.3%;"><span class="glyphicon glyphicon-minus-sign"style="font-size:20px;"> <b>10</b></span></button>
-                  <a href="http://localhost:8080/#" data-toggle="tooltip" title="" data-original-title="Sodium Bicarbonate"style="font-size:20px;display:inline-block; width:30%;text-align:center;">NaHCO<sub>3</sub>: <span id="NaCtrl">0</span></a>
-                  <button id="NaUp" class="btn btn-success incr-btn-style" style="width:33.3%;"><span class="glyphicon glyphicon-plus-sign" style="font-size:20px;"> <b>10</b></span></button>
-                  <div class="badge" style="width:100%;font-size:16px;">0 - 800mEq</div>
+                  <button id="capDown" class="btn btn-danger incr-btn-style"style="width:33.3%;"><span class="glyphicon glyphicon-minus-sign"style="font-size:20px;"> <b>5</b></span></button>
+                  <a href="http://localhost:8080/#" data-toggle="tooltip" title="" data-original-title="Capnograph"style="font-size:20px;display:inline-block; width:30%;text-align:center;">Cap: <span id="capCtrl">35</span></a>
+                  <button id="capUp" class="btn btn-success incr-btn-style" style="width:33.3%;"><span class="glyphicon glyphicon-plus-sign" style="font-size:20px;"> <b>5</b></span></button>
+                  <div class="badge" style="width:100%;font-size:16px;">0 - 60mmHg</div>
                   <hr style="display: block;
                      height: 1px;
                      border: 0;
@@ -167,10 +172,10 @@
                </div>
                <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10" style="float:center;width:100%;">
                   <br>
-                  <button id="lidDown" class="btn btn-danger incr-btn-style"style="width:33.3%;"><span class="glyphicon glyphicon-minus-sign"style="font-size:20px;"><b>100</b></span></button>
-                  <a href="http://localhost:8080/#" data-toggle="tooltip" title="" data-original-title="Lidocaine" style="font-size:20px;display:inline-block; width:30%;text-align:center;">Lidocaine: <span id="lidCtrl">0</span></a>
-                  <button id="lidUp" class="btn btn-success incr-btn-style"style="width:33.3%;"><span class="glyphicon glyphicon-plus-sign"style="font-size:20px;"><b>100</b></span></button>
-                  <div class="badge" style="width:100%;font-size:16px;">0 - 300mg</div>
+                  <button id="cvpDown" class="btn btn-danger incr-btn-style"style="width:33.3%;"><span class="glyphicon glyphicon-minus-sign"style="font-size:20px;"> <b>1</b></span></button>
+                  <a href="http://localhost:8080/#" data-toggle="tooltip" title="" data-original-title="Central Venous Pressure" style="font-size:20px;display:inline-block; width:30%;text-align:center;">CVP: <span id="cvpCtrl">2</span></a>
+                  <button id="cvpUp" class="btn btn-success incr-btn-style"style="width:33.3%;"><span class="glyphicon glyphicon-plus-sign"style="font-size:20px;"> <b>1</b></span></button>
+                  <div class="badge" style="width:100%;font-size:16px;">0 - 20mmHg</div>
                   <hr style="display: block;
                      height: 1px;
                      border: 0;
@@ -180,10 +185,10 @@
                </div>
                <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10" style="float:center;width:100%;">
                   <br>
-                  <button id="magDown" class="btn btn-danger incr-btn-style"style="width:33.3%;"><span class="glyphicon glyphicon-minus-sign"style="font-size:20px;"><b>0.001</b></span></button>
-                  <a href="http://localhost:8080/#" data-toggle="tooltip" title="" data-original-title="Magnesium"style="font-size:20px;display:inline-block; width:30%;text-align:center;">Mg: <span id="MagCtrl">0</span></a>
-                  <button id="magUp" class="btn btn-success incr-btn-style" style="width:33.3%;"><span class="glyphicon glyphicon-plus-sign" style="font-size:20px;"><b>0.001</b></span></button>
-                  <div class="badge" style="width:100%;font-size:16px;">0 - 5g</div>
+                  <button id="bisDown" class="btn btn-danger incr-btn-style"style="width:33.3%;"><span class="glyphicon glyphicon-minus-sign"style="font-size:20px;"> <b>3</b></span></button>
+                  <a href="http://localhost:8080/#" data-toggle="tooltip" title="" data-original-title="Bispectral Analysis"style="font-size:20px;display:inline-block; width:30%;text-align:center;">BIS: <span id="bisCtrl">50</span></a>
+                  <button id="bisUp" class="btn btn-success incr-btn-style" style="width:33.3%;"><span class="glyphicon glyphicon-plus-sign" style="font-size:20px;"> <b>3</b></span></button>
+                  <div class="badge" style="width:100%;font-size:16px;">15 - 65</div>
                   <hr style="display: block;
                      height: 1px;
                      border: 0;
@@ -191,7 +196,7 @@
                      margin: 1em 0;
                      padding: 0; ">
                </div>
-              <!-- <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10" style="float:center;width:100%;">
+               <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10" style="float:center;width:100%;">
                   <br>
                   <button id="esoTempDown" class="btn btn-danger incr-btn-style"style="width:33.3%;"><span class="glyphicon glyphicon-minus-sign"style="font-size:20px;"> <b>1</b></span></button>
                   <a href="http://localhost:8080/#" data-toggle="tooltip" title="" data-original-title="Esophageal Temperature" style="font-size:20px;display:inline-block; width:30%;text-align:center;">ESO: <span id="esoCtrl">37</span></a>
@@ -206,14 +211,20 @@
                </div>
                <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10" style="float:center;width:100%;">
                   <br>
-                  col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xs-offset-3 col-sm-offset-3 col-md-offset-3 col-lg-offset-3
+                  <!--col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xs-offset-3 col-sm-offset-3 col-md-offset-3 col-lg-offset-3-->
                   <button id="bladTempDown" class="btn btn-danger incr-btn-style"style="width:33.3%;"><span class="glyphicon glyphicon-minus-sign"style="font-size:20px;"> <b>1</b></span></button>
                   <a href="http://localhost:8080/#" data-toggle="tooltip" title="" data-original-title="Bladder Temperature" style="font-size:20px;display:inline-block; width:30%;text-align:center;">BLD: <span id="bldCtrl">37</span></a>
                   <button id="bladTempUp" class="btn btn-success incr-btn-style"style="width:33.3%;"><span class="glyphicon glyphicon-plus-sign"style="font-size:20px;"> <b>1</b></span></button>
                   <div class="badge" style="width:100%;font-size:16px;">18℃ - 38℃</div>
+                  <hr style="display: block;
+                     height: 1px;
+                     border: 0;
+                     border-top: 1px solid #000;
+                     margin: 1em 0;
+                     padding: 0; ">
                </div>
                </br>
-            </div>-->
+            </div>
             <!--<div class="col-lg-11 " style="float:right;border-style: solid;
                border-width: 1px;margin-top:5px;background-color:#eff1f4;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
                <div class="page-header" style="text-align: center;margin:0;">
@@ -240,92 +251,48 @@
          <div class="col-lg-12 col-md-12" style="float:right;padding:0px;">
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="float:right;border-style: solid;
                border-width: 1px;background-color:#eff1f4;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
-               <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="float:left; padding:0; ">
+               <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" style="float:left; padding-left:0; padding-right:10px;">
                  <div class="page-header" style="text-align: center;margin:0;">
                     </br>
-                    <h3 style="text-align:center;margin-bottom:0;">Gas Flow Controls</h3>
+                    <h3 style="text-align:center;margin-bottom:0;">ECG Controls</h3>
                  </div>
-
-                 <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10" style="float:center;width:100%;">
-                    <br>
-                    <button id="sweepDown" class="btn btn-warning incr-btn-style"style="width:33.3%;"><span class="glyphicon glyphicon-minus-sign"style="font-size:20px;"> <b>0.5</b></span></button>
-                    <a href="http://localhost:8080/#" data-toggle="tooltip" title="" data-original-title="Sweep"style="font-size:20px;display:inline-block; width:30%;text-align:center;">Sweep: <span id="SweepCtrl">0</span></a>
-                    <button id="sweepUp" class="btn btn-info incr-btn-style" style="width:33.3%;"><span class="glyphicon glyphicon-plus-sign" style="font-size:20px;"> <b>0.5</b></span></button>
-                    <div class="badge" style="width:100%;font-size:16px;">0 - 10L/min</div>
-                    <hr style="display: block;
-                       height: 1px;
-                       border: 0;
-                       border-top: 1px solid #000;
-                       margin: 1em 0;
-                       padding: 0; ">
+                 </br>
+                 <div class="btn-group-vertical" style="width:100%; font-size:20px;padding:0px;display:block;">
+                    <button id="ecgNormal" type="button" class="btn btn-primary" style="font-size:20px;">Normal</button>
+                    </br>
+                    <button id="ecgSlow" type="button" class="btn btn-primary" style="font-size:20px;">Slower</button>
+                    </br>
+                    <button id="ecgFast" type="button" class="btn btn-primary" style="font-size:20px;">Faster</button>
+                    </br>
+                    <button id="ecgFlat" type="button" class="btn btn-primary" style="font-size:20px;">Flatline</button>
+                    </br>
+                    <button id="ecgFib" stype="button" class="btn btn-primary" style="font-size:20px;">Fibrillation</button>
+                    </br>
                  </div>
-                 <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10" style="float:center;width:100%;">
-                    <br>
-                    <button id="Fidown" class="btn btn-warning incr-btn-style"style="width:33.3%;"><span class="glyphicon glyphicon-minus-sign"style="font-size:20px;"> <b>0.1</b></span></button>
-                    <a href="http://localhost:8080/#" data-toggle="tooltip" title="" data-original-title="FiO2"style="font-size:20px;display:inline-block; width:30%;text-align:center;">FiO<sub>2</sub>: <span id="FiCtrl">0</span></a>
-                    <button id="FiUp" class="btn btn-info incr-btn-style" style="width:33.3%;"><span class="glyphicon glyphicon-plus-sign" style="font-size:20px;"> <b>0.1</b></span></button>
-                    <div class="badge" style="width:100%;font-size:16px;">0.21 - 1.0L/min</div>
-                    <hr style="display: block;
-                       height: 1px;
-                       border: 0;
-                       border-top: 1px solid #000;
-                       margin: 1em 0;
-                       padding: 0; ">
-                 </div>
-
-                 <h4 style="text-align:center;">Pump: On</h4>
-
 
                </div>
 
-
-</br>
-            </div>
-
-            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="float:right;border-style: solid;
-               border-width: 1px;background-color:#eff1f4;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); margin-top:5px;">
-               <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="float:left; padding:0; ">
-                 <div class="page-header" style="text-align: center;margin:0;">
-                    </br>
-                    <h3 style="text-align:center;margin-bottom:0;">Patient Controls</h3>
-                 </div>
-
-                 <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10" style="float:center;width:100%;">
-                    <br>
-                    <button id="svo2Down" class="btn btn-danger incr-btn-style"style="width:33.3%;"><span class="glyphicon glyphicon-minus-sign"style="font-size:20px;"> <b>5</b></span></button>
-                    <!--  <span>SVO<sub>2</sub></span>-->
-                    <a href="http://localhost:8080/#" data-toggle="tooltip" title="" data-original-title="Venous Oxygen Saturation"style="font-size:20px;display:inline-block; width:30%;text-align:center;">SVO<sub>2</sub>: <span id="svo2Ctrl">75</span></a>
-                    <button id="svo2Up" class="btn btn-primary incr-btn-style"style="width:33.3%;"><span class="glyphicon glyphicon-plus-sign" style="font-size:20px;"> <b>5</b></span></button>
-                    <div class="badge" style="width:100%;font-size:16px;">25% - 100%</div>
-                    <hr style="display: block;
-                       height: 1px;
-                       border: 0;
-                       border-top: 1px solid #000;
-                       margin: 1em 0;
-                       padding: 0; ">
-                 </div>
-                 <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10" style="float:center;width:100%;">
-                    <br>
-                    <button id="tempdown" class="btn btn-danger incr-btn-style"style="width:33.3%;"><span class="glyphicon glyphicon-minus-sign"style="font-size:20px;"> <b>1</b></span></button>
-                    <a href="http://localhost:8080/#" data-toggle="tooltip" title="" data-original-title="Temperature"style="font-size:20px;display:inline-block; width:30%;text-align:center;">Temp: <span id="TempCtrl">0</span>℃</a>
-                    <button id="tempUp" class="btn btn-primary incr-btn-style" style="width:33.3%;"><span class="glyphicon glyphicon-plus-sign" style="font-size:20px;"> <b>1</b></span></button>
-                    <div class="badge" style="width:100%;font-size:16px;">4 - 39℃</div>
-                    <hr style="display: block;
-                       height: 1px;
-                       border: 0;
-                       border-top: 1px solid #000;
-                       margin: 1em 0;
-                       padding: 0; ">
-                 </div>
-
-
+              <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" style="float:right; padding:0; ">
+               <div class="page-header" style="text-align: center;margin:0;">
+                  </br>
+                  </br>
+                  <h3 style="text-align:center;margin:0;">Emergency Scenarios</h3>
                </div>
-
-
+               <div  class="btn-group-vertical" style="text-align:left;font-size:20px;display:block;padding:0;">
+                  <br>
+                  <button id="oxyfail" type="button" class="btn btn-danger" style="font-size:20px;">Oxyfail</button>
+                  </br>
+                  <button id="anesthfail" type="button" class="btn btn-danger" style="font-size:20px;">Anesthfail</button>
+                  </br>
+                  <button id="inadAnticoag" type="button" class="btn btn-danger" style="font-size:20px;">InadAnticoag</button>
+                  </br>
+                  <button id="intravasHemo" type="button" class="btn btn-danger" style="font-size:20px;">IntravasHemo</button>
+                  </br>
+               </div>
+             </div>
 
             </div>
-
-          <!--  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="border-style: solid;
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="border-style: solid;
                border-width: 1px;padding:0;float:right;margin-top:5px;background-color:#eff1f4;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="text-align:center;float:center;">
 
@@ -333,7 +300,7 @@
                      <h3 style="text-align:center;margin:0;">Mechanical Controls</h3>
                   </div>
 
-                  col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xs-offset-3 col-sm-offset-3 col-md-offset-3 col-lg-offset-3
+                  <!--col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xs-offset-3 col-sm-offset-3 col-md-offset-3 col-lg-offset-3-->
                   <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8" style="float:left; text-align:center; margin-bottom:15px;">
 
                      <div class="btn-group-vertical" style="margin-left:0; text-align:center;width:100%;">
@@ -356,16 +323,16 @@
                   <button class="btn btn-success incr-btn-style"style="font-size:18px;float:center;">On</button>
                 </br>
               </br>
-                </div>
-                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4" style="float:right;">
+              <!--  </div>-->
+                <!--<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4" style="float:right;">-->
                   <button class="btn btn-primary incr-btn-style"style="font-size:18px;float:center;">Flush</br>System</button>
                 </div>
                </div>
 
-              PASTE
+              <!--PASTE-->
                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="float:center;text-align:center;">
                   <br>
-                  col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xs-offset-3 col-sm-offset-3 col-md-offset-3 col-lg-offset-3
+                  <!--col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xs-offset-3 col-sm-offset-3 col-md-offset-3 col-lg-offset-3-->
                   <span style="font-size:20px;text-align:center;">Pressure :</span>
                   <br>
                   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -409,13 +376,7 @@
                      <p style="font-size:20px;text-align:center;">Value: <span id="demo">50</span></p>
                   </div>
                </div>
-             </div>-->
-
-
-
-
-
-
+             </div>
             </div>
             <script>
                var slider = document.getElementById("myRange");
@@ -431,11 +392,4 @@
    </div>
 </div>
 </div>
-<script src="../js/studentSocket.js"></script>
-<script id="ecgScript" src="../js/ecg.js" data-arg1='stu'></script>
-<script id="abpScript" src="../js/abp.js" data-arg1='stu'></script>
-<script id="svo2Script" src="../js/svo2.js" data-arg1='stu'></script>
-<script id="capScript" src="../js/cap.js" data-arg1='stu'></script>
-<script id="cvpScript" src="../js/cvp.js" data-arg1='stu'></script>
-
-</div>
+<script src="../js/sessionSocket.js"></script>
