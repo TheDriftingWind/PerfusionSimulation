@@ -32,7 +32,7 @@ function routeConfigSettings($routeProvider){
 		controller: 'SessionController'
 	})
 	.when('/studentstation', {
-		templateUrl: 'app/views/studentStation.html',
+		templateUrl: 'app/views/studentstation.html',
 	})
 	.otherwise('/')
 }

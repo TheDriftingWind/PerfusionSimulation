@@ -207,7 +207,7 @@ intravasHemo.addEventListener('click', function(){
 
 function genEcg(){
   let ecgSeries = Highcharts.charts[0].series[0];
-  ecgSeries.addPoint([index % interval == 0 ? 8 : Math.random() * (max - min) + min], true, ecgSeries.data.length > 100);   
+  ecgSeries.addPoint([index % interval == 0 ? 8 : Math.random() * (max - min) + min], true, ecgSeries.data.length > 100);
   index ++;
 
   if(index == 41){
