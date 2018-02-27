@@ -1,6 +1,3 @@
-if($('#studentContainer')){
-  $('#studentContainer').remove()
-}
 var professorSocket = io.connect(window.location.href);
 var profCharts = window.myData.charts.prof;
 professorSocket.on('connect', function(){

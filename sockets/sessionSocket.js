@@ -44,7 +44,6 @@ function initSocket(server){
 		data.bis = bisPoint > data.bis ? Math.min(Math.round(bisPoint * 100) / 100, 65) : Math.max(Math.round(bisPoint * 100) / 100, 15);
 		data.eso = esoPoint > data.eso ? Math.min(Math.round(esoPoint * 100) / 100, 38) : Math.max(Math.round(esoPoint * 100) / 100, 18);
 		data.bld = bldPoint > data.bld ? Math.min(Math.round(bldPoint * 100) / 100, 38) : Math.max(Math.round(bldPoint * 100) / 100, 18);
-		console.log(data)
 		io.sockets.emit('vitals', data);
 	}, 1000);
 
