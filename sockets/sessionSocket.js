@@ -11,6 +11,13 @@ var vitals  = {
 	cvp: 2
 }
 
+var ecg = {
+	index: 1,
+	interval: 20,
+  	min: 1,
+	max: 3
+}
+
 function initSocket(server){
 
 	var io = socket(server);

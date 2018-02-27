@@ -1,11 +1,13 @@
 var professorSocket = io.connect(window.location.href);
 var profCharts = window.myData.charts.prof;
+var instructorFocus = true;
 professorSocket.on('connect', function(){
   console.log('connected to professor professorSocket')
 })
 professorSocket.on('disconnect', function(){
   console.log('disconnected from professor professorSocket')
 })
+
   var vitals = {};
   var ecgContainer = document.getElementById('ecgContainer');
 
@@ -37,6 +39,17 @@ professorSocket.on('disconnect', function(){
       profCvpDisplay = document.getElementById('profCvpDisplay'),
       profEcgDisplay = document.getElementById('profEcgDisplay');
 
+$(window).on( "focusout", function(){
+  instructorFocus = false;
+})
+$(window).on( "focus", function(){
+  instructorFocus = true;
+  for(chart in profCharts){
+    if('ecg' != chart){
+      profCharts[chart].series[0].setData([])
+    }
+  }
+})
   var abpUp = document.getElementById('abpUp'),
       abpDown = document.getElementById('abpDown');
 
@@ -61,9 +74,7 @@ professorSocket.on('disconnect', function(){
   // Emit events
   abpUp.addEventListener('click', function(){
     abpCtrl.textContent = abpCtrl.textContent * 1 + 10 > 200 ? 200 : abpCtrl.textContent * 1 + 10;
-    console.log(vitals)
     vitals.abp = abpCtrl.textContent;
-    console.log(vitals)
     professorSocket.emit('vitals', vitals);
   });
   abpDown.addEventListener('click', function(){
@@ -139,33 +150,35 @@ professorSocket.on('disconnect', function(){
   });
 
   professorSocket.on('vitals', function(data){
-    if('/' == window.location.href.split('#!')[1]){  
-      vitals = data;
-      let time = new Date().getTime();
-      let abpSeries = profCharts.abp.series[0];
-      let svo2Series = profCharts.svo2.series[0];
-      let capSeries = profCharts.cap.series[0];
-      let cvpSeries = profCharts.cvp.series[0];
+    if('/' == window.location.href.split('#!')[1]){
+      if(instructorFocus){
+          vitals = data;
+          let time = new Date().getTime();
+          let abpSeries = profCharts.abp.series[0];
+          let svo2Series = profCharts.svo2.series[0];
+          let capSeries = profCharts.cap.series[0];
+          let cvpSeries = profCharts.cvp.series[0];
 
-      abpSeries.addPoint([time, data.abp], true, abpSeries.data.length > 30);
-      svo2Series.addPoint([time, data.svo2], true, svo2Series.data.length > 30);
-      capSeries.addPoint([time, data.cap], true, capSeries.data.length > 30);
-      cvpSeries.addPoint([time, data.cvp], true, cvpSeries.data.length > 30);
+          abpSeries.addPoint([time, data.abp], true, abpSeries.data.length > 30);
+          svo2Series.addPoint([time, data.svo2], true, svo2Series.data.length > 30);
+          capSeries.addPoint([time, data.cap], true, capSeries.data.length > 30);
+          cvpSeries.addPoint([time, data.cvp], true, cvpSeries.data.length > 30);
 
-      profAbpDisplay.textContent = data.abp;
-      profSvo2Display.textContent = data.svo2;
-      profCapDisplay.textContent = data.cap;
-      profCvpDisplay.textContent = data.cvp;
-      profBisDisplay.textContent = data.bis;
-      profEsoDisplay.textContent = data.eso;
-      profBldDisplay.textContent = data.bld;
+          profAbpDisplay.textContent = data.abp;
+          profSvo2Display.textContent = data.svo2;
+          profCapDisplay.textContent = data.cap;
+          profCvpDisplay.textContent = data.cvp;
+          profBisDisplay.textContent = data.bis;
+          profEsoDisplay.textContent = data.eso;
+          profBldDisplay.textContent = data.bld;
+      }
     }else{
       professorSocket.disconnect();
      }
   });
 
   professorSocket.on('ecg', function(data){
-    if('/' == window.location.href.split('#!')[1]){  
+    if('/' == window.location.href.split('#!')[1] && instructorFocus){  
       genEcg()
     }
   });
