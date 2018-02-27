@@ -1,6 +1,8 @@
 var studentSocket = io.connect(window.location.href);
 var studentCharts = window.myData.charts.stu;
 var studentFocus = true;
+var ecgIndex = 1;
+
 studentSocket.on('connect', function(){
   console.log('connected to student studentSocket')
 })
@@ -58,23 +60,15 @@ $(window).on( "focus", function(){
   });
 
   studentSocket.on('ecg', function(data){
-    if('/studentstation' == window.location.href.split('#!')[1] && studentFocus){  
-      genEcg()
+    if('/' == window.location.href.split('#!')[1] && studentFocus){  
+      let ecgSeries = studentCharts.ecg.series[0];
+      ecgSeries.addPoint([ecgIndex % data.interval == 0 ? 8 : Math.random() * (data.max - data.min) + data.min], true, ecgSeries.data.length > 100);   
+      stuEcgDisplay.textContent = data.seconds;
+      ecgIndex ++;
+
+      if(ecgIndex == 41){
+        ecgIndex = 1;
+      }
     }
   });
-
-  var index = 1;
-  var interval = 20;
-  var min = 1;
-  var max = 3;
-
-  function genEcg(){
-    let ecgSeries = studentCharts.ecg.series[0];
-    ecgSeries.addPoint([index % interval == 0 ? 8 : Math.random() * (max - min) + min], true, ecgSeries.data.length > 100);   
-    index ++;
-
-    if(index == 41){
-      index = 1;
-    }
-  } 
 

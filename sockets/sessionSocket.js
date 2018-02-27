@@ -12,10 +12,10 @@ var vitals  = {
 }
 
 var ecg = {
-	index: 1,
 	interval: 20,
   	min: 1,
-	max: 3
+	max: 3,
+	seconds: '1'
 }
 
 function initSocket(server){
@@ -25,8 +25,12 @@ function initSocket(server){
 	io.on('connection', function(socket){
 		console.log('made socket connection', socket.id);
 		socket.emit('vitals', vitals)
+		socket.emit('ecg', ecg)
 		socket.on('vitals', function(data){
 			vitals = data;
+		});
+		socket.on('ecg', function(data){
+			ecg = data;
 		});
 
 		socket.on('disconnect', function(data){
@@ -55,11 +59,8 @@ function initSocket(server){
 	}, 1000);
 
 	setInterval(function(){
-		io.sockets.emit('ecg', {});
+		io.sockets.emit('ecg', ecg);
 	}, 100);
 }
-
-
-
 
 module.exports = initSocket;

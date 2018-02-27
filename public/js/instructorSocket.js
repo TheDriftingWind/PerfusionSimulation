@@ -1,43 +1,68 @@
 var professorSocket = io.connect(window.location.href);
 var profCharts = window.myData.charts.prof;
-var instructorFocus = true;
+var instructorFocus = true;  
+var ecgIndex = 1;
+
+var vitals = {};
+var ecg = {};
+var ecgContainer = document.getElementById('ecgContainer');
+
+var ecgNormal = document.getElementById('ecgNormal');
+    ecgFast = document.getElementById('ecgFast'),
+    ecgSlow = document.getElementById('ecgSlow'),
+    ecgFlat = document.getElementById('ecgFlat'),
+    ecgFib = document.getElementById('ecgFib');
+
+var oxyfail = document.getElementById('oxyfail'),
+    anesthfail = document.getElementById('anesthfail'),
+    inadAnticoag = document.getElementById('inadAnticoag'),
+    intravasHemo = document.getElementById('intravasHemo');
+
+var abpCtrl = document.getElementById('abpCtrl'),
+    capCtrl = document.getElementById('capCtrl'),
+    bisCtrl = document.getElementById('bisCtrl'),
+    bldCtrl = document.getElementById('bldCtrl'),
+    svo2Ctrl = document.getElementById('svo2Ctrl'),
+    esoCtrl = document.getElementById('esoCtrl'),
+    cvpCtrl = document.getElementById('cvpCtrl');
+
+var profAbpDisplay = document.getElementById('profAbpDisplay'),
+    profCapDisplay = document.getElementById('profCapDisplay'),
+    profBisDisplay = document.getElementById('profBisDisplay'),
+    profBldDisplay = document.getElementById('profBldDisplay'),
+    profSvo2Display = document.getElementById('profSvo2Display'),
+    profEsoDisplay = document.getElementById('profEsoDisplay'),
+    profCvpDisplay = document.getElementById('profCvpDisplay'),
+    profEcgDisplay = document.getElementById('profEcgDisplay');
+
+var abpUp = document.getElementById('abpUp'),
+    abpDown = document.getElementById('abpDown');
+
+var capUp = document.getElementById('capUp'),
+    capDown = document.getElementById('capDown');
+
+var bisUp = document.getElementById('bisUp'),
+    bisDown = document.getElementById('bisDown');
+
+var bladTempDown = document.getElementById('bladTempDown'),
+    bladTempUp = document.getElementById('bladTempUp');
+
+var svo2Up = document.getElementById('svo2Up'),
+    svo2Down = document.getElementById('svo2Down');
+
+var esoTempUp = document.getElementById('esoTempUp'),
+    esoTempDown = document.getElementById('esoTempDown');
+
+var cvpUp = document.getElementById('cvpUp'),
+    cvpDown = document.getElementById('cvpDown');
+
+
 professorSocket.on('connect', function(){
   console.log('connected to professor professorSocket')
 })
 professorSocket.on('disconnect', function(){
   console.log('disconnected from professor professorSocket')
 })
-
-  var vitals = {};
-  var ecgContainer = document.getElementById('ecgContainer');
-
-  var ecgNormal = document.getElementById('ecgNormal');
-      ecgFast = document.getElementById('ecgFast'),
-      ecgSlow = document.getElementById('ecgSlow'),
-      ecgFlat = document.getElementById('ecgFlat'),
-      ecgFib = document.getElementById('ecgFib');
-
-  var oxyfail = document.getElementById('oxyfail'),
-      anesthfail = document.getElementById('anesthfail'),
-      inadAnticoag = document.getElementById('inadAnticoag'),
-      intravasHemo = document.getElementById('intravasHemo');
-
-  var abpCtrl = document.getElementById('abpCtrl'),
-      capCtrl = document.getElementById('capCtrl'),
-      bisCtrl = document.getElementById('bisCtrl'),
-      bldCtrl = document.getElementById('bldCtrl'),
-      svo2Ctrl = document.getElementById('svo2Ctrl'),
-      esoCtrl = document.getElementById('esoCtrl'),
-      cvpCtrl = document.getElementById('cvpCtrl');
-
-  var profAbpDisplay = document.getElementById('profAbpDisplay'),
-      profCapDisplay = document.getElementById('profCapDisplay'),
-      profBisDisplay = document.getElementById('profBisDisplay'),
-      profBldDisplay = document.getElementById('profBldDisplay'),
-      profSvo2Display = document.getElementById('profSvo2Display'),
-      profEsoDisplay = document.getElementById('profEsoDisplay'),
-      profCvpDisplay = document.getElementById('profCvpDisplay'),
-      profEcgDisplay = document.getElementById('profEcgDisplay');
 
 $(window).on( "focusout", function(){
   instructorFocus = false;
@@ -50,26 +75,7 @@ $(window).on( "focus", function(){
     }
   }
 })
-  var abpUp = document.getElementById('abpUp'),
-      abpDown = document.getElementById('abpDown');
-
-  var capUp = document.getElementById('capUp'),
-      capDown = document.getElementById('capDown');
-
-  var bisUp = document.getElementById('bisUp'),
-      bisDown = document.getElementById('bisDown');
-
-  var bladTempDown = document.getElementById('bladTempDown'),
-      bladTempUp = document.getElementById('bladTempUp');
-
-  var svo2Up = document.getElementById('svo2Up'),
-      svo2Down = document.getElementById('svo2Down');
-
-  var esoTempUp = document.getElementById('esoTempUp'),
-      esoTempDown = document.getElementById('esoTempDown');
-
-  var cvpUp = document.getElementById('cvpUp'),
-      cvpDown = document.getElementById('cvpDown');
+ 
 
   // Emit events
   abpUp.addEventListener('click', function(){
@@ -178,67 +184,53 @@ $(window).on( "focus", function(){
   });
 
   professorSocket.on('ecg', function(data){
-    if('/' == window.location.href.split('#!')[1] && instructorFocus){  
-      genEcg()
+    if('/' == window.location.href.split('#!')[1] && instructorFocus){ 
+      ecg = data; 
+      let ecgSeries = profCharts.ecg.series[0];
+      ecgSeries.addPoint([ecgIndex % data.interval == 0 ? 8 : Math.random() * (data.max - data.min) + data.min], true, ecgSeries.data.length > 100);   
+      profEcgDisplay.textContent = data.seconds;
+      
+      ecgIndex ++;
+      if(ecgIndex == 41){
+        ecgIndex = 1;
+      }
     }
   });
 
-  var index = 1;
-  var interval = 20;
-  var min = 1;
-  var max = 3;
-
   ecgNormal.addEventListener('click', function(){
-    interval = 20;
-    min = 1;
-    max = 3;
-    profEcgDisplay.textContent = 1.0;
+    ecg.interval = 20;
+    ecg.min = 1;
+    ecg.max = 3;
+    ecg.seconds = 1.0;
+    professorSocket.emit('ecg', ecg);
   });
   ecgSlow.addEventListener('click', function(){
-    interval = 30;
-    min = 1;
-    max = 3;
-    profEcgDisplay.textContent = 2.0;
-
+    ecg.interval = 30;
+    ecg.min = 1;
+    ecg.max = 3;
+    ecg.seconds = 2.0;
+    professorSocket.emit('ecg', ecg);
   });
   ecgFast.addEventListener('click', function(){
-    interval = 10;
-    min = 1;
-    max = 3;
-    profEcgDisplay.textContent = 0.5;
-
+    ecg.interval = 10;
+    ecg.min = 1;
+    ecg.max = 3;
+    ecg.seconds = 0.5;
+    professorSocket.emit('ecg', ecg);
   });
   ecgFlat.addEventListener('click', function(){
-    interval = 99;
-    min = 0;
-    max = 1;
-    profEcgDisplay.textContent = '-';
+    ecg.interval = 99;
+    ecg.min = 0;
+    ecg.max = 1;
+    ecg.seconds = '-';
+    professorSocket.emit('ecg', ecg);
 
   });
   ecgFib.addEventListener('click', function(){
-    interval = 5;
-    min = 5;
-    max = 1;
-    profEcgDisplay.textContent = 0.1;
+    ecg.interval = 5;
+    ecg.min = 5;
+    ecg.max = 1;
+    ecg.seconds = 0.1;
+    professorSocket.emit('ecg', ecg);
   });
-
-
-  oxyfail.addEventListener('click', function(){
-  });
-  anesthfail.addEventListener('click', function(){
-  });
-  inadAnticoag.addEventListener('click', function(){
-  });
-  intravasHemo.addEventListener('click', function(){
-  });
-
-  function genEcg(){
-    let ecgSeries = profCharts.ecg.series[0];
-    ecgSeries.addPoint([index % interval == 0 ? 8 : Math.random() * (max - min) + min], true, ecgSeries.data.length > 100);   
-    index ++;
-
-    if(index == 41){
-      index = 1;
-    }
-  } 
 
