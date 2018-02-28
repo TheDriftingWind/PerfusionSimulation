@@ -60,7 +60,7 @@ $(window).on( "focus", function(){
   });
 
   studentSocket.on('ecg', function(data){
-    if('/' == window.location.href.split('#!')[1] && studentFocus){  
+    if('/studentstation' == window.location.href.split('#!')[1] && studentFocus){  
       let ecgSeries = studentCharts.ecg.series[0];
       ecgSeries.addPoint([ecgIndex % data.interval == 0 ? 8 : Math.random() * (data.max - data.min) + data.min], true, ecgSeries.data.length > 100);   
       stuEcgDisplay.textContent = data.seconds;
