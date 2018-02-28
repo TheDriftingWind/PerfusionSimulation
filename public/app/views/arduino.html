@@ -1,0 +1,13 @@
+<div style="padding-top: 5%; font-size: 18px">
+	<div class="col-lg-3 col-md-3 col-lg-offset-1 col-md-offset-1">
+		<p style="width: 100%; display: block;"><strong>Pin 13 LED Interval</strong></p>
+		<input style="display: block;" onkeypress="return event.charCode >= 48 && event.charCode <= 57" placeholder="interval in milliseconds" ng-model="interval">
+		<input style="display: block;" onkeypress="return event.charCode >= 48 && event.charCode <= 57" placeholder="number of ticks" ng-model="ticks">
+		<button style="display: block;" type="button" class="btn btn-info" ng-click="setLEDInterval(interval, ticks)">Send</button>
+	</div>
+	<div class="col-lg-3 col-md-3">
+		<p style="width: 100%; display: block"><strong> {{ outputPin13 }} </strong></p>
+		<input style="display: block;" onkeypress="return event.charCode >= 48 && event.charCode <= 57" placeholder="set pin status" ng-model="pinStatus">
+		<button style="display: block;" type="button" class="btn btn-info" ng-click="setLEDStatus(pinStatus)">Send</button>
+	</div>
+</div>
