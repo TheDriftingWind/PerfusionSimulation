@@ -35,5 +35,9 @@ function routeConfigSettings($routeProvider){
 		templateUrl: 'app/views/student-station.html',
 		controller: 'studentController'
 	})
+	.when('/login', {
+		templateUrl: 'app/views/login.html',
+		controller: 'loginController'
+	})
 	.otherwise('/')
 }
