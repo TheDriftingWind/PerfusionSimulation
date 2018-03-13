@@ -38,5 +38,9 @@ function routeConfigSettings($routeProvider){
 		templateUrl: 'app/views/arduino.html',
 		controller: 'arduinoController'
 	})
+	.when('/login', {
+		templateUrl: 'app/views/login.html',
+		controller: 'loginController'
+	})
 	.otherwise('/')
 }
