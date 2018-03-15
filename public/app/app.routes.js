@@ -1,46 +1,93 @@
-angular
-.module('mainApp')
-.config(routeConfigSettings);
+var app = angular.module('mainApp', ['ngRoute']);
 
-routeConfigSettings.$inject = ['$routeProvider'];
 
-function routeConfigSettings($routeProvider){
-	$routeProvider.when('/', {
+app.config(function ($routeProvider){
+	$routeProvider.when('/login', {
+		templateUrl: 'app/views/login.html',
+		access: {
+			restricted: false,
+			student_access: false
+		}
+	})
+	.when('/register', {
+		templateUrl: 'app/views/register.html',
+		access: {
+			restricted: false,
+			student_access: true
+		}
+	})
+	.when('/waiting-room', {
+		templateUrl: 'app/views/waiting-room.html',
+		access: {
+			restricted: true,
+			student_access: true
+		}
+	})
+	.when('/student-station', {
+		templateUrl: 'app/views/student-station.html',
+		controller: 'studentController',
+		access: {
+			restricted: true,
+			student_access: true
+		}
+	})
+	.when('/instructor-station', {
 		templateUrl: 'app/views/instructor-station.html',
-		controller: 'loginController'
+		controller: 'studentController',
+		access: {
+			restricted: true,
+			student_access: true
+		}
 	})
 	.when('/chart', {
 		templateUrl: 'app/views/highchart.html',
-		controller: 'chartController'
+		controller: 'chartController',
+		access: {
+			restricted: true,
+			student_access: true
+		}
 	})
 	.when('/test', {
 		templateUrl: 'app/views/test.html',
-		controller: 'TestController'
+		controller: 'TestController',
+		access: {
+			restricted: true,
+			student_access: true
+		}
 	})
 	.when('/sync', {
 		templateUrl: 'app/views/syncCharts.html',
-		controller: 'chartController'
-	})
-	.when('/register', {
-		templateUrl: 'app/views/register.html'
-	})
-	.when('/home', {
-		templateUrl: 'app/views/waiting-room.html'
+		controller: 'chartController',
+		access: {
+			restricted: true,
+			student_access: true
+		}
 	})
 	.when('/sessions', {
 		templateUrl: 'app/views/session.html',
-		controller: 'SessionController'
+		controller: 'SessionController',
+		access: {
+			restricted: true,
+			student_access: true
+		}
 	})
-	.when('/studentstation', {
-		templateUrl: 'app/views/student-station.html',
-		controller: 'studentController'
-	}).when('/arduino', {
+	.when('/arduino', {
 		templateUrl: 'app/views/arduino.html',
-		controller: 'arduinoController'
+		controller: 'arduinoController',
+		access: {
+			restricted: true,
+			student_access: true
+		}
 	})
-	.when('/login', {
-		templateUrl: 'app/views/login.html',
-		controller: 'loginController'
-	})
-	.otherwise('/')
-}
+	.otherwise('/login')
+});
+
+app.run(function($rootScope, $location) {
+	$rootScope.$on( "$routeChangeStart", function(event, next, current) {
+		// if ($rootScope.loggedInUser == null) {
+		// 	if (next.access.restricted) {
+		// 		$location.path("/login");
+		// 	}
+		// }
+	});
+});
