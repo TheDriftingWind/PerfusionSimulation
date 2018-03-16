@@ -11,7 +11,7 @@ var cors = require('cors');
 var uri = 'mongodb://troy:perfusion@ds113606.mlab.com:13606/perfusion-simulation';
 var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
-var chatSocket = require('./sockets/sessionSocket');
+var socket = require('./sockets/sessionSocket');
 var request = require('request');
 var mongoose = require('mongoose');
 var mongoDriver = require('./config/database').driver;
@@ -33,7 +33,15 @@ app.use(cors())
 
 var server = app.listen(port, function() {
 	console.log('Sever running at localhost:' + port);
-	console.log(mongoDriver)
-	chatSocket(server);
+	socket(server);
+	//initDB();
 });
+
+function initDB(){
+	var db = mongoose.createConnection(mongoDriver);
+	db.on('error', console.error.bind(console, 'connection error:'));
+	db.once('open', function callback () {
+		console.log('Database connection established at ' + mongoDriver);
+	});
+}
 
