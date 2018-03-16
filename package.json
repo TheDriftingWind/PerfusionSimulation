@@ -21,10 +21,12 @@
     "request": "^2.83.0",
     "socket.io": "^2.0.4"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "nodemon": "^1.17.2"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js"
+    "start": "nodemon index.js"
   },
   "repository": {
     "type": "git",

@@ -1,10 +1,10 @@
 angular
 .module('mainApp')
-.controller('loginController', loginController);
+.controller('LoginController', LoginController);
 
-loginController.$inject = ['$scope', '$location'];
+LoginController.$inject = ['$scope', '$location'];
 
-function loginController($scope, $location){
+function LoginController($scope, $location){
 	$scope.login = login;
 	activate();
 

@@ -1,14 +1,17 @@
 angular
 .module('mainApp')
-.factory('AdministrationFactory', AdministrationFactory);
+.factory('AuthFactory', AuthFactory);
 
-AdministrationFactory.$inject = ['$http'];
+AuthFactory.$inject = ['$http'];
 
 // set up the services needed for this factory
-function AdministrationFactory($http){
+function AuthFactory($http){
 
 	var service = {
-		getAdministrations: getAdministrations
+		isLoggedIn: isLoggedIn,
+		register: register,
+		login: login,
+		logout: logout
 	};
 
 	return service;

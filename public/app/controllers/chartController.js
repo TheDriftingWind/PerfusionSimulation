@@ -1,10 +1,10 @@
 angular
 .module('mainApp')
-.controller('chartController', chartController);
+.controller('ChartController', ChartController);
 
-chartController.$inject = ['$scope', 'SessionFactory', 'AdministrationFactoy'];
+ChartController.$inject = ['$scope', 'SessionFactory', 'AdministrationFactory'];
 
-function chartController($scope, SessionFactory, AdministrationFactoy){
+function ChartController($scope, SessionFactory, AdministrationFactory){
 	var session;
 	$scope.getFormattedChartData = getFormattedChartData;
 	$scope.title = 'title';
@@ -18,7 +18,7 @@ function chartController($scope, SessionFactory, AdministrationFactoy){
 			session = res[0];
 		});
 
-		AdministrationFactoy.getAdministrations().then(function(res){
+		AdministrationFactory.getAdministrations().then(function(res){
 			$scope.administrations = res;
 		});
 	}

@@ -1,10 +1,10 @@
 angular
 .module('mainApp')
-.controller('navController', navController);
+.controller('NavController', NavController);
 
-navController.$inject = ['$scope', '$location', '$window'];
+NavController.$inject = ['$scope', '$location', '$window'];
 
-function navController($scope, $location, $window){
+function NavController($scope, $location, $window){
 	$scope.home = 'home';
 	$scope.chart = 'chart';
 	$scope.login = 'login';

@@ -4,7 +4,7 @@ var app = angular.module('mainApp', ['ngRoute']);
 app.config(function ($routeProvider){
 	$routeProvider.when('/login', {
 		templateUrl: 'app/views/login.html',
-		controller: 'loginController',
+		controller: 'LoginController',
 		access: {
 			restricted: false,
 			student_access: false
@@ -26,7 +26,7 @@ app.config(function ($routeProvider){
 	})
 	.when('/student-station', {
 		templateUrl: 'app/views/student-station.html',
-		controller: 'studentController',
+		controller: 'StudentController',
 		access: {
 			restricted: true,
 			student_access: true
@@ -34,7 +34,7 @@ app.config(function ($routeProvider){
 	})
 	.when('/instructor-station', {
 		templateUrl: 'app/views/instructor-station.html',
-		controller: 'studentController',
+		controller: 'StudentController',
 		access: {
 			restricted: true,
 			student_access: true
@@ -42,7 +42,7 @@ app.config(function ($routeProvider){
 	})
 	.when('/chart', {
 		templateUrl: 'app/views/highchart.html',
-		controller: 'chartController',
+		controller: 'ShartController',
 		access: {
 			restricted: true,
 			student_access: true
@@ -58,7 +58,7 @@ app.config(function ($routeProvider){
 	})
 	.when('/sync', {
 		templateUrl: 'app/views/syncCharts.html',
-		controller: 'chartController',
+		controller: 'ChartController',
 		access: {
 			restricted: true,
 			student_access: true
@@ -74,7 +74,7 @@ app.config(function ($routeProvider){
 	})
 	.when('/arduino', {
 		templateUrl: 'app/views/arduino.html',
-		controller: 'arduinoController',
+		controller: 'ArduinoController',
 		access: {
 			restricted: true,
 			student_access: true

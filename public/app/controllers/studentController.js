@@ -1,10 +1,10 @@
 angular
 .module('mainApp')
-.controller('studentController', studentController);
+.controller('StudentController', StudentController);
 
-studentController.$inject = ['$scope', '$location', '$window'];
+StudentController.$inject = ['$scope', '$location', '$window'];
 
-function studentController($scope, $location, $window){
+function StudentController($scope, $location, $window){
 
 
 	activate();

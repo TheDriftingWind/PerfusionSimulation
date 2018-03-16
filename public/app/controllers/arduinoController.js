@@ -1,10 +1,10 @@
 angular
 .module('mainApp')
-.controller('arduinoController', arduinoController);
+.controller('ArduinoController', ArduinoController);
 
-arduinoController.$inject = ['$scope', '$location', 'ArduinoFactory'];
+ArduinoController.$inject = ['$scope', '$location', 'ArduinoFactory'];
 
-function arduinoController($scope, $location, ArduinoFactory){
+function ArduinoController($scope, $location, ArduinoFactory){
 	$scope.outputPin13 = 'n/a'
 	$scope.intervalRes = 'n/a'
 
