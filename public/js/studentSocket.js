@@ -32,7 +32,7 @@ $(window).on( "focus", function(){
       stuEcgDisplay = document.getElementById('stuEcgDisplay');
 
   studentSocket.on('vitals', function(data){
-    if('/studentstation' == window.location.href.split('#!')[1]){
+    if('/student-station' == window.location.href.split('#!')[1]){
       if(studentFocus){
         vitals = data;  
         let time = new Date().getTime();
@@ -60,7 +60,7 @@ $(window).on( "focus", function(){
   });
 
   studentSocket.on('ecg', function(data){
-    if('/studentstation' == window.location.href.split('#!')[1] && studentFocus){  
+    if('/student-station' == window.location.href.split('#!')[1] && studentFocus){  
       let ecgSeries = studentCharts.ecg.series[0];
       ecgSeries.addPoint([ecgIndex % data.interval == 0 ? 8 : Math.random() * (data.max - data.min) + data.min], true, ecgSeries.data.length > 100);   
       stuEcgDisplay.textContent = data.seconds;

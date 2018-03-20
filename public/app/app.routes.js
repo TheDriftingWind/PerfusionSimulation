@@ -12,6 +12,7 @@ app.config(function ($routeProvider){
 	})
 	.when('/register', {
 		templateUrl: 'app/views/register.html',
+		controller: 'RegisterController',
 		access: {
 			restricted: false,
 			student_access: true
@@ -80,15 +81,18 @@ app.config(function ($routeProvider){
 			student_access: true
 		}
 	})
-	.otherwise('/login')
+	.otherwise('/register')
 });
 
-app.run(function($rootScope, $location) {
+app.run(function($rootScope, $location, $route, AuthFactory) {
 	$rootScope.$on( "$routeChangeStart", function(event, next, current) {
-		// if ($rootScope.loggedInUser == null) {
-		// 	if (next.access.restricted) {
-		// 		$location.path("/login");
-		// 	}
-		// }
+		if(next.$$route.access.restricted){
+			AuthFactory.isLoggedIn().then(function(res){
+				if(res.status != 200){
+					$location.path('/login');
+	          		$route.reload();
+				}
+			});
+		}
 	});
 });

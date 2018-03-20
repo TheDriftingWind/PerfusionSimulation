@@ -156,7 +156,7 @@ $(window).on( "focus", function(){
   });
 
   professorSocket.on('vitals', function(data){
-    if('/' == window.location.href.split('#!')[1]){
+    if('/instructor-station' == window.location.href.split('#!')[1]){
       if(instructorFocus){
           vitals = data;
           let time = new Date().getTime();
@@ -184,7 +184,7 @@ $(window).on( "focus", function(){
   });
 
   professorSocket.on('ecg', function(data){
-    if('/' == window.location.href.split('#!')[1] && instructorFocus){ 
+    if('/instructor-station' == window.location.href.split('#!')[1] && instructorFocus){ 
       ecg = data; 
       let ecgSeries = profCharts.ecg.series[0];
       ecgSeries.addPoint([ecgIndex % data.interval == 0 ? 8 : Math.random() * (data.max - data.min) + data.min], true, ecgSeries.data.length > 100);   
