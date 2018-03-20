@@ -1,6 +1,6 @@
 var professorSocket = io.connect(window.location.href);
 var profCharts = window.myData.charts.prof;
-var instructorFocus = true;  
+var instructorFocus = true;
 var ecgIndex = 1;
 
 var vitals = {};
@@ -75,7 +75,7 @@ $(window).on( "focus", function(){
     }
   }
 })
- 
+
 
   // Emit events
   abpUp.addEventListener('click', function(){
@@ -156,7 +156,7 @@ $(window).on( "focus", function(){
   });
 
   professorSocket.on('vitals', function(data){
-    if('/' == window.location.href.split('#!')[1]){
+    if('/instructor-station' == window.location.href.split('#!')[1]){
       if(instructorFocus){
           vitals = data;
           let time = new Date().getTime();
@@ -184,12 +184,12 @@ $(window).on( "focus", function(){
   });
 
   professorSocket.on('ecg', function(data){
-    if('/' == window.location.href.split('#!')[1] && instructorFocus){ 
-      ecg = data; 
+    if('/instructor-station' == window.location.href.split('#!')[1] && instructorFocus){
+      ecg = data;
       let ecgSeries = profCharts.ecg.series[0];
-      ecgSeries.addPoint([ecgIndex % data.interval == 0 ? 8 : Math.random() * (data.max - data.min) + data.min], true, ecgSeries.data.length > 100);   
+      ecgSeries.addPoint([ecgIndex % data.interval == 0 ? 8 : Math.random() * (data.max - data.min) + data.min], true, ecgSeries.data.length > 100);
       profEcgDisplay.textContent = data.seconds;
-      
+
       ecgIndex ++;
       if(ecgIndex == 41){
         ecgIndex = 1;
@@ -233,4 +233,3 @@ $(window).on( "focus", function(){
     ecg.seconds = 0.1;
     professorSocket.emit('ecg', ecg);
   });
-

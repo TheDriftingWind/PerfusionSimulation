@@ -10,7 +10,7 @@ function ArduinoController($scope, $location, ArduinoFactory){
 
 	$scope.setLEDInterval = setLEDInterval;
 	$scope.setLEDStatus = setLEDStatus;
-	
+
 	activate();
 
 	///////////

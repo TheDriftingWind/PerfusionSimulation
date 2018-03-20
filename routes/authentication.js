@@ -47,4 +47,3 @@ router.get('/login', function(req, res){
         res.json(response.request.body);
     });
 });
-
