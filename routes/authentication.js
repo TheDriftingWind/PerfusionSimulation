@@ -31,25 +31,20 @@ module.exports = function(app, passport){
         function(req, email, password, done) {
             UserSchema.getUserByEmail(email, function(err, user) {
                 if (err) { 
-                    console.log('strat1')
-                    return done(err, false, {myMessage: "hey"})
+                    return done(err, false, {myMessage: ""})
                 }
                 if (!user) {
-                    console.log('strat2')
-                    return done(null, false, {myMessage: "hey"});
+                    return done(null, false, {myMessage: ""});
                 }
                 UserSchema.comparePassword(password, user.password, function(err, isMatch) {
                     if (err) { 
-                        console.log('strat3')                    
-                        return done(err, false, {myMessage: "hey"})
+                        return done(err, false, {myMessage: ""})
                     }
                     if(isMatch){
-                        console.log('strat4')
-                            return done(null, user, {myMessage: "hey"});
+                        return done(null, user, {myMessage: ""});
                     }
                     else{
-                        console.log('strat5')
-                            return done(null, false, {myMessage: "hey"});
+                        return done(null, false, {myMessage: ""});
                     }
                 });
             });

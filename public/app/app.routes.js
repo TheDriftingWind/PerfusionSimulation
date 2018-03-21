@@ -81,7 +81,7 @@ app.config(function ($routeProvider){
 			student_access: true
 		}
 	})
-	.otherwise('/register')
+	.otherwise('/login')
 });
 
 app.run(function($rootScope, $location, $route, AuthFactory) {
