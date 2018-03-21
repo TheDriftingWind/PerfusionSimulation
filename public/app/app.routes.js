@@ -84,15 +84,15 @@ app.config(function ($routeProvider){
 	.otherwise('/login')
 });
 
-app.run(function($rootScope, $location, $route, AuthFactory) {
-	$rootScope.$on( "$routeChangeStart", function(event, next, current) {
-		if(next.$$route.access.restricted){
-			AuthFactory.isLoggedIn().then(function(res){
-				if(res.status != 200){
-					$location.path('/login');
-	          		$route.reload();
-				}
-			});
-		}
-	});
-});
+// app.run(function($rootScope, $location, $route, AuthFactory) {
+// 	$rootScope.$on( "$routeChangeStart", function(event, next, current) {
+// 		if(next.$$route && next.$$route.access.restricted){
+// 			AuthFactory.isLoggedIn().then(function(res){
+// 				if(res.status != 200){
+// 					$location.path('/login');
+// 	          		$route.reload();
+// 				}
+// 			});
+// 		}
+// 	});
+// });
