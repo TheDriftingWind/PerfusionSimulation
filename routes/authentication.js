@@ -16,10 +16,9 @@ module.exports = function(app, passport){
         });
 
         UserSchema.createUser(user, function(err, user){
-            if(err) console.log(err)
-            if(user) console.log(user.username + ' has been registered');
-            
-            res.status(200).json({message: "Successful Register"})
+            console.log(err);
+            if(err) res.status(401).json({})
+            if(user) res.status(200).json({})
         });
     });
 
@@ -66,6 +65,16 @@ module.exports = function(app, passport){
             res.json({user: req.user.email});
         }
     );
+
+    app.post('/authentication/email_exists', function(req, res){
+        UserSchema.getUserByEmail(req.body.email, function(err, user) {
+            if(user){
+                res.json({isEmailAvailable: false});
+            }else{
+                res.json({isEmailAvailable: true});
+            }
+        });
+    });
 
     app.get('/authentication/logout', function(req, res){
         req.logout();

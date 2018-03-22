@@ -7,7 +7,6 @@ RegisterController.$inject = ['$scope', '$location', 'AuthFactory'];
 function RegisterController($scope, $location, AuthFactory){
 	$scope.register = register;
 	$scope.errorMessages = '';
-
 	
 	activate();
 
@@ -16,17 +15,38 @@ function RegisterController($scope, $location, AuthFactory){
 	function activate(){
 	}
 
-	function register(){
+	function register(first_name, last_name, email, password){
 		let form = {
-			first_name: 'Troy',
-			last_name: 'Ingel',
-			email: 'tingel@quinnipiac.edu',
-			password: 'pass'
+			first_name,
+			last_name,
+			email,
+			password
 		}
 
-		AuthFactory.register(form).then(function(data){
-			console.log(data.error_message);
+		console.log(form);
+
+		AuthFactory.register(form).then(function(res){
+			console.log(res.status);
 		});
 	}
 
+	// Emit events
+	let email = document.getElementById('email');
+	let verifyEmail = document.getElementById('verifyEmail');
+  	email.addEventListener('change', validateEmail);
+  	verifyEmail.addEventListener('change', validateEmail);
+  	function validateEmail(){
+  		AuthFactory.isEmailAvailable(email.value).then(function(res){
+  			if(!res.data.isEmailAvailable){
+	            email.setCustomValidity('This email already exists');
+	        }else{
+	            email.setCustomValidity('');
+	          if(email.value != verifyEmail.value) {
+	            verifyEmail.setCustomValidity("Emails Don't Match");
+	          } else {
+	            verifyEmail.setCustomValidity('');
+	          }
+	        }
+		});
+    }
 }

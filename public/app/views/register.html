@@ -7,7 +7,7 @@
 </br>
 </br>
 </br>
-    <form class="form" ng-submit="register()">
+    <form class="form" ng-submit="register(registerForm.firstName,registerForm.lastName,registerForm.email,registerForm.password)">
         <div class="shadedbox col-lg-8 col-md-8">
             <div class="signup"> <h1>New User Sign Up</h1> </div>
 
@@ -40,21 +40,7 @@
         </br>
         </div>
     </form>
-   <script type="text/javascript">
-        var email = document.getElementById("email")
-          , confirm_email = document.getElementById("verifyEmail");
-
-        function validateEmail(){
-          if(email.value != confirm_email.value) {
-            confirm_email.setCustomValidity("Emails Don't Match");
-          } else {
-            confirm_email.setCustomValidity('');
-          }
-        }
-
-        email.onchange = validateEmail;
-        confirm_email.onchange = validateEmail;
-    </script>
+  
     <script type="text/javascript">
         var password = document.getElementById("password")
           , confirm_password = document.getElementById("verifyPassword");
