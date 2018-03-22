@@ -76,7 +76,7 @@ div div button#export{
 	margin-top:0.5%;
 	padding-bottom:10px;
 }
-div div button#logout{
+div div button#logout1{
 	margin-top:0.5%;
 	padding-bottom:12px;
 }
@@ -202,10 +202,10 @@ font-size:20px;
 div div div div div div#misc{
 	float:right;padding-right: 10px;
 }
-div div div div div div div button.btn.btn.danger.incr-btn-style{
+div div div div div div div button.btn.btn.danger.incr-btn-style.off{
 	font-size:18px;float:center;
 }
-div div div div div div div button.btn.btn-success.incr-btn-style{
+div div div div div div div button.btn.btn-success.incr-btn-style.on{
 	font-size:18px;float:center;
 }
 div div div div div div div button.btn.btn.warning.incr-btn-style{
@@ -339,7 +339,7 @@ div div div div div div div div div hr.line{
                        padding: 0;
 }
 
-div div div div div div div.col-xs-12.col-sm-12.col-md-12.col-lg-12{
+div div div div div div div.col-xs-12.col-sm-12.col-md-12.col-lg-12.patientcont{
 	float:right;border-style: solid;
                border-width: 1px;background-color:#eff1f4;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); margin-top:5px;
 }
@@ -352,10 +352,10 @@ div div div div div div div div div.page-header{
 div div div div div div div div div h3.pcont{
 	text-align:center;margin-bottom:0;
 }
-div div div div div div div div div button.btn.btn-danger.incr-btn-style{
+div div div div div div div div div button.btn.btn-danger.incr-btn-style.stdown{
 	width:33.3%;
 }
-div div div div div div div div div button.btn.btn-primary.incr-btn-style{
+div div div div div div div div div button.btn.btn-primary.incr-btn-style.stup{
 	width:33.3%;
 }
 div div div div div button#submit{
