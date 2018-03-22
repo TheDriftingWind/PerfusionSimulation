@@ -7,37 +7,67 @@
 </br>
 </br>
 </br>
-<div class="shadedbox col-lg-8 col-md-8">
-    <div class="signup"> <h1>New User Sign Up</h1> </div>
+    <form class="form" ng-submit="register()">
+        <div class="shadedbox col-lg-8 col-md-8">
+            <div class="signup"> <h1>New User Sign Up</h1> </div>
 
-    <label for="firstName">First Name: </label>
-    <input id="firstName" type="text" placeholder="First Name" class="form-control">
-    <label for="lastName">Last Name: </label>
-    <input id="lastName" type="text" placeholder="Last Name" class="form-control">
+            <label for="firstName">First Name: </label>
+            <input id="firstName" type="text" placeholder="First Name" class="form-control" ng-model="registerForm.firstName" required>
+            <label for="lastName">Last Name: </label>
+            <input id="lastName" type="text" placeholder="Last Name" class="form-control" ng-model="registerForm.lastName" required>
 
-    <label for="email">E-mail Address: </label>
-    <input id="email" type="text" class="form-control" placeholder="E-mail Address">
+            <label for="email">E-mail Address: </label>
+            <input id="email" type="email" class="form-control" placeholder="E-mail Address" ng-model="registerForm.email" required>
 
-    <label for="verifyEmail">Verify E-mail Address: </label>
-    <input id="verifyEmail" type="text" class="form-control" placeholder="Verify E-mail Address">
+            <label for="verifyEmail">Verify E-mail Address: </label>
+            <input id="verifyEmail" type="email" class="form-control" placeholder="Verify E-mail Address" required>
 
-    <label for="password">Password: </label>
-    <input id="password" type="password" class="form-control" placeholder="Password">
+            <label for="password">Password: </label>
+            <input id="password" type="password" class="form-control" placeholder="Password" ng-model="registerForm.password" required>
 
-    <label for="verifyPassword">Verify Password: </label>
-    <input id="verifyPassword" type="password" class="form-control" placeholder="Verify Password">
+            <label for="verifyPassword">Verify Password: </label>
+            <input id="verifyPassword" type="password" class="form-control" placeholder="Verify Password" required>
 
-    <div style="text-align: center;">
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-            <button id="signup-btn" class="btn btn-lg btn-default" ng-click='register()'>
-                <a href="#!/login">Sign Up</a>
-            </button>
+            <div style="text-align: center;">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <button type="submit" id="signin-btn" class="btn btn-lg btn-default">Register</button>
+                </div>
+            </div>
+
+            <div style="text-align: center;">
+                <a href="#!/login">Already have an account? Sign In</a>
+            </div>
+        </br>
         </div>
-    </div>
+    </form>
+   <script type="text/javascript">
+        var email = document.getElementById("email")
+          , confirm_email = document.getElementById("verifyEmail");
 
-    <div style="text-align: center;">
-        <a href="#!/login">Already have an account? Sign In</a>
-    </div>
-</br>
-</div>
+        function validateEmail(){
+          if(email.value != confirm_email.value) {
+            confirm_email.setCustomValidity("Emails Don't Match");
+          } else {
+            confirm_email.setCustomValidity('');
+          }
+        }
+
+        email.onchange = validateEmail;
+        confirm_email.onchange = validateEmail;
+    </script>
+    <script type="text/javascript">
+        var password = document.getElementById("password")
+          , confirm_password = document.getElementById("verifyPassword");
+
+        function validatePassword(){
+          if(password.value != confirm_password.value) {
+            confirm_password.setCustomValidity("Passwords Don't Match");
+          } else {
+            confirm_password.setCustomValidity('');
+          }
+        }
+
+        password.onchange = validatePassword;
+        confirm_password.onchange = validatePassword;
+    </script>
 </div>
