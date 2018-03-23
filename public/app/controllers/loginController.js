@@ -15,14 +15,13 @@ function LoginController($scope, $location, $route, AuthFactory){
 	}
 
 	function login(email, password){
+		let myEmail = email;
+		let myPass = password;
 		$scope.loginForm.password = '';
 		$scope.loginForm.email = '';
-		AuthFactory.login(email, password).then(function(res){
-			if(res.data.isValid){
+		AuthFactory.login(myEmail, myPass).then(function(res){
+			if(res.data.user){
 				$location.path('/waiting-room');
-	          	$route.reload();
-			}else{
-				$location.path('/login');
 	          	$route.reload();
 			}
 		}).catch(error => console.log('reject'));
