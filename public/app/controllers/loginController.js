@@ -6,7 +6,7 @@ LoginController.$inject = ['$scope', '$location', '$route','AuthFactory'];
 
 function LoginController($scope, $location, $route, AuthFactory){
 	$scope.login = login;
-	
+
 	activate();
 
 	///////////
@@ -25,6 +25,8 @@ function LoginController($scope, $location, $route, AuthFactory){
 	          	$route.reload();
 			}
 		}).catch(error => console.log('reject'));
+		$scope.loginForm.password = '';
+		$scope.loginForm.email = '';
 	}
 
 	function logout(){
