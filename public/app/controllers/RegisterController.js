@@ -2,9 +2,9 @@ angular
 .module('mainApp')
 .controller('RegisterController', RegisterController);
 
-RegisterController.$inject = ['$scope', '$location', 'AuthFactory'];
+RegisterController.$inject = ['$scope', '$location', '$route', 'AuthFactory'];
 
-function RegisterController($scope, $location, AuthFactory){
+function RegisterController($scope, $location, $route, AuthFactory){
 	$scope.register = register;
 	$scope.errorMessages = '';
 	
@@ -27,6 +27,8 @@ function RegisterController($scope, $location, AuthFactory){
 
 		AuthFactory.register(form).then(function(res){
 			console.log(res.status);
+			$location.path('/login');
+	        $route.reload();
 		});
 	}
 
