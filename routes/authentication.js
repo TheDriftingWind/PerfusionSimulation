@@ -29,21 +29,15 @@ module.exports = function(app, passport){
     },
         function(req, email, password, done) {
             UserSchema.getUserByEmail(email, function(err, user) {
-                if (err) { 
-                    return done(err, false, {myMessage: ""})
-                }
                 if (!user) {
-                    return done(null, false, {myMessage: ""});
+                    return done(null, false);
                 }
                 UserSchema.comparePassword(password, user.password, function(err, isMatch) {
-                    if (err) { 
-                        return done(err, false, {myMessage: ""})
-                    }
                     if(isMatch){
-                        return done(null, user, {myMessage: ""});
+                        return done(null, user);
                     }
                     else{
-                        return done(null, false, {myMessage: ""});
+                        return done(null, false);
                     }
                 });
             });
@@ -62,30 +56,30 @@ module.exports = function(app, passport){
 
     app.post('/authentication/login', passport.authenticate('local'), 
         function(req, res){
-            res.json({user: req.user.email});
+            res.status(200).json({user: req.user.email});
         }
     );
 
     app.post('/authentication/email_exists', function(req, res){
         UserSchema.getUserByEmail(req.body.email, function(err, user) {
             if(user){
-                res.json({isEmailAvailable: false});
+                res.status(409).json({message: "Email already exists."});
             }else{
-                res.json({isEmailAvailable: true});
+                res.status(200).json({message: "Email is available."});
             }
         });
     });
 
     app.get('/authentication/logout', function(req, res){
         req.logout();
-        res.json({user: req.user.email});
+        res.json({message: req.user.email + " has logged out"});
     });
 
     app.get('/authentication/login', function(req, res){
         if(req.user){
-            res.status(200).json();
+            res.status(200).json({message: req.user.email + " is logged in."});
         }else{
-            res.status(401).json();
+            res.status(401).json({message: "User is not logged in."});
         }
     });
 

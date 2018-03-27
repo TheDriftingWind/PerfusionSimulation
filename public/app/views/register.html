@@ -7,26 +7,36 @@
 </br>
 </br>
 </br>
-    <form class="form" ng-submit="register(registerForm.firstName,registerForm.lastName,registerForm.email,registerForm.password)">
+    <form class="form" ng-submit="register()">
         <div class="shadedbox col-lg-8 col-md-8">
             <div class="signup"> <h1>New User Sign Up</h1> </div>
 
             <label for="firstName">First Name: </label>
-            <input id="firstName" type="text" placeholder="First Name" class="form-control" ng-model="registerForm.firstName" required>
+            <input id="firstName" type="text" placeholder="First Name" class="form-control" ng-model="firstName">
+            <p style="color: red; width: 100%; text-align: center" ng-show="errorMessages.firstName"><strong></strong>{{errorMessages.firstName}}</p>
+
             <label for="lastName">Last Name: </label>
-            <input id="lastName" type="text" placeholder="Last Name" class="form-control" ng-model="registerForm.lastName" required>
+            <input id="lastName" type="text" placeholder="Last Name" class="form-control" ng-model="lastName">
+            <p style="color: red; width: 100%; text-align: center" ng-show="errorMessages.lastName"><strong></strong>{{errorMessages.lastName}}</p>
 
             <label for="email">E-mail Address: </label>
-            <input id="email" type="email" class="form-control" placeholder="E-mail Address" ng-model="registerForm.email" required>
+            <input id="email" type="email" class="form-control" placeholder="E-mail Address" ng-model="email">
+            <p style="color: red; width: 100%; text-align: center" ng-show="errorMessages.email"><strong></strong>{{errorMessages.email}}</p>
+            <p style="color: red; width: 100%; text-align: center" ng-show="errorMessages.existingEmail"><strong></strong>{{errorMessages.existingEmail}}</p>
 
             <label for="verifyEmail">Verify E-mail Address: </label>
-            <input id="verifyEmail" type="email" class="form-control" placeholder="Verify E-mail Address" required>
+            <input id="verifyEmail" type="email" class="form-control" placeholder="Verify E-mail Address" ng-model="verifyEmail">
+            <p style="color: red; width: 100%; text-align: center" ng-show="errorMessages.verifyEmail"><strong></strong>{{errorMessages.verifyEmails}}</p>
+            <p style="color: red; width: 100%; text-align: center" ng-show="errorMessages.compareEmails"><strong></strong>{{errorMessages.compareEmails}}</p>
 
             <label for="password">Password: </label>
-            <input id="password" type="password" class="form-control" placeholder="Password" ng-model="registerForm.password" required>
+            <input id="password" type="password" class="form-control" placeholder="Password" ng-model="password">
+            <p style="color: red; width: 100%; text-align: center" ng-show="errorMessages.password"><strong></strong>{{errorMessages.password}}</p>
+            <p style="color: red; width: 100%; text-align: center" ng-show="errorMessages.comparePasswords"><strong></strong>{{errorMessages.comparePasswords}}</p>
 
             <label for="verifyPassword">Verify Password: </label>
-            <input id="verifyPassword" type="password" class="form-control" placeholder="Verify Password" required>
+            <input id="verifyPassword" type="password" class="form-control" placeholder="Verify Password" ng-model="verifyPassword">
+            <p style="color: red; width: 100%; text-align: center" ng-show="errorMessages.verifyPassword"><strong></strong>{{errorMessages.verifyPassword}}</p>
 
             <div style="text-align: center;">
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -40,20 +50,4 @@
         </br>
         </div>
     </form>
-  
-    <script type="text/javascript">
-        var password = document.getElementById("password")
-          , confirm_password = document.getElementById("verifyPassword");
-
-        function validatePassword(){
-          if(password.value != confirm_password.value) {
-            confirm_password.setCustomValidity("Passwords Don't Match");
-          } else {
-            confirm_password.setCustomValidity('');
-          }
-        }
-
-        password.onchange = validatePassword;
-        confirm_password.onchange = validatePassword;
-    </script>
 </div>

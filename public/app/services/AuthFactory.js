@@ -32,12 +32,12 @@ function AuthFactory($http){
 	function login(email, password){
 		return $http.post('authentication/login', {email, password})
 		.then((res)=>res)
-		.catch((err)=>console.error(err));
+		.catch((err)=>err);
 	}
 	function isEmailAvailable(email){
 		return $http.post('authentication/email_exists', {email})
 		.then((res)=>res)
-		.catch((err)=>console.error(err));
+		.catch((err)=>err);
 	}
 	function logout(username, password){
 		return $http.get('/authentication/logout')

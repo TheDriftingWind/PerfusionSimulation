@@ -2,9 +2,9 @@ angular
 .module('mainApp')
 .controller('LoginController', LoginController);
 
-LoginController.$inject = ['$scope', '$location', '$route','AuthFactory'];
+LoginController.$inject = ['$scope', '$location', '$route', '$window', '$rootScope', 'AuthFactory'];
 
-function LoginController($scope, $location, $route, AuthFactory){
+function LoginController($scope, $location, $route, $window, $rootScope, AuthFactory){
 	$scope.login = login;
 	
 	activate();
@@ -15,16 +15,18 @@ function LoginController($scope, $location, $route, AuthFactory){
 	}
 
 	function login(email, password){
-		let myEmail = email;
-		let myPass = password;
-		$scope.loginForm.password = '';
-		$scope.loginForm.email = '';
-		AuthFactory.login(myEmail, myPass).then(function(res){
-			if(res.data.user){
+		AuthFactory.login(email, password).then(function(res){
+			if(res.status == 200){
+				$rootScope.user = res.data.user;
 				$location.path('/waiting-room');
 	          	$route.reload();
+			}else{
+				$window.alert('Invalid login, please try again.');
+				$scope.loginForm.password = '';
+				$scope.loginForm.email = '';
+				document.getElementById('email').focus();
 			}
-		}).catch(error => console.log('reject'));
+		});
 	}
 
 	function logout(){
