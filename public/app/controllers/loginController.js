@@ -6,7 +6,7 @@ LoginController.$inject = ['$scope', '$location', '$route', '$window', '$rootSco
 
 function LoginController($scope, $location, $route, $window, $rootScope, AuthFactory){
 	$scope.login = login;
-	
+
 	activate();
 
 	///////////
