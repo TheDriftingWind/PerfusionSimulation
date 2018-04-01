@@ -4,11 +4,31 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <div class="row">
+    <style>
+    body{
+        margin: 0;
+        padding: 0;
+        width: 100%;
+    }
+  </style>
+    <div id="hellobar-bar" class="regular closable">
+        <div class="hb-content-wrapper">
+            <div class="hb-text-wrapper">
+                <div class="hb-headline-text">
+                    <p><span>John Doe Administered Drug @ 10:58:07 am</span></p>
+                </div>
+            </div>
 
-    <div class="col-lg-5 col-md-5 col-lg-offset-1 col-md-offset-1">
+
+        </div>
+        <div class="hb-close-wrapper">
+            <a href="javascript:void(0);" class="icon-close" onClick="$('#hellobar-bar').fadeOut()">&#10006;</a>
+        </div>
+    </div>
+    <div class="col-lg-5 col-md-5 col-lg-offset-1 col-md-offset-1" style="margin-top:3.5%;">
       <p class="stitle"><b><i class="material-icons" style="font-size:36px">local_hospital</i> Student Station<b></p>
    </div>
-   <div class="col-lg-6 col-md-6">
+   <div class="col-lg-6 col-md-6" style="margin-top:3.5%;">
      <div class="btn-group" style="float:right; ">
       <button type="button"class="btn btn-success"  id="wait"><i class="material-icons" style="font-size:20px; ">group</i> Waiting Room</button>
       <button type="button"class="btn btn-danger"  id="export"><span class="glyphicon glyphicon-download"style="font-size:20px;"></span> Export Data</button>
