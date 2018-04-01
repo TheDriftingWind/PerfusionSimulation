@@ -9,10 +9,10 @@ window.myData.charts[$("#abpScript").data('arg1')].abp = new Highcharts.chart('a
             defaultSeriesType: 'spline',
             events: {
 
-            }, 
+            },
             height: 150,
              animation: {
-                duration: 2000                        
+                duration: 2000
             }
         },
         plotOptions: {
@@ -50,7 +50,7 @@ window.myData.charts[$("#abpScript").data('arg1')].abp = new Highcharts.chart('a
             enabled: false
         },
         series: [{
-            showInLegend: false,  
+            showInLegend: false,
             data: []
         }]
 });
