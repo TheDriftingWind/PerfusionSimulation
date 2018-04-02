@@ -10,6 +10,80 @@ font-family: 'Exo', sans-serif;
 	margin-bottom: 20px;
 }
 
+
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+    position: relative;
+    background-color: #fefefe;
+    margin: auto;
+    padding: 0;
+    border: 1px solid #888;
+    width: 80%;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+    -webkit-animation-name: animatetop;
+    -webkit-animation-duration: 0.4s;
+    animation-name: animatetop;
+    animation-duration: 0.4s
+}
+
+/* Add Animation */
+@-webkit-keyframes animatetop {
+    from {top:-300px; opacity:0}
+    to {top:0; opacity:1}
+}
+
+@keyframes animatetop {
+    from {top:-300px; opacity:0}
+    to {top:0; opacity:1}
+}
+
+/* The Close Button */
+.close {
+    color: white;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal-header {
+    padding: 2px 16px;
+    background-color: #5cb85c;
+    color: white;
+}
+
+.modal-body {padding: 2px 16px;}
+
+.modal-footer {
+    padding: 2px 16px;
+    background-color: #5cb85c;
+    color: white;
+}
+
+
+
+
 /*notification bar*/
 
 #hellobar-bar {
@@ -22,9 +96,9 @@ font-family: 'Exo', sans-serif;
         font-weight: 400;
         padding: .33em .5em;
         -webkit-font-smoothing: antialiased;
-        color: #0b3c9a;
-        position: fixed;
-        background-color: white;
+        color: black;
+        position: relative;
+        background-color: #eff1f4;
         box-shadow: 0 1px 3px 2px rgba(0,0,0,0.15);
     }
     #hellobar-bar.regular {
@@ -64,17 +138,16 @@ font-family: 'Exo', sans-serif;
     .hb-cta-button {
         opacity: 1;
         color: #fff;
-        display: block;
+      /*  display: block;*/
         cursor: pointer;
-        line-height: 1.5;
-        max-width: 22.5em;
+
         text-align: center;
         position: relative;
-        border-radius: 3px;
+
         white-space: nowrap;
-        margin: 1.75em auto 0;
+
         text-decoration: none;
-        padding: 0;
+
         overflow: hidden;
     }
     .hb-cta-button .hb-text-holder {
@@ -162,21 +235,43 @@ p.inst_title{
 }
 div div button#wait{
 	margin-top:0.5%;
+	width: 50px;
+	border-radius: 50px;
 }
 div div button#export{
 	margin-top:0.5%;
-	padding-bottom:10px;
+	width: 50px;
+	border-radius: 50px;
+
 }
 div div button#logout1{
 	margin-top:0.5%;
-	padding-bottom:12px;
+	width: 50px;
+	border-radius: 50px;
+
+}
+div div button#myBtn{
+	margin-top:0.5%;
+	width: 50px;
+	border-radius: 50px;
+
 }
 div div button i.material-icons{
 	font-size:20px;
 }
 div div button i.fa.fa-sign-out{
+	font-size:25px;
+}
+div div button i.fa.fa-users{
+	font-size:25px;
+}
+div div button i.fa.fa-download{
 	font-size:20px;
 }
+div div button i.fa.fa-envelope{
+	font-size:25px;
+}
+
 div div button span.glyphicon.glyphicon-download{
 	font-size:20px;
 }
