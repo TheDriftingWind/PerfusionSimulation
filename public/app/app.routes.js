@@ -18,6 +18,7 @@ app.config(function ($routeProvider){
 			student_access: true
 		}
 	})
+
 	.when('/waiting-room', {
 		templateUrl: 'app/views/waiting-room.html',
 		access: {
