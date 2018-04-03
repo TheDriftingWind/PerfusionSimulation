@@ -18,6 +18,8 @@ var ecg = {
 	seconds: '1'
 }
 
+var administrationMessages = [];
+
 function initSocket(server){
 
 	var io = socket(server);
@@ -31,6 +33,9 @@ function initSocket(server){
 		});
 		socket.on('ecg', function(data){
 			ecg = data;
+		});
+		socket.on('administration', function(data){
+			socket.emit('administration', {messages: data.message});
 		});
 
 		socket.on('disconnect', function(data){

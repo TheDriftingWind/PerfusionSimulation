@@ -5,7 +5,7 @@ angular
 StudentController.$inject = ['$scope', '$location', '$window'];
 
 function StudentController($scope, $location, $window){
-
+	$scope.testy = 'hey there tom';
 
 	activate();
 
