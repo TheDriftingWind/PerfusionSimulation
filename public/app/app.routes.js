@@ -66,6 +66,13 @@ app.config(function ($routeProvider){
 			student_access: true
 		}
 	})
+	.when('/data-portal', {
+		templateUrl: 'app/views/data-portal.html',
+		access: {
+			restricted: true,
+			student_access: true
+		}
+	})
 	.when('/sessions', {
 		templateUrl: 'app/views/session.html',
 		controller: 'SessionController',
