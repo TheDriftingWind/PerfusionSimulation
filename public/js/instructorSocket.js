@@ -69,11 +69,7 @@ $(window).on( "focusout", function(){
 })
 $(window).on( "focus", function(){
   instructorFocus = true;
-  for(chart in profCharts){
-    if('ecg' != chart){
-      profCharts[chart].series[0].setData([])
-    }
-  }
+  professorSocket.emit('initCharts', {})
 })
 
 
@@ -159,7 +155,7 @@ $(window).on( "focus", function(){
     if('/instructor-station' == window.location.href.split('#!')[1]){
       if(instructorFocus){
           vitals = data;
-          let time = new Date().getTime();
+          let time = vitals.time;
           let abpSeries = profCharts.abp.series[0];
           let svo2Series = profCharts.svo2.series[0];
           let capSeries = profCharts.cap.series[0];
@@ -182,6 +178,18 @@ $(window).on( "focus", function(){
       professorSocket.disconnect();
      }
   });
+
+professorSocket.on('administration', function(data){
+  console.log('here');
+  document.getElementById('modal-body').innerHTML += '<p> ' + data.message + '</p>';
+});
+
+professorSocket.on('initCharts', function(data){
+    profCharts.abp.series[0].setData(data.abp.slice(data.abp.length > 30 ? data.abp.length - 29 : 0, data.abp.length))
+    profCharts.svo2.series[0].setData(data.svo2.slice(data.svo2.length > 30 ? data.svo2.length - 29 : 0, data.svo2.length))
+    profCharts.cap.series[0].setData(data.cap.slice(data.cap.length > 30 ? data.cap.length - 29 : 0, data.cap.length))
+    profCharts.cvp.series[0].setData(data.cvp.slice(data.cvp.length > 30 ? data.cvp.length - 29 : 0, data.cvp.length))
+})
 
   professorSocket.on('ecg', function(data){
     if('/instructor-station' == window.location.href.split('#!')[1] && instructorFocus){

@@ -11,7 +11,7 @@ window.myData.charts[$("#cvpScript").data('arg1')].cvp = new Highcharts.chart('c
             }, 
             height: 150,
              animation: {
-                duration: 2000                        
+                duration: 1500                        
             }
         },
         plotOptions: {

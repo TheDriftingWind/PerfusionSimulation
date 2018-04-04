@@ -14,16 +14,12 @@ $(window).on( "focusout", function(){
 })
 $(window).on( "focus", function(){
   studentFocus = true;
-  for(chart in studentCharts){
-    if('ecg' != chart){
-      studentCharts[chart].series[0].setData([])
-    }
-  }
+  studentSocket.emit('initCharts', {})
 })
+
 var vitals = {};
   
 var ecgContainer = document.getElementById('ecgContainer');
-var modal = document.getElementById('modal-body');
 
 var stuAbpDisplay = document.getElementById('stuAbpDisplay'),
     stuCapDisplay = document.getElementById('stuCapDisplay'),
@@ -76,14 +72,22 @@ naDown.addEventListener('click', function(){
 });
 
 studentSocket.on('administration', function(data){
-  modal.innerHTML += '<p> ' + data.message + '</p>';
+  console.log(data);
+  document.getElementById('modal-body').innerHTML += '<p> ' + data.message + '</p>';
+})
+
+studentSocket.on('initCharts', function(data){
+    studentCharts.abp.series[0].setData(data.abp.slice(data.abp.length > 30 ? data.abp.length - 29 : 0, data.abp.length))
+    studentCharts.svo2.series[0].setData(data.svo2.slice(data.svo2.length > 30 ? data.svo2.length - 29 : 0, data.svo2.length))
+    studentCharts.cap.series[0].setData(data.cap.slice(data.cap.length > 30 ? data.cap.length - 29 : 0, data.cap.length))
+    studentCharts.cvp.series[0].setData(data.cvp.slice(data.cvp.length > 30 ? data.cvp.length - 29 : 0, data.cvp.length))
 })
 
 studentSocket.on('vitals', function(data){
   if('/student-station' == window.location.href.split('#!')[1]){
     if(studentFocus){
       vitals = data;  
-      let time = new Date().getTime();
+      let time = vitals.time;
       let abpSeries = studentCharts.abp.series[0];
       let svo2Series = studentCharts.svo2.series[0];
       let capSeries = studentCharts.cap.series[0];

@@ -1,3 +1,4 @@
+
 var socket = require('socket.io');
 var request = require('request');
 
@@ -18,7 +19,12 @@ var ecg = {
 	seconds: '1'
 }
 
-var administrationMessages = [];
+var dataPoints = {
+	abp: [],
+	cap: [],
+	cvp: [],
+	svo2: []
+};
 
 function initSocket(server){
 
@@ -26,7 +32,7 @@ function initSocket(server){
 
 	io.on('connection', function(socket){
 		console.log('made socket connection', socket.id);
-		socket.emit('vitals', vitals)
+		socket.emit('initCharts', dataPoints)
 		socket.emit('ecg', ecg)
 		socket.on('vitals', function(data){
 			vitals = data;
@@ -35,9 +41,12 @@ function initSocket(server){
 			ecg = data;
 		});
 		socket.on('administration', function(data){
-			socket.emit('administration', {messages: data.message});
+			io.sockets.emit('administration', data);
 		});
-
+		socket.on('initCharts', function(data){
+			let start = dataPoints.length > 30 ? dataPoints.length - 30 : 0;
+			io.sockets.emit('initCharts', dataPoints);
+		});
 		socket.on('disconnect', function(data){
 			console.log('left page');
 		});
@@ -60,8 +69,13 @@ function initSocket(server){
 		data.bis = bisPoint > data.bis ? Math.min(Math.round(bisPoint * 100) / 100, 65) : Math.max(Math.round(bisPoint * 100) / 100, 15);
 		data.eso = esoPoint > data.eso ? Math.min(Math.round(esoPoint * 100) / 100, 38) : Math.max(Math.round(esoPoint * 100) / 100, 18);
 		data.bld = bldPoint > data.bld ? Math.min(Math.round(bldPoint * 100) / 100, 38) : Math.max(Math.round(bldPoint * 100) / 100, 18);
+		data.time = new Date().getTime();
+		dataPoints.abp.push([data.time, data.abp]);
+		dataPoints.cap.push([data.time, data.cap]);
+		dataPoints.cvp.push([data.time, data.cvp]);
+		dataPoints.svo2.push([data.time, data.svo2]);
 		io.sockets.emit('vitals', data);
-	}, 1000);
+	}, 2000);
 
 	setInterval(function(){
 		io.sockets.emit('ecg', ecg);
@@ -69,3 +83,4 @@ function initSocket(server){
 }
 
 module.exports = initSocket;
+

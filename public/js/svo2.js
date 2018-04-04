@@ -12,7 +12,7 @@ window.myData.charts[$("#svo2Script").data('arg1')].svo2 = new Highcharts.chart(
             }, 
             height: 150,
             animation: {
-                duration: 2000                        
+                duration: 1500                        
             }
         },
         plotOptions: {
