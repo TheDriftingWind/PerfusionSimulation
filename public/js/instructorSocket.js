@@ -180,8 +180,9 @@ $(window).on( "focus", function(){
   });
 
 professorSocket.on('administration', function(data){
-  console.log('here');
-  document.getElementById('modal-body').innerHTML += '<p> ' + data.message + '</p>';
+  for(let i = 0; i < data.length; i++){
+    document.getElementById('modal-body').innerHTML += '<p> ' + data[i] + '</p>' + '<hr>';
+  }
 });
 
 professorSocket.on('initCharts', function(data){

@@ -9,17 +9,15 @@ studentSocket.on('connect', function(){
 studentSocket.on('disconnect', function(){
   console.log('disconnected from student studentSocket')
 })
-$(window).on( "focusout", function(){
-  studentFocus = false;
-})
+
 $(window).on( "focus", function(){
-  studentFocus = true;
   studentSocket.emit('initCharts', {})
 })
 
 var vitals = {};
   
 var ecgContainer = document.getElementById('ecgContainer');
+var submit = document.getElementById('submit');
 
 var stuAbpDisplay = document.getElementById('stuAbpDisplay'),
     stuCapDisplay = document.getElementById('stuCapDisplay'),
@@ -53,27 +51,69 @@ var magUp = document.getElementById('magUp'),
 
 // Emit events
 hepUp.addEventListener('click', function(){
-  studentSocket.emit('administration', {message: "hepUp"});
+  hepCtrl.textContent = hepCtrl.textContent * 1 + 1000 <= 80000 ? hepCtrl.textContent * 1 + 1000 : 80000;
 });
 hepDown.addEventListener('click', function(){
-  studentSocket.emit('administration', {message: "hepDown"});
+  hepCtrl.textContent = hepCtrl.textContent * 1 - 1000 >= 0 ? hepCtrl.textContent * 1 - 1000 : 0;
 });
 ph2Up.addEventListener('click', function(){
-  studentSocket.emit('administration', {message: "phUp"});
+  ph2Ctrl.textContent = ph2Ctrl.textContent * 1.0 + 0.1 <= 10.0 ? Math.round((ph2Ctrl.textContent * 1.0 + 0.1) * 10)/10 : 10.0;
 });
 ph2Down.addEventListener('click', function(){
-  studentSocket.emit('administration', {message: "phDown"});
+  ph2Ctrl.textContent = ph2Ctrl.textContent * 1.0 - 0.1 >= 0.0 ? Math.round((ph2Ctrl.textContent * 1.0 - 0.1) * 10)/10 : 0.0;
 });
 naUp.addEventListener('click', function(){
-  studentSocket.emit('administration', {message: "naUp"});
+  naCtrl.textContent = naCtrl.textContent * 1 + 10 <= 800 ? naCtrl.textContent * 1 + 10 : 800;
 });
 naDown.addEventListener('click', function(){
-  studentSocket.emit('administration', {message: "naDown"});
+  naCtrl.textContent = naCtrl.textContent * 1 - 10 >= 0 ? naCtrl.textContent * 1 - 10 : 0;
+});
+lidUp.addEventListener('click', function(){
+  lidCtrl.textContent = lidCtrl.textContent * 1 + 100 <= 300 ? lidCtrl.textContent * 1 + 100 : 300;
+});
+lidDown.addEventListener('click', function(){
+  lidCtrl.textContent = lidCtrl.textContent * 1 - 100 >= 0 ? lidCtrl.textContent * 1 - 100 : 0;
+});
+magUp.addEventListener('click', function(){
+  magCtrl.textContent = magCtrl.textContent * 1.0 + 0.001 <= 5.0 ? Math.round((magCtrl.textContent * 1.0 + 0.001) * 1000)/1000 : 5.0;
+});
+magDown.addEventListener('click', function(){
+  magCtrl.textContent = magCtrl.textContent * 1.0 - 0.001 >= 0.0 ? Math.round((magCtrl.textContent * 1.0 - 0.001) * 1000)/1000 : 0.0;
+});
+submit.addEventListener('click', function(){
+  let messages = [];
+  
+  if(hepCtrl.textContent * 1 > 0){
+    messages.push('Student administered ' + hepCtrl.textContent + ' units of hep.')
+    hepCtrl.textContent = 0;
+  }
+  if(ph2Ctrl.textContent * 1 > 0){
+    messages.push('Student administered ' + ph2Ctrl.textContent + ' units of ph2.')
+    ph2Ctrl.textContent = 0;
+  }
+  if(naCtrl.textContent * 1 > 0){
+    messages.push('Student administered ' + naCtrl.textContent + ' units of na.')
+    naCtrl.textContent = 0;
+  }
+  if(lidCtrl.textContent * 1 > 0){
+    messages.push('Student administered ' + lidCtrl.textContent + ' units of lid.')
+    hepCtrl.lidCtrl = 0;
+  }
+  if(magCtrl.textContent * 1 > 0){
+    messages.push('Student administered ' + magCtrl.textContent + ' units of hep.')
+    hepCtrl.magCtrl = 0;
+  }
+
+ if(messages.length > 0){
+  studentSocket.emit('administration', messages)
+ }
+
 });
 
 studentSocket.on('administration', function(data){
-  console.log(data);
-  document.getElementById('modal-body').innerHTML += '<p> ' + data.message + '</p>';
+  for(let i = 0; i < data.length; i++){
+    document.getElementById('modal-body').innerHTML += '<p> ' + data[i] + '</p>';
+  }
 })
 
 studentSocket.on('initCharts', function(data){
