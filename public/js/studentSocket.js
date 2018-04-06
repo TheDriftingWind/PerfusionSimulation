@@ -1,21 +1,26 @@
 var studentSocket = io.connect(window.location.href);
 var studentCharts = window.myData.charts.stu;
-var studentFocus = true;
+var studentFocus = false;
 var ecgIndex = 1;
+var studentContainer = document.getElementById('studentContainer');
+
+$(window).blur(function(){
+  studentSocket.disconnect();
+});
+$(window).focus(function(){
+  window.location.reload()
+});
 
 studentSocket.on('connect', function(){
+  studentSocket.emit('initCharts', {})
   console.log('connected to student studentSocket')
 })
 studentSocket.on('disconnect', function(){
   console.log('disconnected from student studentSocket')
 })
 
-$(window).on( "focus", function(){
-  studentSocket.emit('initCharts', {})
-})
-
 var vitals = {};
-  
+var ecg = {};
 var ecgContainer = document.getElementById('ecgContainer');
 var submit = document.getElementById('submit');
 
@@ -82,26 +87,34 @@ magDown.addEventListener('click', function(){
 });
 submit.addEventListener('click', function(){
   let messages = [];
-  
+  let date = new Date();
+  let timestamp = date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds()
   if(hepCtrl.textContent * 1 > 0){
-    messages.push('Student administered ' + hepCtrl.textContent + ' units of hep.')
+    messages.push(timestamp + ' : ' + 'Student administered ' + hepCtrl.textContent + ' units of Heparin.')
     hepCtrl.textContent = 0;
   }
   if(ph2Ctrl.textContent * 1 > 0){
-    messages.push('Student administered ' + ph2Ctrl.textContent + ' units of ph2.')
+    messages.push(timestamp + ' : ' + 'Student administered ' + ph2Ctrl.textContent + ' units of Phenylephrine.')
+    studentSocket.emit('abp', {abp: (ph2Ctrl.textContent * 150.0)})
     ph2Ctrl.textContent = 0;
   }
   if(naCtrl.textContent * 1 > 0){
-    messages.push('Student administered ' + naCtrl.textContent + ' units of na.')
+    messages.push(timestamp + ' : ' + 'Student administered ' + naCtrl.textContent + ' units of Sodium Bicarbonate.')
     naCtrl.textContent = 0;
   }
   if(lidCtrl.textContent * 1 > 0){
-    messages.push('Student administered ' + lidCtrl.textContent + ' units of lid.')
-    hepCtrl.lidCtrl = 0;
+    messages.push(timestamp + ' : ' + 'Student administered ' + lidCtrl.textContent + ' units of Lidocaine.')
+    if(ecg.name == 'ecgFib'){
+      studentSocket.emit('ecg', {ecg: 'ecgNormal'});
+    }
+    lidCtrl.textContent = 0;
   }
   if(magCtrl.textContent * 1 > 0){
-    messages.push('Student administered ' + magCtrl.textContent + ' units of hep.')
-    hepCtrl.magCtrl = 0;
+    messages.push(timestamp + ' : ' + 'Student administered ' + magCtrl.textContent + ' units of Magnesium.')
+    if(ecg.name == 'ecgFib'){
+      studentSocket.emit('ecg', {ecg: 'ecgNormal'});
+    }
+    magCtrl.textContent = 0;
   }
 
  if(messages.length > 0){
@@ -121,6 +134,7 @@ studentSocket.on('initCharts', function(data){
     studentCharts.svo2.series[0].setData(data.svo2.slice(data.svo2.length > 30 ? data.svo2.length - 29 : 0, data.svo2.length))
     studentCharts.cap.series[0].setData(data.cap.slice(data.cap.length > 30 ? data.cap.length - 29 : 0, data.cap.length))
     studentCharts.cvp.series[0].setData(data.cvp.slice(data.cvp.length > 30 ? data.cvp.length - 29 : 0, data.cvp.length))
+    studentFocus = true;
 })
 
 studentSocket.on('vitals', function(data){
@@ -152,7 +166,8 @@ studentSocket.on('vitals', function(data){
 });
 
 studentSocket.on('ecg', function(data){
-  if('/student-station' == window.location.href.split('#!')[1] && studentFocus){  
+  if('/student-station' == window.location.href.split('#!')[1] && studentFocus){
+    ecg = data;
     let ecgSeries = studentCharts.ecg.series[0];
     ecgSeries.addPoint([ecgIndex % data.interval == 0 ? 8 : Math.random() * (data.max - data.min) + data.min], true, ecgSeries.data.length > 100);   
     stuEcgDisplay.textContent = data.seconds;

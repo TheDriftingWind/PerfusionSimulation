@@ -2,17 +2,17 @@
    <link href="https://fonts.googleapis.com/css?family=Exo" rel="stylesheet">
    <link href="css/styles.css" rel="stylesheet">
    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"><script defer src="https://use.fontawesome.com/releases/v5.0.9/js/all.js" integrity="sha384-8iPTk2s/jMVj81dnzb/iFR2sdA7u06vHJyyLlAd4snFpCl/SnyUjRrbdJsw1pGIl" crossorigin="anonymous"></script>
    <div class="row">
       <div class="col-lg-4 col-md-4 col-lg-offset-1 col-md-offset-1" >
          <p class="stitle"><b><i class="material-icons" style="font-size:36px">local_hospital</i> Student Station<b></p>
       </div>
       <div class="col-lg-7 col-md-7">
          <div class="btn-group" style="float:right; ">
-            <button id="myBtn" class="btn-info btn-sm hb-cta hb-cta-button" title="Messages" ><i class="fa fa-envelope"></i></button>
-            <button type="button"class="btn btn-success btn-sm" title="Waiting Room"  id="wait"><i class="fa fa-users"></i></button>
-            <button type="button"class="btn btn-danger btn-sm" title="Export Data" id="export"> <i class="fa fa-download"></i></button>
-            <button type="button"class="btn btn-primary btn-sm" title="Log Out" id="logout1"><i class="fa fa-sign-out"></i> </button>
+            <button id="myBtn" class="btn-info btn-sm hb-cta hb-cta-button" title="Messages" ><i class="fas fa-envelope"style="font-size:25px;"></i></button>
+            <a type="button"class="btn btn-success btn-sm" title="Waiting Room" href="/#!/waiting-room" id="wait"><i class="fa fa-users"style="font-size:25px;"></i></a>
+          <!--  <button type="button"class="btn btn-danger btn-sm" title="Export Data" id="export"> <i class="fa fa-download"style="font-size:20px;"></i></button>-->
+            <button type="button"class="btn btn-primary btn-sm" title="Log Out" id="logout1"><i class="fas fa-sign-out-alt"style="font-size:25px;"></i> </button>
          </div>
       </div>
       <div class="page-header"></div>
@@ -23,7 +23,7 @@
             <div class="col-lg-9 col-md-9"  id="ecgContainer">
             </div>
             <div class="col-lg-3 col-md-3" style= "">
-               <h4><span id="stuEcgDisplay">1.0</span> second(s)</h4>
+               <h4><span id="stuEcgDisplay">1.0</span> BPM</h4>
             </div>
             <div class="col-lg-9 col-md-9" style="" id="abpContainer">
             </div>
@@ -171,7 +171,7 @@
                var slider = document.getElementById("myRange");
                var output = document.getElementById("demo");
                output.innerHTML = slider.value;
-               
+
                slider.oninput = function() {
                  output.innerHTML = this.value;
                }

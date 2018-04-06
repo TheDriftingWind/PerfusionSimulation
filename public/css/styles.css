@@ -30,10 +30,11 @@ font-family: 'Exo', sans-serif;
 .modal-content {
     position: relative;
     background-color: #fefefe;
+		font-size: 20px;
     margin: auto;
     padding: 0;
     border: 1px solid #888;
-    width: 80%;
+    width: 30%;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
     -webkit-animation-name: animatetop;
     -webkit-animation-duration: 0.4s;
@@ -233,12 +234,18 @@ p.inst_title{
 	color:#bd0f1c;
 	text-align: left;
 }
-div div button#wait{
+div div a#wait{
 	margin-top:0.5%;
 	width: 50px;
 	border-radius: 50px;
 }
 div div button#export{
+	margin-top:0.5%;
+	width: 50px;
+	border-radius: 50px;
+
+}
+div div a#end{
 	margin-top:0.5%;
 	width: 50px;
 	border-radius: 50px;

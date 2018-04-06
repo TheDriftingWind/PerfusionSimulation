@@ -4,7 +4,6 @@ var instructorFocus = true;
 var ecgIndex = 1;
 
 var vitals = {};
-var ecg = {};
 var ecgContainer = document.getElementById('ecgContainer');
 
 var ecgNormal = document.getElementById('ecgNormal');
@@ -56,20 +55,19 @@ var esoTempUp = document.getElementById('esoTempUp'),
 var cvpUp = document.getElementById('cvpUp'),
     cvpDown = document.getElementById('cvpDown');
 
+$(window).blur(function(){
+  professorSocket.disconnect();
+});
+$(window).focus(function(){
+  window.location.reload()
+});
 
 professorSocket.on('connect', function(){
+  professorSocket.emit('initCharts', {})
   console.log('connected to professor professorSocket')
 })
 professorSocket.on('disconnect', function(){
   console.log('disconnected from professor professorSocket')
-})
-
-$(window).on( "focusout", function(){
-  instructorFocus = false;
-})
-$(window).on( "focus", function(){
-  instructorFocus = true;
-  professorSocket.emit('initCharts', {})
 })
 
 
@@ -190,11 +188,12 @@ professorSocket.on('initCharts', function(data){
     profCharts.svo2.series[0].setData(data.svo2.slice(data.svo2.length > 30 ? data.svo2.length - 29 : 0, data.svo2.length))
     profCharts.cap.series[0].setData(data.cap.slice(data.cap.length > 30 ? data.cap.length - 29 : 0, data.cap.length))
     profCharts.cvp.series[0].setData(data.cvp.slice(data.cvp.length > 30 ? data.cvp.length - 29 : 0, data.cvp.length))
+    instructorFocus = true;
 })
 
   professorSocket.on('ecg', function(data){
     if('/instructor-station' == window.location.href.split('#!')[1] && instructorFocus){
-      ecg = data;
+      let ecg = data;
       let ecgSeries = profCharts.ecg.series[0];
       ecgSeries.addPoint([ecgIndex % data.interval == 0 ? 8 : Math.random() * (data.max - data.min) + data.min], true, ecgSeries.data.length > 100);
       profEcgDisplay.textContent = data.seconds;
@@ -207,38 +206,17 @@ professorSocket.on('initCharts', function(data){
   });
 
   ecgNormal.addEventListener('click', function(){
-    ecg.interval = 20;
-    ecg.min = 1;
-    ecg.max = 3;
-    ecg.seconds = 1.0;
-    professorSocket.emit('ecg', ecg);
+    professorSocket.emit('ecg', {ecg: 'ecgNormal'});
   });
   ecgSlow.addEventListener('click', function(){
-    ecg.interval = 30;
-    ecg.min = 1;
-    ecg.max = 3;
-    ecg.seconds = 2.0;
-    professorSocket.emit('ecg', ecg);
+    professorSocket.emit('ecg', {ecg: 'ecgSlow'});
   });
   ecgFast.addEventListener('click', function(){
-    ecg.interval = 10;
-    ecg.min = 1;
-    ecg.max = 3;
-    ecg.seconds = 0.5;
-    professorSocket.emit('ecg', ecg);
+    professorSocket.emit('ecg', {ecg: 'ecgFast'});
   });
   ecgFlat.addEventListener('click', function(){
-    ecg.interval = 99;
-    ecg.min = 0;
-    ecg.max = 1;
-    ecg.seconds = '-';
-    professorSocket.emit('ecg', ecg);
-
+    professorSocket.emit('ecg', {ecg: 'ecgFlat'});
   });
   ecgFib.addEventListener('click', function(){
-    ecg.interval = 5;
-    ecg.min = 5;
-    ecg.max = 1;
-    ecg.seconds = 0.1;
-    professorSocket.emit('ecg', ecg);
+    professorSocket.emit('ecg', {ecg: 'ecgFib'});
   });
