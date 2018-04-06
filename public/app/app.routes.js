@@ -21,6 +21,7 @@ app.config(function ($routeProvider){
 
 	.when('/waiting-room', {
 		templateUrl: 'app/views/waiting-room.html',
+		controller: 'WaitingRoomController',
 		access: {
 			restricted: true,
 			student_access: true
@@ -36,7 +37,7 @@ app.config(function ($routeProvider){
 	})
 	.when('/instructor-station', {
 		templateUrl: 'app/views/instructor-station.html',
-		controller: 'StudentController',
+		controller: 'InstructorController',
 		access: {
 			restricted: true,
 			student_access: true
@@ -44,7 +45,7 @@ app.config(function ($routeProvider){
 	})
 	.when('/chart', {
 		templateUrl: 'app/views/highchart.html',
-		controller: 'ShartController',
+		controller: 'ChartController',
 		access: {
 			restricted: true,
 			student_access: true
@@ -68,6 +69,7 @@ app.config(function ($routeProvider){
 	})
 	.when('/data-portal', {
 		templateUrl: 'app/views/data-portal.html',
+		controller: 'DataPortalController',
 		access: {
 			restricted: true,
 			student_access: true
@@ -92,11 +94,11 @@ app.config(function ($routeProvider){
 	.otherwise('/login')
 });
 
-// app.run(function($rootScope, $location, $route, AuthFactory) {
-// 	$rootScope.$on("$routeChangeStart", function(event, next, current) {
-// 		if(next.$$route && next.$$route.access.restricted && !$rootScope.user){
-// 			$location.path('/login');
-//       		$route.reload();
-// 		}
-// 	});
-// });
+app.run(function($rootScope, $location, $route, $window, AuthFactory) {
+	$rootScope.$on("$routeChangeStart", function(event, next, current) {
+		if(next.$$route && next.$$route.access.restricted && window.sessionStorage.getItem('user') == ''){
+			$location.path('/login');
+      		$route.reload();
+		}
+	});
+});

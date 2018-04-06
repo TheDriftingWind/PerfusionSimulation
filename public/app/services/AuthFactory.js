@@ -39,7 +39,7 @@ function AuthFactory($http){
 		.then((res)=>res)
 		.catch((err)=>err);
 	}
-	function logout(username, password){
+	function logout(){
 		return $http.get('/authentication/logout')
 		.then((res)=>res)
 		.catch((err)=>console.error(err));

@@ -17,7 +17,7 @@ function LoginController($scope, $location, $route, $window, $rootScope, AuthFac
 	function login(email, password){
 		AuthFactory.login(email, password).then(function(res){
 			if(res.status == 200){
-				$rootScope.user = res.data.user;
+				$window.sessionStorage.setItem('user', res.data.user);
 				$location.path('/waiting-room');
 	          	$route.reload();
 			}else{

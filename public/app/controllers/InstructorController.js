@@ -1,10 +1,10 @@
 angular
 .module('mainApp')
-.controller('StudentController', StudentController);
+.controller('InstructorController', InstructorController);
 
-StudentController.$inject = ['$scope', '$location', '$window', '$rootScope', 'AuthFactory'];
+InstructorController.$inject = ['$scope', '$location', '$window', '$rootScope', 'AuthFactory'];
 
-function StudentController($scope, $location, $window, $rootScope, AuthFactory){
+function InstructorController($scope, $location, $window, $rootScope, AuthFactory){
 	$scope.logout = logout;
 
 	activate();

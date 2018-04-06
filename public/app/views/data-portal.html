@@ -13,13 +13,12 @@
             <button id="myBtn" class="btn-info btn-sm hb-cta hb-cta-button" title="Messages" ><i class="fas fa-envelope"style="font-size:25px;"></i></button>
             <a type="button"class="btn btn-success btn-sm" title="Waiting Room" href="/#!/waiting-room" id="wait"><i class="fa fa-users"style="font-size:25px;"></i></a>
             <button type="button"class="btn btn-danger btn-sm" title="Export Data" id="export"> <i class="fa fa-download"style="font-size:20px;"></i></button>
-            <button type="button"class="btn btn-primary btn-sm" title="Log Out" id="logout1"><i class="fas fa-sign-out-alt"style="font-size:25px;"></i> </button>
+            <button type="button"class="btn btn-primary btn-sm" title="Log Out" id="logout1" ng-click="logout()"><i class="fas fa-sign-out-alt"style="font-size:25px;" ng-click="logout()"></i> </button>
          </div>
       </div>
       <div class="page-header"></div>
       <div class="col-lg-12 col-md-12" >
          <!-- The Modal -->
-         <div ng-include="'app/views/toolbar.html'"></div>
          <div class="col-lg-5 col-md-5" id="interventionContainer">
             <style>
                table, th, td {
@@ -45,7 +44,7 @@
                <h2  class="conttitle"><b>Medication Intervention Data</b></h2>
             </div>
             <br>
-            <table id="t01" ng-controller="chartController"style="text-align: center;">
+            <table id="t01" style="text-align: center;">
                <tr>
                   <th>Medication</th>
                   <th>Dose</th>

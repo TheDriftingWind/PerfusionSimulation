@@ -1,10 +1,10 @@
 angular
 .module('mainApp')
-.controller('StudentController', StudentController);
+.controller('WaitingRoomController', WaitingRoomController);
 
-StudentController.$inject = ['$scope', '$location', '$window', '$rootScope', 'AuthFactory'];
+WaitingRoomController.$inject = ['$scope', '$location', '$window', '$rootScope', 'AuthFactory'];
 
-function StudentController($scope, $location, $window, $rootScope, AuthFactory){
+function WaitingRoomController($scope, $location, $window, $rootScope, AuthFactory){
 	$scope.logout = logout;
 
 	activate();
@@ -23,7 +23,7 @@ function StudentController($scope, $location, $window, $rootScope, AuthFactory){
 
 	function logout(){
 		AuthFactory.logout().then(function(res){
-			$window.sessionStorage.setItem('user', '');
+			$window.sessionStorage.setItem('user', '');		
 			$location.path('/login');
           	$route.reload();
 		}).catch(error => console.log('reject'));

@@ -2,7 +2,6 @@ var professorSocket = io.connect(window.location.href);
 var profCharts = window.myData.charts.prof;
 var instructorFocus = true;
 var ecgIndex = 1;
-
 var vitals = {};
 var ecgContainer = document.getElementById('ecgContainer');
 
@@ -55,15 +54,19 @@ var esoTempUp = document.getElementById('esoTempUp'),
 var cvpUp = document.getElementById('cvpUp'),
     cvpDown = document.getElementById('cvpDown');
 
+var endBtn = document.getElementById('end');
+
+
 $(window).blur(function(){
   professorSocket.disconnect();
 });
 $(window).focus(function(){
-  window.location.reload()
+  window.location.reload();
 });
 
 professorSocket.on('connect', function(){
   professorSocket.emit('initCharts', {})
+  professorSocket.emit('initMessages', {})
   console.log('connected to professor professorSocket')
 })
 professorSocket.on('disconnect', function(){
@@ -148,6 +151,9 @@ professorSocket.on('disconnect', function(){
     vitals.cvp = cvpCtrl.textContent;
     professorSocket.emit('vitals', vitals);
   });
+  end.addEventListener('click', function(){
+    professorSocket.emit('end', {});
+  });
 
   professorSocket.on('vitals', function(data){
     if('/instructor-station' == window.location.href.split('#!')[1]){
@@ -181,6 +187,16 @@ professorSocket.on('administration', function(data){
   for(let i = 0; i < data.length; i++){
     document.getElementById('modal-body').innerHTML += '<p> ' + data[i] + '</p>' + '<hr>';
   }
+});
+
+professorSocket.on('initMessages', function(data){
+  for(let i = 0; i < data.length; i++){
+    document.getElementById('modal-body').innerHTML += '<p> ' + data[i] + '</p>' + '<hr>';
+  }
+});
+
+professorSocket.on('end', function(data){
+  window.location.href = '/#!/data-portal'
 });
 
 professorSocket.on('initCharts', function(data){

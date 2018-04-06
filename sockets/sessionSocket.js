@@ -1,7 +1,9 @@
-
+var SessionSchema = require('../models/Session');
 var socket = require('socket.io');
 var request = require('request');
-
+var isSession = true;
+var messages = [];
+var vitalsData = [];
 var vitals  = {
 	abp: 120,
 	cap: 35,
@@ -66,8 +68,13 @@ function initSocket(server){
 	var io = socket(server);
 
 	io.on('connection', function(socket){
+		if(!isSession){
+			io.sockets.emit('end', {});
+		}
 		console.log('made socket connection', socket.id);
+		console.log(io.engine.clientsCount)
 		socket.emit('initCharts', dataPoints)
+		socket.emit('initMessages', messages)
 		socket.emit('ecg', ecg)
 		socket.on('vitals', function(data){
 			vitals = data;
@@ -87,7 +94,18 @@ function initSocket(server){
 			}
 		});
 		socket.on('administration', function(data){
+			for(let i = 0; i < data.length; i++){
+				messages.push(data[i]);
+			}
 			io.sockets.emit('administration', data);
+		});
+		socket.on('end', function(data){
+			io.sockets.emit('end', data);
+			isSession = false;
+			var session = new SessionSchema({ datapoints: vitalsData, activity: messages });
+			session.save(function (err) {
+			  if (err) console.log(err)
+			})
 		});
 		socket.on('abp', function(data){
 			vitals.abp += data.abp;
@@ -98,10 +116,12 @@ function initSocket(server){
 		});
 		socket.on('disconnect', function(data){
 			console.log('left page');
+			console.log(io.engine.clientsCount)
 		});
 	});
 
 	setInterval(function(){
+		vitalsData.push(vitals);
 		let data = JSON.parse(JSON.stringify(vitals));
 		let abpPoint = Math.random() * ((data.abp * 1.0 + 5.0) - (data.abp * 1.0 - 5.0)) + (data.abp * 1.0 - 5.0);
 		let svo2Point = Math.random() * ((data.svo2 * 1.0 + 2.5) - (data.svo2 * 1.0 - 2.5)) + (data.svo2 * 1.0 - 2.5);
