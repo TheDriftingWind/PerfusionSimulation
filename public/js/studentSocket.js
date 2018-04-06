@@ -127,6 +127,7 @@ studentSocket.on('administration', function(data){
   for(let i = 0; i < data.length; i++){
     document.getElementById('modal-body').innerHTML += '<p> ' + data[i] + '</p>';
   }
+  $('#recent-notification').fadeIn();
 })
 
 studentSocket.on('initCharts', function(data){

@@ -87,7 +87,7 @@ font-family: 'Exo', sans-serif;
 
 /*notification bar*/
 
-#hellobar-bar {
+#recent-notification{
         font-family: 'Exo', sans-serif;
         width: 100%;
         margin: 0;
@@ -102,7 +102,7 @@ font-family: 'Exo', sans-serif;
         background-color: #eff1f4;
         box-shadow: 0 1px 3px 2px rgba(0,0,0,0.15);
     }
-    #hellobar-bar.regular {
+    #recent-notification.regular {
         height: 30px;
         font-size: 14px;
         padding: .2em .5em;
@@ -128,7 +128,7 @@ font-family: 'Exo', sans-serif;
         display: inline-block;
         vertical-align: middle;
     }
-    #hellobar-bar .hb-cta {
+    #recent-notification .hb-cta {
         display: inline-block;
         vertical-align: middle;
         margin: 5px 0;
