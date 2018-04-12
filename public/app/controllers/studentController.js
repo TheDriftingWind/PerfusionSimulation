@@ -23,7 +23,7 @@ function StudentController($scope, $location, $window, $rootScope, AuthFactory){
 
 	function logout(){
 		AuthFactory.logout().then(function(res){
-			$window.sessionStorage.setItem('user', '');
+			$rootScope.user = false;
 			$location.path('/login');
           	$route.reload();
 		}).catch(error => console.log('reject'));

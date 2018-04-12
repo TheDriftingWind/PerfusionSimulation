@@ -96,9 +96,16 @@ app.config(function ($routeProvider){
 
 app.run(function($rootScope, $location, $route, $window, AuthFactory) {
 	$rootScope.$on("$routeChangeStart", function(event, next, current) {
-		if(next.$$route && next.$$route.access.restricted && window.sessionStorage.getItem('user') == ''){
-			$location.path('/login');
-      		$route.reload();
+		if(next.$$route && next.$$route.access.restricted && !$rootScope.user){
+			return AuthFactory.isLoggedIn().then(function(res){
+				console.log(res)
+				if(res.status != 200){
+					$location.path('/login');
+		      		$route.reload();
+				}else{
+					$rootScope.user = true;
+				}
+			});
 		}
 	});
 });

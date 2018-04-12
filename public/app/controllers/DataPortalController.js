@@ -23,7 +23,7 @@ function DataPortalController($scope, $location, $window, $rootScope, AuthFactor
 
 	function logout(){
 		AuthFactory.logout().then(function(res){
-			$window.sessionStorage.setItem('user', '');
+			$rootScope.user = false;
 			$location.path('/login');
           	$route.reload();
 		}).catch(error => console.log('reject'));
