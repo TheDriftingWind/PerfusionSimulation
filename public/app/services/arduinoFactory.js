@@ -8,30 +8,47 @@ ArduinoFactory.$inject = ['$http'];
 function ArduinoFactory($http){
 
 	var service = {
-		getPin: getPin,
-		setLEDInterval: setLEDInterval,
-		setLEDStatus: setLEDStatus
+		setPump: setPump,
+		setValve0: setValve0,
+		setValve1: setValve1,
+		setServo: setServo,
+		getHeight: getHeight,
+		getPressure: getPressure
 	};
 
 	return service;
 
 	////////////////////
 
-	function getPin(pin){
-		return $http.get('/arduino/pin/' + pin)
+	function setPump(value){
+		return $http.post('/arduino/pump', {value})
 		.then((res)=>res.data)
 		.catch((err)=>console.error(err));
 	}
-
-	function setLEDInterval(interval, ticks){
-		return $http.get('/arduino/led/' + interval + '/' + ticks)
+	function setValve0(value){
+		return $http.post('/arduino/valve0', {value})
 		.then((res)=>res.data)
 		.catch((err)=>console.error(err));
 	}
-
-	function setLEDStatus(status){
-		return $http.get('/arduino/pin/status/' + status)
+	function setValve1(value){
+		return $http.post('/arduino/valve1', {value})
 		.then((res)=>res.data)
 		.catch((err)=>console.error(err));
 	}
+	function setServo(value){
+		return $http.post('/arduino/servo', {value})
+		.then((res)=>res.data)
+		.catch((err)=>console.error(err));
+	}
+	function getHeight(){
+		return $http.get('/arduino/height')
+		.then((res)=>res.data)
+		.catch((err)=>console.error(err));
+	}
+	function getPressure(){
+		return $http.get('/arduino/pressure')
+		.then((res)=>res.data)
+		.catch((err)=>console.error(err));
+	}
+	
 }

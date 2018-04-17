@@ -4,6 +4,7 @@ var request = require('request');
 var isSession = true;
 var messages = [];
 var vitalsData = [];
+var users = {};
 var vitals  = {
 	abp: 120,
 	cap: 35,
@@ -69,16 +70,43 @@ function initSocket(server){
 
 	io.on('connection', function(socket){
 		if(!isSession){
-			io.sockets.emit('end', {});
+			io.sockets.to('simulation').emit('end', {});
 		}
 		console.log('made socket connection', socket.id);
-		console.log(io.engine.clientsCount)
 		socket.emit('initCharts', dataPoints)
 		socket.emit('initMessages', messages)
 		socket.emit('ecg', ecg)
 		socket.on('vitals', function(data){
 			vitals = data;
 		});
+		
+		socket.on('leaveSimulation', function(data){
+			socket.leave('simulation');
+		})
+
+		socket.on('joinSimulation', function(data){
+			socket.join('simulation');
+			socket.emit('joinSimulation', data)
+		})
+
+		socket.on('joinWaitingRoom', function(data){
+			if(data.email){
+				socket.join('waiting-room');
+				console.log(data)
+				users[data.email] = data;
+				io.sockets.to('waiting-room').emit('waiting-room', users)
+			}
+		})
+
+		socket.on('leaveWaitingRoom', function(data){
+			if(data.email){
+				socket.leave('waiting-room');
+				console.log(data)
+				users[data.email] = undefined;
+				io.sockets.to('waiting-room').emit('waiting-room', users)
+			}
+		})
+
 		socket.on('ecg', function(data){
 			switch(data.ecg){
 				case 'ecgNormal' : ecg = ecgNormal;
@@ -93,14 +121,21 @@ function initSocket(server){
 					break;
 			}
 		});
+
 		socket.on('administration', function(data){
+			let administrations = [];
 			for(let i = 0; i < data.length; i++){
-				messages.push(data[i]);
+				let time = data[i].time;
+				let administration = ('00' + time.h).slice(-2) + ':' + ('00' + time.m).slice(-2) + ':' + 
+					('00' + time.s).slice(-2) + ' ' +  data[i].email +  ' administered ' + data[i].dosage + 
+					data[i].units + ' of ' + data[i].medication + '.';
+				messages.push(administration);
+				administrations.push(administration);
 			}
-			io.sockets.emit('administration', data);
+			io.sockets.to('simulation').emit('administration', administrations);
 		});
 		socket.on('end', function(data){
-			io.sockets.emit('end', data);
+			io.sockets.to('simulation').emit('end', data);
 			isSession = false;
 			var session = new SessionSchema({ datapoints: vitalsData, activity: messages });
 			session.save(function (err) {
@@ -116,9 +151,12 @@ function initSocket(server){
 		});
 		socket.on('disconnect', function(data){
 			console.log('left page');
-			console.log(io.engine.clientsCount)
 		});
 	});
+
+	setInterval(function(){
+		io.sockets.to('test').emit('test',{data:'fuck'})
+	}, 1000)
 
 	setInterval(function(){
 		vitalsData.push(vitals);
@@ -151,11 +189,11 @@ function initSocket(server){
 		dataPoints.cap.push([data.time, data.cap]);
 		dataPoints.cvp.push([data.time, data.cvp]);
 		dataPoints.svo2.push([data.time, data.svo2]);
-		io.sockets.emit('vitals', data);
+		io.sockets.to('simulation').emit('vitals', data);
 	}, 2000);
 
 	setInterval(function(){
-		io.sockets.emit('ecg', ecg);
+		io.sockets.to('simulation').emit('ecg', ecg);
 	}, 100);
 }
 

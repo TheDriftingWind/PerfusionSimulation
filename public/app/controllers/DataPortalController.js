@@ -13,6 +13,15 @@ function DataPortalController($scope, $location, $window, $rootScope, AuthFactor
 
 	function activate(){
 		checkIfMobileDevice();
+		let waitingRoomSocket = io.connect($window.location.href);
+		waitingRoomSocket.on('connect', function(){
+		  waitingRoomSocket.emit('initCharts', {})
+		  waitingRoomSocket.emit('initMessages', {})
+		  console.log('connected to waitingRoomSocket')
+		})
+		waitingRoomSocket.on('disconnect', function(){
+		  console.log('disconnected from waitingRoomSocket')
+		})
 	}
 
 	function checkIfMobileDevice(){
@@ -23,7 +32,6 @@ function DataPortalController($scope, $location, $window, $rootScope, AuthFactor
 
 	function logout(){
 		AuthFactory.logout().then(function(res){
-			$rootScope.user = false;
 			$location.path('/login');
           	$route.reload();
 		}).catch(error => console.log('reject'));

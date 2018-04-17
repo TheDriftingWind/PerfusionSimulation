@@ -23,7 +23,6 @@ function InstructorController($scope, $location, $window, $rootScope, AuthFactor
 
 	function logout(){
 		AuthFactory.logout().then(function(res){
-			$rootScope.user = false;
 			$location.path('/login');
           	$route.reload();
 		}).catch(error => console.log('reject'));

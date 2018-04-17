@@ -3,6 +3,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link href="https://fonts.googleapis.com/css?family=Exo" rel="stylesheet">
   <script defer src="https://use.fontawesome.com/releases/v5.0.9/js/all.js" integrity="sha384-8iPTk2s/jMVj81dnzb/iFR2sdA7u06vHJyyLlAd4snFpCl/SnyUjRrbdJsw1pGIl" crossorigin="anonymous"></script>
+
 <div class="container">
   <div class="col-md-12 col-lg-12">
     <button type="button"class="btn btn-primary btn-sm" title="Log Out" id="logout1"style= "	margin-top:0.5%;
@@ -16,10 +17,10 @@
     <div class="col-md-4 col-lg-4" style= "border-style: solid;
   		border-width: 1px; background-color:#eff1f4; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
       <h3 style="float:middle; text-align:center;">Instructors</h3>
-      <i class="far fa-user-circle" style="font-size:40px; color:#bd0f1c;"></i>
-      <span style="font-size:20px;">Professor Smith</span>
-
-
+      <div ng-repeat="(key, user) in users">
+        <i class="far fa-user-circle" style="font-size:40px; color:#bd0f1c;"></i>
+        <span style="font-size:20px;">{{user.email}}</span>
+      </div>
        <a href="/#!/instructor-station" class="btn btn-lg btn-danger" style="float:middle; text-align:center;width:100%; margin-top:50px;margin-bottom:20px;" >Instructor Station</a>
      </br>
     </div>
@@ -31,12 +32,10 @@
     <div class=" col-md-4 col-lg-4" style= " border-style: solid;
   		border-width: 1px; background-color:#eff1f4; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
       <h3 style="float:middle; text-align:center;">Students</h3>
-      <i class="far fa-user-circle" style="font-size:40px; color:#50b867;"></i>
-      <span style="font-size:20px;">John Doe</span>
-    </br>
-  </br>
-      <i class="far fa-user-circle" style="font-size:40px; color:#50b867;"></i>
-      <span style="font-size:20px;">Jane Doe</span>
+      <div ng-repeat="(key, user) in users">
+        <i class="far fa-user-circle" style="font-size:40px; color:#50b867;"></i>
+        <span style="font-size:20px;">{{user.email}}</span>
+      </div>
       <a class="btn btn-lg btn-success" href="/#!/student-station"style="float:middle; text-align:center; width:100%;margin-top:50px;margin-bottom:20px;">Student Station</a>
     </br>
     </div>

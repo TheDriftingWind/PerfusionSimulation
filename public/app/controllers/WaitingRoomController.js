@@ -6,13 +6,25 @@ WaitingRoomController.$inject = ['$scope', '$location', '$window', '$rootScope',
 
 function WaitingRoomController($scope, $location, $window, $rootScope, AuthFactory){
 	$scope.logout = logout;
-
+	$scope.users = {};
+	let user = undefined;
 	activate();
 
 	///////////
 
 	function activate(){
 		checkIfMobileDevice();
+		user = AuthFactory.getUser();
+		socket.emit('joinWaitingRoom', user);
+
+		$scope.$on("$destroy", function(){
+	        socket.emit('leaveWaitingRoom', user);
+	    });
+
+		socket.on('waiting-room', function(data){
+			$scope.users = data
+			$scope.$apply()
+		})
 	}
 
 	function checkIfMobileDevice(){
@@ -23,7 +35,6 @@ function WaitingRoomController($scope, $location, $window, $rootScope, AuthFacto
 
 	function logout(){
 		AuthFactory.logout().then(function(res){
-			$rootScope.user = false;
 			$location.path('/login');
           	$route.reload();
 		}).catch(error => console.log('reject'));

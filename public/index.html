@@ -5,6 +5,7 @@
 
 	<meta charset="UTF-8">
 
+	
 	<link rel="stylesheet" href="lib/bootstrap.min.css">
 	<link rel="stylesheet" href="css/styles.css">
 
@@ -15,7 +16,12 @@
 	<script src="lib/bootstrap.min.js"></script>
 	<script src="lib/highstock.src.js"></script>
     <script src="lib/socketio.js"></script>
+    
     <script type="text/javascript">
+		var socket = io.connect(window.location.href);
+		socket.on('connect', function(){
+		  console.log('connected to socket')
+		})
     	window.myData = {
     		charts: {
     			prof: {},
@@ -39,11 +45,11 @@
 	<script src="app/controllers/SessionController.js"></script>
 	<script src="app/controllers/TestController.js"></script>
 	<script src="app/controllers/StudentController.js"></script>
-	<script src="app/controllers/StudentController.js"></script>
 	<script src="app/controllers/InstructorController.js"></script>
 	<script src="app/controllers/DataPortalController.js"></script>
 	<script src="app/controllers/WaitingRoomController.js"></script>
 	<script src="app/controllers/RegisterController.js"></script>
+	<script src="app/controllers/ArduinoController.js"></script>
 
 	<!-- Services -->
 	<script src="app/services/SessionFactory.js"></script>

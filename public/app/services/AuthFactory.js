@@ -12,8 +12,11 @@ function AuthFactory($http){
 		isEmailAvailable: isEmailAvailable,
 		register: register,
 		login: login,
-		logout: logout
+		logout: logout,
+		getUser: getUser
 	};
+
+	var user = undefined;
 
 	return service;
 
@@ -21,8 +24,19 @@ function AuthFactory($http){
 
 	function isLoggedIn(){
 		return $http.get('/authentication/login')
-		.then((res)=>res)
-		.catch((err)=>err);
+		.then(function(res){
+			if(res.status == 200){
+				user = res.data;
+			}else{
+				user = undefined;
+			}
+			return res;
+		})
+		.catch(function(err){
+			user = undefined;
+			return err;
+		});
+
 	}
 	function register(form){
 		return $http.post('/authentication/register', form)
@@ -31,8 +45,14 @@ function AuthFactory($http){
 	}
 	function login(email, password){
 		return $http.post('authentication/login', {email, password})
-		.then((res)=>res)
-		.catch((err)=>err);
+		.then(function(res){
+			user = res.data;
+			return res;
+		})
+		.catch(function(err){
+			user = undefined;
+			return err;
+		});
 	}
 	function isEmailAvailable(email){
 		return $http.post('authentication/email_exists', {email})
@@ -41,7 +61,17 @@ function AuthFactory($http){
 	}
 	function logout(){
 		return $http.get('/authentication/logout')
-		.then((res)=>res)
-		.catch((err)=>console.error(err));
+		.then(function(res){
+			user = undefined;
+			return res;
+		})
+		.catch(function(err){
+			console.error(err)
+			user = undefined;
+			return err;
+		});
+	}
+	function getUser(){
+		return user;
 	}
 }

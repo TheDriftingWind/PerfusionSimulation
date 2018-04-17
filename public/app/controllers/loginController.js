@@ -17,7 +17,6 @@ function LoginController($scope, $location, $route, $window, $rootScope, AuthFac
 	function login(email, password){
 		AuthFactory.login(email, password).then(function(res){
 			if(res.status == 200){
-				$rootScope.user = true;
 				$location.path('/waiting-room');
 	          	$route.reload();
 			}else{
@@ -28,14 +27,4 @@ function LoginController($scope, $location, $route, $window, $rootScope, AuthFac
 			}
 		});
 	}
-
-	function logout(){
-		AuthFactory.logout().then(function(res){
-			if(!res.data.user){
-				$location.path('/login');
-	          	$route.reload();
-			}
-		}).catch(error => console.log('reject'));
-	}
-
 }

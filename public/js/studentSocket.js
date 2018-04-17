@@ -1,8 +1,8 @@
-var studentSocket = io.connect(window.location.href);
-var studentCharts = window.myData.charts.stu;
-var studentFocus = false;
-var ecgIndex = 1;
-var studentContainer = document.getElementById('studentContainer');
+let studentSocket = io.connect(window.location.href);
+let studentCharts = window.myData.charts.stu;
+let studentFocus = false;
+let ecgIndex = 1;
+let studentContainer = document.getElementById('studentContainer');
 
 $(window).blur(function(){
   studentSocket.disconnect();
@@ -20,12 +20,12 @@ studentSocket.on('disconnect', function(){
   console.log('disconnected from student studentSocket')
 })
 
-var vitals = {};
-var ecg = {};
-var ecgContainer = document.getElementById('ecgContainer');
-var submit = document.getElementById('submit');
+let vitals = {};
+let ecg = {};
+let ecgContainer = document.getElementById('ecgContainer');
+let submit = document.getElementById('submit');
 
-var stuAbpDisplay = document.getElementById('stuAbpDisplay'),
+let stuAbpDisplay = document.getElementById('stuAbpDisplay'),
     stuCapDisplay = document.getElementById('stuCapDisplay'),
     stuBisDisplay = document.getElementById('stuBisDisplay'),
     stuBldDisplay = document.getElementById('stuBldDisplay'),
@@ -34,25 +34,25 @@ var stuAbpDisplay = document.getElementById('stuAbpDisplay'),
     stuCvpDisplay = document.getElementById('stuCvpDisplay'),
     stuEcgDisplay = document.getElementById('stuEcgDisplay');
 
-var hepCtrl = document.getElementById('hepCtrl'),
+let hepCtrl = document.getElementById('hepCtrl'),
     ph2Ctrl = document.getElementById('ph2Ctrl'),
     naCtrl = document.getElementById('naCtrl'),
     lidCtrl = document.getElementById('lidCtrl'),
     magCtrl = document.getElementById('magCtrl');
 
-var hepUp = document.getElementById('hepUp'),
+let hepUp = document.getElementById('hepUp'),
     hepDown = document.getElementById('hepDown');
 
-var ph2Up = document.getElementById('ph2Up'),
+let ph2Up = document.getElementById('ph2Up'),
     ph2Down = document.getElementById('ph2Down');
 
-var naUp = document.getElementById('naUp'),
+let naUp = document.getElementById('naUp'),
     naDown = document.getElementById('naDown');
 
-var lidUp = document.getElementById('lidUp'),
+let lidUp = document.getElementById('lidUp'),
     lidDown = document.getElementById('lidDown');
 
-var magUp = document.getElementById('magUp'),
+let magUp = document.getElementById('magUp'),
     magDown = document.getElementById('magDown');
 
 // Emit events
@@ -87,39 +87,65 @@ magDown.addEventListener('click', function(){
   magCtrl.textContent = magCtrl.textContent * 1.0 - 0.001 >= 0.0 ? Math.round((magCtrl.textContent * 1.0 - 0.001) * 1000)/1000 : 0.0;
 });
 submit.addEventListener('click', function(){
-  let messages = [];
-  let date = new Date();
-  let timestamp = date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds()
+  let administrations = [];
+  let timestamp = new Date().getTime();
+  let user = window.sessionStorage.getItem('user');
+  
   if(hepCtrl.textContent * 1 > 0){
-    messages.push(timestamp + ' : ' + window.sessionStorage.getItem('user') + ' administered ' + hepCtrl.textContent + ' units of Heparin.')
+    administrations.push({
+      user,
+      medication : 'Heparin',
+      dosage : hepCtrl.textContent,
+      timestamp
+    });    
     hepCtrl.textContent = 0;
   }
   if(ph2Ctrl.textContent * 1 > 0){
-    messages.push(timestamp + ' : ' + window.sessionStorage.getItem('user')  + ' administered ' + ph2Ctrl.textContent + ' units of Phenylephrine.')
-    studentSocket.emit('abp', {abp: (ph2Ctrl.textContent * 150.0)})
+    administrations.push({
+      user,
+      medication : 'Phenylephrine',
+      dosage : ph2Ctrl.textContent,
+      timestamp
+    });
+    studentSocket.emit('abp', {abp: (ph2Ctrl.textContent * 15.0)})
     ph2Ctrl.textContent = 0;
   }
   if(naCtrl.textContent * 1 > 0){
-    messages.push(timestamp + ' : ' + window.sessionStorage.getItem('user') + ' administered ' + naCtrl.textContent + ' units of Sodium Bicarbonate.')
+    administrations.push({
+      user,
+      medication : 'Bicarbonate',
+      dosage : naCtrl.textContent,
+      timestamp
+    });
     naCtrl.textContent = 0;
   }
   if(lidCtrl.textContent * 1 > 0){
-    messages.push(timestamp + ' : ' + window.sessionStorage.getItem('user') + ' administered ' + lidCtrl.textContent + ' units of Lidocaine.')
+    administrations.push({
+      user,
+      medication : 'Lidocaine',
+      dosage : lidCtrl.textContent,
+      timestamp
+    });
     if(ecg.name == 'ecgFib'){
       studentSocket.emit('ecg', {ecg: 'ecgNormal'});
     }
     lidCtrl.textContent = 0;
   }
   if(magCtrl.textContent * 1 > 0){
-    messages.push(timestamp + ' : ' + window.sessionStorage.getItem('user') + ' administered ' + magCtrl.textContent + ' units of Magnesium.')
+    administrations.push({
+      user,
+      medication : 'Magnesium',
+      dosage : magCtrl.textContent,
+      timestamp
+    });
     if(ecg.name == 'ecgFib'){
       studentSocket.emit('ecg', {ecg: 'ecgNormal'});
     }
     magCtrl.textContent = 0;
   }
 
- if(messages.length > 0){
-  studentSocket.emit('administration', messages)
+ if(administrations.length > 0){
+  studentSocket.emit('administration', administrations)
  }
 
 });

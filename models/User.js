@@ -21,6 +21,10 @@ var User = mongoose.model('User', mongoose.Schema({
   	password:{
   		type: String,
   		required: true
+  	},
+  	isInstructor:{
+  		type: Boolean,
+  		required: true
   	}
 }));
 

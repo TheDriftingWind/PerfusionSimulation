@@ -1,13 +1,21 @@
-<div style="padding-top: 5%; font-size: 18px">
-	<div class="col-lg-3 col-md-3 col-lg-offset-1 col-md-offset-1">
-		<p style="width: 100%; display: block;"><strong>Pin 13 LED Interval</strong></p>
-		<input style="display: block;" onkeypress="return event.charCode >= 48 && event.charCode <= 57" placeholder="interval in milliseconds" ng-model="interval">
-		<input style="display: block;" onkeypress="return event.charCode >= 48 && event.charCode <= 57" placeholder="number of ticks" ng-model="ticks">
-		<button style="display: block;" type="button" class="btn btn-info" ng-click="setLEDInterval(interval, ticks)">Send</button>
-	</div>
-	<div class="col-lg-3 col-md-3">
-		<p style="width: 100%; display: block"><strong> {{ outputPin13 }} </strong></p>
-		<input style="display: block;" onkeypress="return event.charCode >= 48 && event.charCode <= 57" placeholder="set pin status" ng-model="pinStatus">
-		<button style="display: block;" type="button" class="btn btn-info" ng-click="setLEDStatus(pinStatus)">Send</button>
-	</div>
-</div>
+<br>
+<br>
+
+<button id="pumpOn" style="margin-left: 10%; font-size: 24px" type="button">Pump On</button>		
+<button id="pumpOff" type="button" style="font-size: 24px">Pump Off</button>
+
+<input style="margin-top: 3.5%; margin-left: 10%; width: 20%;font-size: 24px" id="servoSlider" type="range" min="0" max="180" value="90" class="slider">
+<output style="margin-left: 10%;font-size: 24px" id="servoValue">90</output>
+
+<button id="valve0Open" style="margin-top: 3.5%;margin-left: 10%;font-size: 24px" type="button">Valve0 Open</button>		
+<button id="valve0Close" type="button" style="font-size: 24px">Valve0 Close</button>
+
+<br>
+
+<button id="valve1Open" style="margin-top: 3.5%;margin-left: 10%;font-size: 24px" type="button">Valve1 Open</button>		
+<button id="valve1Close" type="button" style="font-size: 24px">Valve1 Close</button>
+
+
+<output style="margin-top: 3.5%;margin-left: 10%;font-size: 24px">Pressure Transducer: <span id="pressureTransducerValue" style="font-size: 24px">n/a</span>mmHg</output>
+
+<output style="margin-top: 3.5%;margin-left: 10%;font-size: 24px">Height Sensor: <span id="heightSensorValue" style="font-size: 24px">n/a</span>inches</output>

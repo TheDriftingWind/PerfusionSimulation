@@ -87,7 +87,7 @@ app.config(function ($routeProvider){
 		templateUrl: 'app/views/arduino.html',
 		controller: 'ArduinoController',
 		access: {
-			restricted: true,
+			restricted: false,
 			student_access: true
 		}
 	})
@@ -96,16 +96,14 @@ app.config(function ($routeProvider){
 
 app.run(function($rootScope, $location, $route, $window, AuthFactory) {
 	$rootScope.$on("$routeChangeStart", function(event, next, current) {
-		if(next.$$route && next.$$route.access.restricted && !$rootScope.user){
-			return AuthFactory.isLoggedIn().then(function(res){
-				console.log(res)
-				if(res.status != 200){
-					$location.path('/login');
-		      		$route.reload();
-				}else{
-					$rootScope.user = true;
+		if(next.$$route && next.$$route.access.restricted && !AuthFactory.getUser()){
+			$location.path('/login');
+			AuthFactory.isLoggedIn().then(function(res){
+				if(res.status == 200){
+					$location.path(next.$$route.originalPath);
+			  		$route.reload();
 				}
-			});
-		}
-	});
+			})
+		};
+	})
 });

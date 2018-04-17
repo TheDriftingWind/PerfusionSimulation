@@ -12,7 +12,8 @@ module.exports = function(app, passport){
             first_name,
             last_name,
             email,
-            password
+            password,
+            isInstructor: false
         });
 
         UserSchema.createUser(user, function(err, user){
@@ -56,7 +57,10 @@ module.exports = function(app, passport){
 
     app.post('/authentication/login', passport.authenticate('local'), 
         function(req, res){
-            res.status(200).json({user: req.user.email});
+            res.status(200).json({
+                email: req.user.email,
+                isInstructor: req.user.isInstructor
+            });
         }
     );
 
@@ -72,14 +76,17 @@ module.exports = function(app, passport){
 
     app.get('/authentication/logout', function(req, res){
         req.logout();
-        res.json({message: req.user.email + " has logged out"});
+        res.end();
     });
 
     app.get('/authentication/login', function(req, res){
         if(req.user){
-            res.status(200).json({message: req.user.email + " is logged in."});
+            res.status(200).json({
+                email: req.user.email,
+                isInstructor: req.user.isInstructor
+            });
         }else{
-            res.status(401).json({message: "User is not logged in."});
+            res.status(401).json({user: null});
         }
     });
 
