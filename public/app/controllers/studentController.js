@@ -12,38 +12,33 @@ function StudentController($scope, $location, $window, $rootScope, $route, AuthF
 	///////////
 
 	function activate(){
+		socket.off()
+		$scope.$on("$destroy", function(){
+	        socket.emit('leaveSimulation', {room: 'stu-simulation'})
+	    });
 		checkIfMobileDevice();
 		let studentCharts = $window.myData.charts.stu;
-		let studentFocus = false;
-		let ecgIndex = 1;
-		let studentContainer = document.getElementById('studentContainer');
+		let chartsOn = false;
+		let ecgOn = false;
 
-		socket.emit('joinSimulation', {room: 'simulation'});
+		socket.emit('joinSimulation', {room: 'stu-simulation'});
 
 		$window.onblur = function(){
-			socket.emit('leaveSimulation', {room: 'afk'})
+			socket.emit('leaveSimulation', {room: 'stu-simulation'})
 		};
 		$window.onfocus = function(){
-			console.log('refocus')
-			socket.emit('joinSimulation', {room: 'simulation'})
+			socket.emit('joinSimulation', {room: 'stu-simulation'});
 		};
-
-		socket.on('test', function(data){
-			console.log(data)
-		})
 
 		socket.on('joinSimulation', function(data){
 			console.log('joined room: ' + data.room)
+			socket.emit('initEcg', {})
 			socket.emit('initCharts', {})
 			socket.emit('initMessages', {})
 		});
-		socket.on('disconnect', function(){
-			console.log('disconnected from student socket')
-		})
 
 		let vitals = {};
 		let ecg = {};
-		let ecgContainer = document.getElementById('ecgContainer');
 		let submit = document.getElementById('submit');
 
 		let stuAbpDisplay = document.getElementById('stuAbpDisplay'),
@@ -193,12 +188,17 @@ function StudentController($scope, $location, $window, $rootScope, $route, AuthF
 			$window.location.href = '/#!/data-portal'
 		});
 
+		socket.on('initEcg', function(data){
+			studentCharts.ecg.series[0].setData(data.slice(data.length - 99, data.length), false);
+			ecgOn = true;
+		})
+
 		socket.on('initCharts', function(data){
-			studentCharts.abp.series[0].setData(data.abp.slice(data.abp.length > 30 ? data.abp.length - 29 : 0, data.abp.length))
-			studentCharts.svo2.series[0].setData(data.svo2.slice(data.svo2.length > 30 ? data.svo2.length - 29 : 0, data.svo2.length))
-			studentCharts.cap.series[0].setData(data.cap.slice(data.cap.length > 30 ? data.cap.length - 29 : 0, data.cap.length))
-			studentCharts.cvp.series[0].setData(data.cvp.slice(data.cvp.length > 30 ? data.cvp.length - 29 : 0, data.cvp.length))
-			studentFocus = true;
+			studentCharts.abp.series[0].setData(data.abp.slice(data.abp.length > 30 ? data.abp.length - 29 : 0, data.abp.length), false)
+			studentCharts.svo2.series[0].setData(data.svo2.slice(data.svo2.length > 30 ? data.svo2.length - 29 : 0, data.svo2.length), false)
+			studentCharts.cap.series[0].setData(data.cap.slice(data.cap.length > 30 ? data.cap.length - 29 : 0, data.cap.length), false)
+			studentCharts.cvp.series[0].setData(data.cvp.slice(data.cvp.length > 30 ? data.cvp.length - 29 : 0, data.cvp.length), false)
+			chartsOn = true;
 		})
 
 		socket.on('initMessages', function(data){
@@ -209,44 +209,35 @@ function StudentController($scope, $location, $window, $rootScope, $route, AuthF
 		})
 
 		socket.on('vitals', function(data){
-			if('/student-station' == $window.location.href.split('#!')[1]){
-				if(studentFocus){
-					vitals = data;  
-					let time = vitals.time;
-					let abpSeries = studentCharts.abp.series[0];
-					let svo2Series = studentCharts.svo2.series[0];
-					let capSeries = studentCharts.cap.series[0];
-					let cvpSeries = studentCharts.cvp.series[0];
+			if(chartsOn){
+				vitals = data;  
+				let time = vitals.time;
+				let abpSeries = studentCharts.abp.series[0];
+				let svo2Series = studentCharts.svo2.series[0];
+				let capSeries = studentCharts.cap.series[0];
+				let cvpSeries = studentCharts.cvp.series[0];
 
-					abpSeries.addPoint([time, data.abp], true, abpSeries.data.length > 30);
-					svo2Series.addPoint([time, data.svo2], true, svo2Series.data.length > 30);
-					capSeries.addPoint([time, data.cap], true, capSeries.data.length > 30);
-					cvpSeries.addPoint([time, data.cvp], true, cvpSeries.data.length > 30);
+				abpSeries.addPoint([time, data.abp], true, abpSeries.data.length > 30);
+				svo2Series.addPoint([time, data.svo2], true, svo2Series.data.length > 30);
+				capSeries.addPoint([time, data.cap], true, capSeries.data.length > 30);
+				cvpSeries.addPoint([time, data.cvp], true, cvpSeries.data.length > 30);
 
-					stuAbpDisplay.textContent = data.abp;
-					stuSvo2Display.textContent = data.svo2;
-					stuCapDisplay.textContent = data.cap;
-					stuCvpDisplay.textContent = data.cvp;
-					stuBisDisplay.textContent = data.bis;
-					stuEsoDisplay.textContent = data.eso;
-					stuBldDisplay.textContent = data.bld;
-				}
-			}else{
-				socket.emit('join', {room: 'afk'})
+				stuAbpDisplay.textContent = data.abp;
+				stuSvo2Display.textContent = data.svo2;
+				stuCapDisplay.textContent = data.cap;
+				stuCvpDisplay.textContent = data.cvp;
+				stuBisDisplay.textContent = data.bis;
+				stuEsoDisplay.textContent = data.eso;
+				stuBldDisplay.textContent = data.bld;
 			}
 		});
 
 		socket.on('ecg', function(data){
-			if('/student-station' == $window.location.href.split('#!')[1] && studentFocus){
+			if(ecgOn){
 				ecg = data;
 				let ecgSeries = studentCharts.ecg.series[0];
-				ecgSeries.addPoint([ecgIndex % data.interval == 0 ? 8 : Math.random() * (data.max - data.min) + data.min], true, ecgSeries.data.length > 100);   
+				ecgSeries.addPoint([data.height], true, ecgSeries.data.length > 100);   
 				stuEcgDisplay.textContent = data.seconds;
-				ecgIndex ++;
-
-				if(ecgIndex == 41){
-					ecgIndex = 1;
-				}
 			}
 		});
 	}

@@ -12,7 +12,7 @@ window.myData.charts[$("#abpScript").data('arg1')].abp = new Highcharts.chart('a
             },
             height: 150,
              animation: {
-                duration: 1500
+                duration: 1900
             }
         },
         plotOptions: {

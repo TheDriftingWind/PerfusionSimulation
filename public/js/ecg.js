@@ -40,22 +40,7 @@ plotOptions: {
 
 series: [{
 showInLegend: false,
-  data: (function () {
-            // generate an array of random data
-            var data = [];
-
-            for (i = 1; i <= 100; i++) {
-               var y;
-
-               if(i % 20 == 0){
-                  y = 8;
-               }else{
-                  y = Math.random() * (3 - 1) + 1
-               }
-
-                data.push([y]);
-            }
-            return data;
-        }())}]
+  data: []
+}]
 });
 

@@ -2,8 +2,10 @@ var SessionSchema = require('../models/Session');
 var socket = require('socket.io');
 var request = require('request');
 var isSession = true;
+var ecgIndex = 1;
 var messages = [];
 var vitalsData = [];
+var ecgPoints = genEcg();
 var users = {};
 var vitals  = {
 	abp: 120,
@@ -70,10 +72,11 @@ function initSocket(server){
 
 	io.on('connection', function(socket){
 		if(!isSession){
-			io.sockets.to('simulation').emit('end', {});
+			io.sockets.to('instr-simulation').to('stu-simulation').emit('end', {});
 		}
 		console.log('made socket connection', socket.id);
 		socket.emit('initCharts', dataPoints)
+		socket.emit('initEcg', ecgPoints)
 		socket.emit('initMessages', messages)
 		socket.emit('ecg', ecg)
 		socket.on('vitals', function(data){
@@ -81,18 +84,17 @@ function initSocket(server){
 		});
 		
 		socket.on('leaveSimulation', function(data){
-			socket.leave('simulation');
+			socket.leave(data.room);
 		})
 
 		socket.on('joinSimulation', function(data){
-			socket.join('simulation');
+			socket.join(data.room);
 			socket.emit('joinSimulation', data)
 		})
 
 		socket.on('joinWaitingRoom', function(data){
 			if(data.email){
 				socket.join('waiting-room');
-				console.log(data)
 				users[data.email] = data;
 				io.sockets.to('waiting-room').emit('waiting-room', users)
 			}
@@ -101,7 +103,6 @@ function initSocket(server){
 		socket.on('leaveWaitingRoom', function(data){
 			if(data.email){
 				socket.leave('waiting-room');
-				console.log(data)
 				users[data.email] = undefined;
 				io.sockets.to('waiting-room').emit('waiting-room', users)
 			}
@@ -132,10 +133,10 @@ function initSocket(server){
 				messages.push(administration);
 				administrations.push(administration);
 			}
-			io.sockets.to('simulation').emit('administration', administrations);
+			io.sockets.to('instr-simulation').to('stu-simulation').emit('administration', administrations);
 		});
 		socket.on('end', function(data){
-			io.sockets.to('simulation').emit('end', data);
+			io.sockets.to('instr-simulation').to('stu-simulation').emit('end', data);
 			isSession = false;
 			var session = new SessionSchema({ datapoints: vitalsData, activity: messages });
 			session.save(function (err) {
@@ -146,17 +147,15 @@ function initSocket(server){
 			vitals.abp += data.abp;
 		});
 		socket.on('initCharts', function(data){
-			let start = dataPoints.length > 30 ? dataPoints.length - 30 : 0;
 			io.sockets.emit('initCharts', dataPoints);
+		});
+		socket.on('initEcg', function(data){
+			io.sockets.emit('initEcg', ecgPoints);
 		});
 		socket.on('disconnect', function(data){
 			console.log('left page');
 		});
 	});
-
-	setInterval(function(){
-		io.sockets.to('test').emit('test',{data:'fuck'})
-	}, 1000)
 
 	setInterval(function(){
 		vitalsData.push(vitals);
@@ -189,12 +188,38 @@ function initSocket(server){
 		dataPoints.cap.push([data.time, data.cap]);
 		dataPoints.cvp.push([data.time, data.cvp]);
 		dataPoints.svo2.push([data.time, data.svo2]);
-		io.sockets.to('simulation').emit('vitals', data);
+		io.sockets.to('instr-simulation').to('stu-simulation').emit('vitals', data);
 	}, 2000);
 
 	setInterval(function(){
-		io.sockets.to('simulation').emit('ecg', ecg);
+		let data = JSON.parse(JSON.stringify(ecg));
+		let height = (ecgIndex % data.interval) == 0 ? 8 : Math.random() * (data.max - data.min) + data.min;
+		io.sockets.to('instr-simulation').to('stu-simulation').emit('ecg', {
+			height,
+			seconds: data.seconds
+		});
+		ecgPoints.push(height)
+		ecgIndex ++;
+		if(ecgIndex == 41){
+			ecgIndex = 1;
+		}
 	}, 100);
+}
+
+function genEcg(){
+	var data = [];
+    for (i = 1; i <= 100; i++) {
+       var y;
+
+       if(i % 20 == 0){
+          y = 8;
+       }else{
+          y = Math.random() * (3 - 1) + 1
+       }
+
+        data.push([y]);
+    }
+    return data
 }
 
 module.exports = initSocket;
