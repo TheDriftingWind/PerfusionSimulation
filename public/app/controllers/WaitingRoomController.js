@@ -6,7 +6,7 @@ WaitingRoomController.$inject = ['$scope', '$location', '$window', '$rootScope',
 
 function WaitingRoomController($scope, $location, $window, $rootScope, AuthFactory){
 	$scope.logout = logout;
-	$scope.users = {};
+	$scope.users = [];
 	let user = undefined;
 	activate();
 
@@ -22,7 +22,7 @@ function WaitingRoomController($scope, $location, $window, $rootScope, AuthFacto
 	    });
 
 		socket.on('waiting-room', function(data){
-			$scope.users = data
+			$scope.users = Object.values(data)
 			$scope.$apply()
 		})
 	}
