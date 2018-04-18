@@ -5,6 +5,7 @@ var isSession = true;
 var ecgIndex = 1;
 var messages = [];
 var vitalsData = [];
+let administrations = [];
 var ecgPoints = genEcg();
 var users = {};
 var vitals  = {
@@ -71,14 +72,7 @@ function initSocket(server){
 	var io = socket(server);
 
 	io.on('connection', function(socket){
-		if(!isSession){
-			io.sockets.to('instr-simulation').to('stu-simulation').emit('end', {});
-		}
 		console.log('made socket connection', socket.id);
-		socket.emit('initCharts', dataPoints)
-		socket.emit('initEcg', ecgPoints)
-		socket.emit('initMessages', messages)
-		socket.emit('ecg', ecg)
 		socket.on('vitals', function(data){
 			vitals = data;
 		});
@@ -94,6 +88,18 @@ function initSocket(server){
 		socket.on('joinSimulation', function(data){
 			socket.join(data.room);
 			socket.emit('joinSimulation', data)
+		})
+
+		socket.on('leaveDataPortal', function(data){
+			socket.leave('data-portal');
+		})
+
+		socket.on('joinDataPortal', function(data){
+			socket.join('data-portal');
+			socket.emit('data-portal', {
+				administrations,
+				dataPoints
+			})
 		})
 
 		socket.on('joinWaitingRoom', function(data){
@@ -128,16 +134,16 @@ function initSocket(server){
 		});
 
 		socket.on('administration', function(data){
-			let administrations = [];
 			for(let i = 0; i < data.length; i++){
-				let time = data[i].time;
-				let administration = ('00' + time.h).slice(-2) + ':' + ('00' + time.m).slice(-2) + ':' + 
-					('00' + time.s).slice(-2) + ' ' +  data[i].email +  ' administered ' + data[i].dosage + 
+				let time = ('00' + data[i].time.h).slice(-2) + ':' + ('00' + data[i].time.m).slice(-2) + ':' + 
+					('00' + data[i].time.s).slice(-2)
+				let administration = time + ' ' +  data[i].email +  ' administered ' + data[i].dosage + 
 					data[i].units + ' of ' + data[i].medication + '.';
+				data[i].time = time;
 				messages.push(administration);
-				administrations.push(administration);
+				administrations.push(data[i]);
 			}
-			io.sockets.to('instr-simulation').to('stu-simulation').emit('administration', administrations);
+			io.sockets.to('instr-simulation').to('stu-simulation').emit('administration', messages);
 		});
 		socket.on('end', function(data){
 			io.sockets.to('instr-simulation').to('stu-simulation').emit('end', data);
@@ -146,6 +152,9 @@ function initSocket(server){
 			session.save(function (err) {
 			  if (err) console.log(err)
 			})
+			setInterval(function(){
+				io.sockets.to('instr-simulation').to('stu-simulation').emit('end', data);
+			}, 2000)
 		});
 		socket.on('abp', function(data){
 			vitals.abp += data.abp;

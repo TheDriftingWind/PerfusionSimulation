@@ -13,6 +13,7 @@ function StudentController($scope, $location, $window, $rootScope, $route, AuthF
 
 	function activate(){
 		socket.off()
+		$scope.user = AuthFactory.getUser();
 		$scope.$on("$destroy", function(){
 	        socket.emit('leaveSimulation', {room: 'stu-simulation'})
 	    });
@@ -34,7 +35,7 @@ function StudentController($scope, $location, $window, $rootScope, $route, AuthF
 			console.log('joined room: ' + data.room)
 			socket.emit('initEcg', {})
 			socket.emit('initCharts', {})
-			socket.emit('initMessages', {})
+			socket.emit('administration', {})
 		});
 
 		let vitals = {};
@@ -159,7 +160,7 @@ function StudentController($scope, $location, $window, $rootScope, $route, AuthF
 			}
 			if(magCtrl.textContent * 1 > 0){
 				administrations.push({
-					user,
+					email,
 					medication : 'Magnesium',
 					dosage : magCtrl.textContent,
 					units: 'g',
@@ -178,7 +179,8 @@ function StudentController($scope, $location, $window, $rootScope, $route, AuthF
 		});
 
 		socket.on('administration', function(data){
-			for(let i = 0; i < data.length; i++){
+			document.getElementById('modal-body').innerHTML = '';
+			for(let i = data.length - 1; i >=0; i--){
 				document.getElementById('modal-body').innerHTML += '<p> ' + data[i] + '</p>' + '<hr>';
 			}
 			$('#recent-notification').fadeIn();
@@ -189,6 +191,7 @@ function StudentController($scope, $location, $window, $rootScope, $route, AuthF
 		});
 
 		socket.on('initEcg', function(data){
+			console.log('initecg')
 			studentCharts.ecg.series[0].setData(data.slice(data.length - 99, data.length), false);
 			ecgOn = true;
 		})
@@ -199,13 +202,6 @@ function StudentController($scope, $location, $window, $rootScope, $route, AuthF
 			studentCharts.cap.series[0].setData(data.cap.slice(data.cap.length > 30 ? data.cap.length - 29 : 0, data.cap.length), false)
 			studentCharts.cvp.series[0].setData(data.cvp.slice(data.cvp.length > 30 ? data.cvp.length - 29 : 0, data.cvp.length), false)
 			chartsOn = true;
-		})
-
-		socket.on('initMessages', function(data){
-			for(let i = 0; i < data.length; i++){
-				document.getElementById('modal-body').innerHTML += '<p> ' + data[i] + '</p>' + '<hr>';
-			}
-			$('#recent-notification').fadeIn();
 		})
 
 		socket.on('vitals', function(data){

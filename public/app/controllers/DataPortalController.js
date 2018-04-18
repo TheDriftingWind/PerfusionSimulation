@@ -6,21 +6,45 @@ DataPortalController.$inject = ['$scope', '$location', '$window', '$rootScope', 
 
 function DataPortalController($scope, $location, $window, $rootScope, AuthFactory){
 	$scope.logout = logout;
-
+	$scope.administrations = [];
+	$scope.abp = [];
+	$scope.cap = [];
+	$scope.cvp = [];
+	$scope.svo2 = [];
+	$scope.ecg = [];
 	activate();
 
 	///////////
 
 	function activate(){
 		checkIfMobileDevice();
-		let waitingRoomSocket = io.connect($window.location.href);
-		waitingRoomSocket.on('connect', function(){
-		  waitingRoomSocket.emit('initCharts', {})
-		  waitingRoomSocket.emit('initMessages', {})
-		  console.log('connected to waitingRoomSocket')
-		})
-		waitingRoomSocket.on('disconnect', function(){
-		  console.log('disconnected from waitingRoomSocket')
+		let portalCharts = $window.myData.charts.portal;
+		$scope.user = AuthFactory.getUser();
+		socket.off()
+
+		socket.emit('joinDataPortal', {});
+
+		$scope.$on("$destroy", function(){
+	        socket.emit('leaveDataPortal', {});
+	    });
+
+		socket.on('data-portal', function(data){
+			$scope.administrations = data.administrations;
+			$scope.abp = data.dataPoints.abp;
+			$scope.cap = data.dataPoints.cap;
+			$scope.cvp = data.dataPoints.cvp;
+			$scope.svo2 = data.dataPoints.svo2;
+			$scope.$apply()
+
+			portalCharts.abp.series[0].setData($scope.abp, false)
+			portalCharts.svo2.series[0].setData($scope.svo2, false)
+			portalCharts.cap.series[0].setData($scope.cap, false)
+			portalCharts.cvp.series[0].setData($scope.cvp, false)
+
+			portalCharts.abp.redraw();
+			portalCharts.svo2.redraw();
+			portalCharts.cap.redraw();
+			portalCharts.cvp.redraw();
 		})
 	}
 

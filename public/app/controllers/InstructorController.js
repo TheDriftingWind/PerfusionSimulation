@@ -34,7 +34,7 @@ function InstructorController($scope, $location, $window, $rootScope, AuthFactor
 		socket.on('joinSimulation', function(data){
 			socket.emit('initEcg', {})
 			socket.emit('initCharts', {})
-			socket.emit('initMessages', {})
+			socket.emit('administration', {})
 		});
 
 		var ecgNormal = document.getElementById('ecgNormal');
@@ -195,13 +195,8 @@ function InstructorController($scope, $location, $window, $rootScope, AuthFactor
 		  });
 
 		socket.on('administration', function(data){
-		  for(let i = 0; i < data.length; i++){
-		    document.getElementById('modal-body').innerHTML += '<p> ' + data[i] + '</p>' + '<hr>';
-		  }
-		});
-
-		socket.on('initMessages', function(data){
-		  for(let i = 0; i < data.length; i++){
+			document.getElementById('modal-body').innerHTML = '';
+		  for(let i = data.length - 1; i >=0; i--){
 		    document.getElementById('modal-body').innerHTML += '<p> ' + data[i] + '</p>' + '<hr>';
 		  }
 		});
