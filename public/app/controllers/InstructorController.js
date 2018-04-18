@@ -32,7 +32,6 @@ function InstructorController($scope, $location, $window, $rootScope, AuthFactor
 		};
 
 		socket.on('joinSimulation', function(data){
-			console.log('joined room: ' + data.room)
 			socket.emit('initEcg', {})
 			socket.emit('initCharts', {})
 			socket.emit('initMessages', {})

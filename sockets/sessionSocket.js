@@ -82,6 +82,10 @@ function initSocket(server){
 		socket.on('vitals', function(data){
 			vitals = data;
 		});
+
+		socket.on('startSession', function(data){
+			io.sockets.to('waiting-room').emit('startSession', {});
+		})
 		
 		socket.on('leaveSimulation', function(data){
 			socket.leave(data.room);

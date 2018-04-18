@@ -2,29 +2,42 @@ angular
 .module('mainApp')
 .controller('WaitingRoomController', WaitingRoomController);
 
-WaitingRoomController.$inject = ['$scope', '$location', '$window', '$rootScope', 'AuthFactory'];
+WaitingRoomController.$inject = ['$scope', '$location', '$window', '$route', 'AuthFactory'];
 
-function WaitingRoomController($scope, $location, $window, $rootScope, AuthFactory){
+function WaitingRoomController($scope, $location, $window, $route, AuthFactory){
 	$scope.logout = logout;
 	$scope.users = [];
-	let user = undefined;
+	$scope.user = undefined;
+	$scope.startSession = startSession;
 	activate();
 
 	///////////
 
 	function activate(){
 		checkIfMobileDevice();
-		user = AuthFactory.getUser();
-		socket.emit('joinWaitingRoom', user);
+		var startSessionBtn = document.getElementById('startSessionBtn')
+		$scope.user = AuthFactory.getUser();
+		socket.off()
+		socket.emit('joinWaitingRoom', $scope.user);
 
 		$scope.$on("$destroy", function(){
-	        socket.emit('leaveWaitingRoom', user);
+	        socket.emit('leaveWaitingRoom', $scope.user);
 	    });
 
 		socket.on('waiting-room', function(data){
 			$scope.users = Object.values(data)
 			$scope.$apply()
 		})
+
+		socket.on('startSession', function(data){
+			let path = AuthFactory.getUser().isInstructor ? 'instructor' : 'student'
+			$location.path('/' + path + '-station');
+	  		$route.reload();
+		})
+	}
+
+	function startSession(){
+		socket.emit('startSession', {});
 	}
 
 	function checkIfMobileDevice(){
