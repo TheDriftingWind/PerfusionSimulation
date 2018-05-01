@@ -43,6 +43,7 @@ var server = app.listen(port, function() {
 // routes
 require('./routes/authentication')(app, passport);
 require('./routes/arduino')(app);
+require('./routes/session')(app);
 
 
 

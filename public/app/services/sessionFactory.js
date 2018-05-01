@@ -8,27 +8,15 @@ SessionFactory.$inject = ['$http'];
 function SessionFactory($http){
 
 	var service = {
-		getSessions: getSessions,
-		postSessions: postSessions,
-		deleteSessions: deleteSessions
+		getSession: getSession,
 	};
 
 	return service;
 
 	////////////////////
 
-	function getSessions(){
-		return $http.get('/sessions')
-		.then((res)=>res.data)
-		.catch((err)=>console.error(err));
-	}
-	function postSessions(){
-		return $http.post('/sessions')
-		.then((res)=>res.data)
-		.catch((err)=>console.error(err));
-	}
-	function deleteSessions(){
-		return $http.put('/sessions')
+	function getSession(){
+		return $http.get('/session')
 		.then((res)=>res.data)
 		.catch((err)=>console.error(err));
 	}

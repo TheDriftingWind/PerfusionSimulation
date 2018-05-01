@@ -2,10 +2,11 @@ angular
 .module('mainApp')
 .controller('DataPortalController', DataPortalController);
 
-DataPortalController.$inject = ['$scope', '$location', '$window', '$rootScope', 'AuthFactory'];
+DataPortalController.$inject = ['$scope', '$location', '$window', '$rootScope', 'AuthFactory', 'SessionFactory'];
 
-function DataPortalController($scope, $location, $window, $rootScope, AuthFactory){
+function DataPortalController($scope, $location, $window, $rootScope, AuthFactory, SessionFactory){
 	$scope.logout = logout;
+	$scope.export = export;
 	$scope.administrations = [];
 	$scope.abp = [];
 	$scope.cap = [];
@@ -59,5 +60,11 @@ function DataPortalController($scope, $location, $window, $rootScope, AuthFactor
 			$location.path('/login');
           	$route.reload();
 		}).catch(error => console.log('reject'));
+	}
+
+	function export(){
+		SessionFactory.getSession().then(function(res){
+			console.log('exported');
+		})
 	}
 }

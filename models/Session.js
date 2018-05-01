@@ -10,12 +10,17 @@ var Session = mongoose.model('Session', mongoose.Schema({
 	  		bld: Number,
 	  		eso: Number,
 	  		cvp: Number,
+	  		ecg: String
 	  	},
 	  	required: true
   	},
   	activity:{
   		type: [String],
   		required: false
+  	},
+  	end_time: {
+  		type: Number,
+  		required: true
   	}
 }));
 

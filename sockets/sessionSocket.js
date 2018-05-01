@@ -8,6 +8,7 @@ var vitalsData = [];
 let administrations = [];
 var ecgPoints = genEcg();
 var users = {};
+
 var vitals  = {
 	abp: 120,
 	cap: 35,
@@ -15,7 +16,9 @@ var vitals  = {
 	svo2: 75,
 	bld: 37,
 	eso: 37,
-	cvp: 2
+	cvp: 2,
+	messages: [],
+	ecgName: 'ecgNormal'
 }
 
 var ecgNormal = {
@@ -75,6 +78,7 @@ function initSocket(server){
 		console.log('made socket connection', socket.id);
 		socket.on('vitals', function(data){
 			vitals = data;
+			data.ecgName = ecg.name;
 		});
 
 		socket.on('startSession', function(data){
@@ -141,6 +145,7 @@ function initSocket(server){
 					data[i].units + ' of ' + data[i].medication + '.';
 				data[i].time = time;
 				messages.push(administration);
+				vitals.messages.push(data[i]);
 				administrations.push(data[i]);
 			}
 			io.sockets.to('instr-simulation').to('stu-simulation').emit('administration', messages);
@@ -148,7 +153,7 @@ function initSocket(server){
 		socket.on('end', function(data){
 			io.sockets.to('instr-simulation').to('stu-simulation').emit('end', data);
 			isSession = false;
-			var session = new SessionSchema({ datapoints: vitalsData, activity: messages });
+			var session = new SessionSchema({ datapoints: vitalsData, activity: messages, end_time: new Date().getTime()});
 			session.save(function (err) {
 			  if (err) console.log(err)
 			})
@@ -169,7 +174,7 @@ function initSocket(server){
 			console.log('left page');
 		});
 	});
-
+ 
 	setInterval(function(){
 		vitalsData.push(vitals);
 		let data = JSON.parse(JSON.stringify(vitals));
