@@ -10,13 +10,19 @@ var Session = mongoose.model('Session', mongoose.Schema({
 	  		bld: Number,
 	  		eso: Number,
 	  		cvp: Number,
-	  		ecg: String
+	  		ecg: String, 
+	  		time: Number
 	  	},
 	  	required: true
   	},
   	activity:{
-  		type: [String],
-  		required: false
+  		type: {
+	  		time: String,
+	  		email: String,
+	  		dosage: String,
+	  		units: String,
+	  		medication: String
+  		}
   	},
   	end_time: {
   		type: Number,

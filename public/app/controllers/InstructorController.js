@@ -167,30 +167,41 @@ function InstructorController($scope, $location, $window, $rootScope, AuthFactor
 		    socket.emit('vitals', vitals);
 		  });
 		  end.addEventListener('click', function(){
+			socket.emit('leaveSimulation', {room: 'instr-simulation'})
 		    socket.emit('end', {});
+		    window.location.href = '/#!/data-portal'
 		  });
 
 		  socket.on('vitals', function(data){
 		      if(chartsOn){
-		          vitals = data;
-		          let time = vitals.time;
+
+		          vitals = data.realData;
+		          let time = data.adjustedData.time;
 		          let abpSeries = profCharts.abp.series[0];
 		          let svo2Series = profCharts.svo2.series[0];
 		          let capSeries = profCharts.cap.series[0];
 		          let cvpSeries = profCharts.cvp.series[0];
 
-		          abpSeries.addPoint([time, data.abp], true, abpSeries.data.length > 30);
-		          svo2Series.addPoint([time, data.svo2], true, svo2Series.data.length > 30);
-		          capSeries.addPoint([time, data.cap], true, capSeries.data.length > 30);
-		          cvpSeries.addPoint([time, data.cvp], true, cvpSeries.data.length > 30);
+		          abpSeries.addPoint([time, data.adjustedData.abp], true, abpSeries.data.length > 150);
+		          svo2Series.addPoint([time, data.adjustedData.svo2], true, svo2Series.data.length > 150);
+		          capSeries.addPoint([time, data.adjustedData.cap], true, capSeries.data.length > 150);
+		          cvpSeries.addPoint([time, data.adjustedData.cvp], true, cvpSeries.data.length > 150);
 
-		          profAbpDisplay.textContent = data.abp;
-		          profSvo2Display.textContent = data.svo2;
-		          profCapDisplay.textContent = data.cap;
-		          profCvpDisplay.textContent = data.cvp;
-		          profBisDisplay.textContent = data.bis;
-		          profEsoDisplay.textContent = data.eso;
-		          profBldDisplay.textContent = data.bld;
+		          abpCtrl.textContent = data.realData.abp;
+		          svo2Ctrl.textContent = data.realData.svo2;
+		          capCtrl.textContent = data.realData.cap;
+		          cvpCtrl.textContent = data.realData.cvp;
+		          bisCtrl.textContent = data.realData.bis;
+		          esoCtrl.textContent = data.realData.eso;
+		          bldCtrl.textContent = data.realData.bld;
+
+		          profAbpDisplay.textContent = data.adjustedData.abp;
+		          profSvo2Display.textContent = data.adjustedData.svo2;
+		          profCapDisplay.textContent = data.adjustedData.cap;
+		          profCvpDisplay.textContent = data.adjustedData.cvp;
+		          profBisDisplay.textContent = data.adjustedData.bis;
+		          profEsoDisplay.textContent = data.adjustedData.eso;
+		          profBldDisplay.textContent = data.adjustedData.bld;
 		      }
 		  });
 
@@ -206,10 +217,10 @@ function InstructorController($scope, $location, $window, $rootScope, AuthFactor
 		});
 
 		socket.on('initCharts', function(data){
-		    profCharts.abp.series[0].setData(data.abp.slice(data.abp.length > 30 ? data.abp.length - 29 : 0, data.abp.length), false)
-		    profCharts.svo2.series[0].setData(data.svo2.slice(data.svo2.length > 30 ? data.svo2.length - 29 : 0, data.svo2.length), false)
-		    profCharts.cap.series[0].setData(data.cap.slice(data.cap.length > 30 ? data.cap.length - 29 : 0, data.cap.length), false)
-		    profCharts.cvp.series[0].setData(data.cvp.slice(data.cvp.length > 30 ? data.cvp.length - 29 : 0, data.cvp.length), false)
+		    profCharts.abp.series[0].setData(data.abp.slice(data.abp.length > 150 ? data.abp.length - 29 : 0, data.abp.length), false)
+		    profCharts.svo2.series[0].setData(data.svo2.slice(data.svo2.length > 150 ? data.svo2.length - 29 : 0, data.svo2.length), false)
+		    profCharts.cap.series[0].setData(data.cap.slice(data.cap.length > 150 ? data.cap.length - 29 : 0, data.cap.length), false)
+		    profCharts.cvp.series[0].setData(data.cvp.slice(data.cvp.length > 150 ? data.cvp.length - 29 : 0, data.cvp.length), false)
 		    chartsOn = true;
 		})
 

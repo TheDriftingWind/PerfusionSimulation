@@ -4,7 +4,6 @@ var morgan = require('morgan');
 var port = process.env.PORT || 8080;
 var mongoose = require('mongoose');
 var cors = require('cors');
-var uri = 'mongodb://troy:perfusion@ds113606.mlab.com:13606/perfusion-simulation';
 var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 var socket = require('./sockets/sessionSocket');

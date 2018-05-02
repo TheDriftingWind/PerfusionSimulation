@@ -116,42 +116,42 @@ function StudentController($scope, $location, $window, $rootScope, $route, AuthF
 
 			if(hepCtrl.textContent * 1 > 0){
 				administrations.push({
+					time,
 					email,
 					medication : 'Heparin',
 					dosage : hepCtrl.textContent,
-					units: 'U',
-					time
+					units: 'U'
 				});    
 				hepCtrl.textContent = 0;
 			}
 			if(ph2Ctrl.textContent * 1 > 0){
 				administrations.push({
+					time,
 					email,
 					medication : 'Phenylephrine',
 					dosage : ph2Ctrl.textContent,
-					units: 'mg',
-					time
+					units: 'mg'
 				});
 				socket.emit('abp', {abp: (ph2Ctrl.textContent * 150.0)})
 				ph2Ctrl.textContent = 0;
 			}
 			if(naCtrl.textContent * 1 > 0){
 				administrations.push({
+					time,
 					email,
 					medication : 'Bicarbonate',
 					dosage : naCtrl.textContent,
-					units: 'mEq',
-					time
+					units: 'mEq'
 				});
 				naCtrl.textContent = 0;
 			}
 			if(lidCtrl.textContent * 1 > 0){
 				administrations.push({
+					time,
 					email,
 					medication : 'Lidocaine',
 					dosage : lidCtrl.textContent,
-					units: 'mg',
-					time
+					units: 'mg'
 				});
 				if(ecg.name == 'ecgFib'){
 					socket.emit('ecg', {ecg: 'ecgNormal'});
@@ -160,11 +160,11 @@ function StudentController($scope, $location, $window, $rootScope, $route, AuthF
 			}
 			if(magCtrl.textContent * 1 > 0){
 				administrations.push({
+					time,
 					email,
 					medication : 'Magnesium',
 					dosage : magCtrl.textContent,
-					units: 'g',
-					time
+					units: 'g'
 				});
 				if(ecg.name == 'ecgFib'){
 					socket.emit('ecg', {ecg: 'ecgNormal'});
@@ -187,6 +187,7 @@ function StudentController($scope, $location, $window, $rootScope, $route, AuthF
 		})
 
 		socket.on('end', function(data){
+	        socket.emit('leaveSimulation', {room: 'stu-simulation'})
 			$window.location.href = '/#!/data-portal'
 		});
 
@@ -197,34 +198,34 @@ function StudentController($scope, $location, $window, $rootScope, $route, AuthF
 		})
 
 		socket.on('initCharts', function(data){
-			studentCharts.abp.series[0].setData(data.abp.slice(data.abp.length > 30 ? data.abp.length - 29 : 0, data.abp.length), false)
-			studentCharts.svo2.series[0].setData(data.svo2.slice(data.svo2.length > 30 ? data.svo2.length - 29 : 0, data.svo2.length), false)
-			studentCharts.cap.series[0].setData(data.cap.slice(data.cap.length > 30 ? data.cap.length - 29 : 0, data.cap.length), false)
-			studentCharts.cvp.series[0].setData(data.cvp.slice(data.cvp.length > 30 ? data.cvp.length - 29 : 0, data.cvp.length), false)
+			studentCharts.abp.series[0].setData(data.abp.slice(data.abp.length > 150 ? data.abp.length - 29 : 0, data.abp.length), false)
+			studentCharts.svo2.series[0].setData(data.svo2.slice(data.svo2.length > 150 ? data.svo2.length - 29 : 0, data.svo2.length), false)
+			studentCharts.cap.series[0].setData(data.cap.slice(data.cap.length > 150 ? data.cap.length - 29 : 0, data.cap.length), false)
+			studentCharts.cvp.series[0].setData(data.cvp.slice(data.cvp.length > 150 ? data.cvp.length - 29 : 0, data.cvp.length), false)
 			chartsOn = true;
 		})
 
 		socket.on('vitals', function(data){
 			if(chartsOn){
-				vitals = data;  
-				let time = vitals.time;
+				vitals = data.realData;  
+		        let time = data.adjustedData.time;
 				let abpSeries = studentCharts.abp.series[0];
 				let svo2Series = studentCharts.svo2.series[0];
 				let capSeries = studentCharts.cap.series[0];
 				let cvpSeries = studentCharts.cvp.series[0];
 
-				abpSeries.addPoint([time, data.abp], true, abpSeries.data.length > 30);
-				svo2Series.addPoint([time, data.svo2], true, svo2Series.data.length > 30);
-				capSeries.addPoint([time, data.cap], true, capSeries.data.length > 30);
-				cvpSeries.addPoint([time, data.cvp], true, cvpSeries.data.length > 30);
+				abpSeries.addPoint([time, data.adjustedData.abp], true, abpSeries.data.length > 150);
+				svo2Series.addPoint([time, data.adjustedData.svo2], true, svo2Series.data.length > 150);
+				capSeries.addPoint([time, data.adjustedData.cap], true, capSeries.data.length > 150);
+				cvpSeries.addPoint([time, data.adjustedData.cvp], true, cvpSeries.data.length > 150);
 
-				stuAbpDisplay.textContent = data.abp;
-				stuSvo2Display.textContent = data.svo2;
-				stuCapDisplay.textContent = data.cap;
-				stuCvpDisplay.textContent = data.cvp;
-				stuBisDisplay.textContent = data.bis;
-				stuEsoDisplay.textContent = data.eso;
-				stuBldDisplay.textContent = data.bld;
+				stuAbpDisplay.textContent = data.adjustedData.abp;
+				stuSvo2Display.textContent = data.adjustedData.svo2;
+				stuCapDisplay.textContent = data.adjustedData.cap;
+				stuCvpDisplay.textContent = data.adjustedData.cvp;
+				stuBisDisplay.textContent = data.adjustedData.bis;
+				stuEsoDisplay.textContent = data.adjustedData.eso;
+				stuBldDisplay.textContent = data.adjustedData.bld;
 			}
 		});
 

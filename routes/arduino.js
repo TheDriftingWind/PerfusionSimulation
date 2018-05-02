@@ -1,3 +1,5 @@
+var request = require('request');
+
 module.exports = function(app){
 	app.get('/arduino/height', function(req, res){
 	    request({
@@ -11,7 +13,7 @@ module.exports = function(app){
 
 			if(success){
 				console.log(success)
-				res.end(success)
+				res.json({height: success})
 			}
 		})
 	});
@@ -28,7 +30,7 @@ module.exports = function(app){
 
 			if(success){
 				console.log(success)
-				res.end(success)
+				res.json({pressure: success})
 			}
 		})
 	});

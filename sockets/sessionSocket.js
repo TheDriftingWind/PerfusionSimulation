@@ -10,6 +10,7 @@ var ecgPoints = genEcg();
 var users = {};
 
 var vitals  = {
+	time: new Date().getTime(),
 	abp: 120,
 	cap: 35,
 	bis: 50,
@@ -17,7 +18,6 @@ var vitals  = {
 	bld: 37,
 	eso: 37,
 	cvp: 2,
-	messages: [],
 	ecgName: 'ecgNormal'
 }
 
@@ -78,7 +78,6 @@ function initSocket(server){
 		console.log('made socket connection', socket.id);
 		socket.on('vitals', function(data){
 			vitals = data;
-			data.ecgName = ecg.name;
 		});
 
 		socket.on('startSession', function(data){
@@ -135,6 +134,8 @@ function initSocket(server){
 				case 'ecgFib' : ecg = ecgFib;
 					break;
 			}
+			vitals.ecgName = ecg.name;
+
 		});
 
 		socket.on('administration', function(data){
@@ -145,7 +146,6 @@ function initSocket(server){
 					data[i].units + ' of ' + data[i].medication + '.';
 				data[i].time = time;
 				messages.push(administration);
-				vitals.messages.push(data[i]);
 				administrations.push(data[i]);
 			}
 			io.sockets.to('instr-simulation').to('stu-simulation').emit('administration', messages);
@@ -153,7 +153,7 @@ function initSocket(server){
 		socket.on('end', function(data){
 			io.sockets.to('instr-simulation').to('stu-simulation').emit('end', data);
 			isSession = false;
-			var session = new SessionSchema({ datapoints: vitalsData, activity: messages, end_time: new Date().getTime()});
+			var session = new SessionSchema({ datapoints: vitalsData, activity: administrations, end_time: new Date().getTime()});
 			session.save(function (err) {
 			  if (err) console.log(err)
 			})
@@ -162,7 +162,7 @@ function initSocket(server){
 			}, 2000)
 		});
 		socket.on('abp', function(data){
-			vitals.abp += data.abp;
+			vitals.abp = vitals.abp * 1 + data.abp * 1;
 		});
 		socket.on('initCharts', function(data){
 			io.sockets.emit('initCharts', dataPoints);
@@ -176,50 +176,61 @@ function initSocket(server){
 	});
  
 	setInterval(function(){
-		vitalsData.push(vitals);
-		let data = JSON.parse(JSON.stringify(vitals));
-		let abpPoint = Math.random() * ((data.abp * 1.0 + 5.0) - (data.abp * 1.0 - 5.0)) + (data.abp * 1.0 - 5.0);
-		let svo2Point = Math.random() * ((data.svo2 * 1.0 + 2.5) - (data.svo2 * 1.0 - 2.5)) + (data.svo2 * 1.0 - 2.5);
-		let capPoint = Math.random() * ((data.cap * 1.0 + 2.5) - (data.cap * 1.0 - 2.5)) + (data.cap * 1.0 - 2.5);
-		let cvpPoint = Math.random() * ((data.cvp * 1.0 + 0.5) - (data.cvp * 1.0 - 0.5)) + (data.cvp * 1.0 - 0.5);
-		let bisPoint = Math.random() * ((data.bis * 1.0 + 1.5) - (data.bis * 1.0 - 1.5)) + (data.bis * 1.0 - 1.5);
-		let esoPoint = Math.random() * ((data.eso * 1.0 + 0.5) - (data.eso * 1.0 - 0.5)) + (data.eso * 1.0 - 0.5);
-		let bldPoint = Math.random() * ((data.bld * 1.0 + 0.5) - (data.bld * 1.0 - 0.5)) + (data.bld * 1.0 - 0.5);
+		if(isSession){
+			let realData = JSON.parse(JSON.stringify(vitals));
+			let date = new Date();
+			realData.time = ('00' + date.getHours()).slice(-2) + ':' + ('00' + date.getMinutes()).slice(-2) + ':' + 
+					('00' + date.getSeconds()).slice(-2)
+			vitalsData.push(realData);
+			realData = JSON.parse(JSON.stringify(realData));
+			realData.time = date.getTime()
+			let adjustedData = JSON.parse(JSON.stringify(realData));
+			let abpPoint = Math.random() * ((adjustedData.abp * 1.0 + 2.5) - (adjustedData.abp * 1.0 - 2.5)) + (adjustedData.abp * 1.0 - 2.5);
+			let svo2Point = Math.random() * ((adjustedData.svo2 * 1.0 + 1.25) - (adjustedData.svo2 * 1.0 - 1.25)) + (adjustedData.svo2 * 1.0 - 1.25);
+			let capPoint = Math.random() * ((adjustedData.cap * 1.0 + 1.25) - (adjustedData.cap * 1.0 - 1.25)) + (adjustedData.cap * 1.0 - 1.25);
+			let cvpPoint = Math.random() * ((adjustedData.cvp * 1.0 + 0.25) - (adjustedData.cvp * 1.0 - 0.25)) + (adjustedData.cvp * 1.0 - 0.25);
+			let bisPoint = Math.random() * ((adjustedData.bis * 1.0 + 0.75) - (adjustedData.bis * 1.0 - 0.75)) + (adjustedData.bis * 1.0 - 0.75);
+			let esoPoint = Math.random() * ((adjustedData.eso * 1.0 + 0.25) - (adjustedData.eso * 1.0 - 0.25)) + (adjustedData.eso * 1.0 - 0.25);
+			let bldPoint = Math.random() * ((adjustedData.bld * 1.0 + 0.25) - (adjustedData.bld * 1.0 - 0.25)) + (adjustedData.bld * 1.0 - 0.25);
 
-		abpPoint = Math.round(abpPoint * 100) / 100;
-		svo2Point = Math.round(svo2Point * 100) / 100;
-		capPoint = Math.round(capPoint * 100) / 100;
-		cvpPoint = Math.round(cvpPoint * 100) / 100;
-		bisPoint = Math.round(bisPoint * 100) / 100;
-		esoPoint = Math.round(esoPoint * 100) / 100;
-		bldPoint = Math.round(bldPoint * 100) / 100;
+			abpPoint = Math.round(abpPoint * 100) / 100;
+			svo2Point = Math.round(svo2Point * 100) / 100;
+			capPoint = Math.round(capPoint * 100) / 100;
+			cvpPoint = Math.round(cvpPoint * 100) / 100;
+			bisPoint = Math.round(bisPoint * 100) / 100;
+			esoPoint = Math.round(esoPoint * 100) / 100;
+			bldPoint = Math.round(bldPoint * 100) / 100;
 
-		data.abp = abpPoint > 200.0 ?  200.0 : abpPoint < 0.0 ? 0.0 : abpPoint;
-		data.svo2 = svo2Point > 100.0 ?  100.0 : svo2Point < 25.0 ? 25.0 : svo2Point;
-		data.cap = capPoint > 60.0 ?  60.0 : capPoint < 0.0 ? 0.0 : capPoint;
-		data.cvp = cvpPoint > 20.0 ?  20.0 : cvpPoint < 0.0 ? 0.0 : cvpPoint;
-		data.bis = bisPoint > 65.0 ?  65.0 : bisPoint < 15.0 ? 15.0 : bisPoint;
-		data.eso = esoPoint > 38.0 ?  38.0 : esoPoint < 18.0 ? 18.0 : esoPoint;
-		data.bld = bldPoint > 38.0 ?  38.0 : bldPoint < 18.0 ? 18.0 : bldPoint;		
-		data.time = new Date().getTime();
-		dataPoints.abp.push([data.time, data.abp]);
-		dataPoints.cap.push([data.time, data.cap]);
-		dataPoints.cvp.push([data.time, data.cvp]);
-		dataPoints.svo2.push([data.time, data.svo2]);
-		io.sockets.to('instr-simulation').to('stu-simulation').emit('vitals', data);
+			adjustedData.abp = abpPoint > 200.0 ?  200.0 : abpPoint < 0.0 ? 0.0 : abpPoint;
+			adjustedData.svo2 = svo2Point > 100.0 ?  100.0 : svo2Point < 25.0 ? 25.0 : svo2Point;
+			adjustedData.cap = capPoint > 60.0 ?  60.0 : capPoint < 0.0 ? 0.0 : capPoint;
+			adjustedData.cvp = cvpPoint > 20.0 ?  20.0 : cvpPoint < 0.0 ? 0.0 : cvpPoint;
+			adjustedData.bis = bisPoint > 65.0 ?  65.0 : bisPoint < 15.0 ? 15.0 : bisPoint;
+			adjustedData.eso = esoPoint > 38.0 ?  38.0 : esoPoint < 18.0 ? 18.0 : esoPoint;
+			adjustedData.bld = bldPoint > 38.0 ?  38.0 : bldPoint < 18.0 ? 18.0 : bldPoint;		
+
+			dataPoints.abp.push([adjustedData.time, adjustedData.abp]);
+			dataPoints.cap.push([adjustedData.time, adjustedData.cap]);
+			dataPoints.cvp.push([adjustedData.time, adjustedData.cvp]);
+			dataPoints.svo2.push([adjustedData.time, adjustedData.svo2]);
+			io.sockets.to('instr-simulation').to('stu-simulation').emit('vitals', {adjustedData, realData});
+		}
 	}, 2000);
 
 	setInterval(function(){
-		let data = JSON.parse(JSON.stringify(ecg));
-		let height = (ecgIndex % data.interval) == 0 ? 8 : Math.random() * (data.max - data.min) + data.min;
-		io.sockets.to('instr-simulation').to('stu-simulation').emit('ecg', {
-			height,
-			seconds: data.seconds
-		});
-		ecgPoints.push(height)
-		ecgIndex ++;
-		if(ecgIndex == 41){
-			ecgIndex = 1;
+		if(isSession){
+			let data = JSON.parse(JSON.stringify(ecg));
+			let height = (ecgIndex % data.interval) == 0 ? 8 : Math.random() * (data.max - data.min) + data.min;
+			io.sockets.to('instr-simulation').to('stu-simulation').emit('ecg', {
+				name: data.name,
+				height,
+				seconds: data.seconds
+			});
+			ecgPoints.push(height)
+			ecgIndex ++;
+			if(ecgIndex == 41){
+				ecgIndex = 1;
+			}
 		}
 	}, 100);
 }

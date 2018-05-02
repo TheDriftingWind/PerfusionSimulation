@@ -47,14 +47,17 @@ function ArduinoController($scope, $location, ArduinoFactory){
 			ArduinoFactory.setValve1(0).then(function(res){
 			})
 		}
-
 		
-		ArduinoFactory.getHeight().then(function(res){
-			document.getElementById('heightSensorValue').textContent = res.height;
-		});
-		ArduinoFactory.getPressure().then(function(res){
-			document.getElementById('pressureTransducerValue').textContent = res.pressure;
-		});
+		setInterval(function(){
+			ArduinoFactory.getHeight().then(function(res){
+				document.getElementById('heightSensorValue').textContent = res.height;
+				});
+		}, 5000)	
+		
+		
+		// ArduinoFactory.getPressure().then(function(res){
+		// 	document.getElementById('pressureTransducerValue').textContent = res.pressure;
+		// });
 	}
 
 	function getPin13(){

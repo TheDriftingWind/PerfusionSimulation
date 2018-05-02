@@ -6,7 +6,7 @@ DataPortalController.$inject = ['$scope', '$location', '$window', '$rootScope', 
 
 function DataPortalController($scope, $location, $window, $rootScope, AuthFactory, SessionFactory){
 	$scope.logout = logout;
-	$scope.export = export;
+	$scope.exportData = exportData;
 	$scope.administrations = [];
 	$scope.abp = [];
 	$scope.cap = [];
@@ -16,7 +16,7 @@ function DataPortalController($scope, $location, $window, $rootScope, AuthFactor
 	activate();
 
 	///////////
-
+ 
 	function activate(){
 		checkIfMobileDevice();
 		let portalCharts = $window.myData.charts.portal;
@@ -62,9 +62,59 @@ function DataPortalController($scope, $location, $window, $rootScope, AuthFactor
 		}).catch(error => console.log('reject'));
 	}
 
-	function export(){
+	function exportData(){
 		SessionFactory.getSession().then(function(res){
-			console.log('exported');
+			let csv = convertToCSV(res.results[0]);
+			downloadCSV(csv);
 		})
 	}
+
+	function convertToCSV(obj) {
+		console.log(obj.datapoints ? true : false)
+		console.log(obj.administrations ? true : false)
+        var vitals = obj.datapoints ? obj.datapoints : [];
+        var administrations = obj.activity ? obj.activity : [];
+
+        var str = 'Time,ABP,CAP,BIS,SVO2,BLD,ESO,CVP,ECG,,Time,Student,Medication,Dosage,Units\r\n';
+
+        for (var i = 0; i < Math.max(vitals.length, administrations.length); i++) {
+            var line = '';
+            
+            if(i < vitals.length){
+            	for (var index in vitals[i]) {
+                	if (line != '') line += ','
+                		line += vitals[i][index];
+            	}
+            }
+
+            if(i < administrations.length){
+            	line += ','
+            	for (var index in administrations[i]) {
+                	if (line != '') line += ','
+                		line += administrations[i][index];
+            	}
+            }
+
+            str += line + '\r\n';
+        }
+
+        return str;
+    }
+
+    function downloadCSV(csv) {  
+        var data, filename, link;
+        if (csv == null) return;
+
+        filename = 'session.csv';
+
+        if (!csv.match(/^data:text\/csv/i)) {
+            csv = 'data:text/csv;charset=utf-8,' + csv;
+        }
+        data = encodeURI(csv);
+
+        link = document.createElement('a');
+        link.setAttribute('href', data);
+        link.setAttribute('download', filename);
+        link.click();
+    }
 }
