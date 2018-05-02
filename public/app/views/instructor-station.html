@@ -1,9 +1,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <link href="css/styles.css" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css?family=Exo" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <script defer src="https://use.fontawesome.com/releases/v5.0.9/js/all.js" integrity="sha384-8iPTk2s/jMVj81dnzb/iFR2sdA7u06vHJyyLlAd4snFpCl/SnyUjRrbdJsw1pGIl" crossorigin="anonymous"></script>
+  <link rel="stylesheet" type="text/css" href="css/fontawesome-all.min.css">
+  <link rel="stylesheet" type="text/css" href="css/fontawesome.min.css">
 
 <div id="instructorContainer">
   <div class="row">
@@ -90,61 +88,61 @@
         </script>
         <!--<div class="row btn-row" style="float:right;">-->
         <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
-          <button id="abpDown" class="btn btn-danger incr-btn-style"><span class="glyphicon glyphicon-minus-sign" > <b>10</b></span></button>
+          <button id="abpDown" class="btn btn-danger incr-btn-style"><i class="fa fa-minus-circle"style="font-size:20px;"></i><b>10</b></span></button>
           <!--<span class="tooltip">ABP</span>-->
           <a class="hover" href="http://localhost:8080/#" data-toggle="tooltip" title="" data-original-title="Arterial Blood Pressure">ABP: <span style="font-size:20px;" id="abpCtrl">120</span></a>
-          <button id="abpUp" class="btn btn-success incr-btn-style"><span class="glyphicon glyphicon-plus-sign" style="font-size:20px;"> <b>10</b></span></button>
+          <button id="abpUp" class="btn btn-success incr-btn-style"><i class="fa fa-plus-circle"style="font-size:20px;"></i> <b>10</b></span></button>
           <br>
           <div class="badge">0-200mmHg</div>
           <hr class="line">
         </div>
         <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
           <br>
-          <button id="svo2Down" class="btn btn-danger incr-btn-style"><span class="glyphicon glyphicon-minus-sign"style="font-size:20px;"> <b>5</b></span></button>
+          <button id="svo2Down" class="btn btn-danger incr-btn-style"><i class="fa fa-minus-circle"style="font-size:20px;"></i><b>5</b></span></button>
           <!--  <span>SVO<sub>2</sub></span>-->
           <a class="hover" href="http://localhost:8080/#" data-toggle="tooltip" title="" data-original-title="Venous Oxygen Saturation">SVO<sub>2</sub>: <span id="svo2Ctrl">75</span></a>
-          <button id="svo2Up" class="btn btn-success incr-btn-style"><span class="glyphicon glyphicon-plus-sign" style="font-size:20px;"> <b>5</b></span></button>
+          <button id="svo2Up" class="btn btn-success incr-btn-style"><i class="fa fa-plus-circle"style="font-size:20px;"></i> <b>5</b></span></button>
           <div class="badge">25% - 100%</div>
           <hr class="line">
         </div>
         <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
           <br>
-          <button id="capDown" class="btn btn-danger incr-btn-style"><span class="glyphicon glyphicon-minus-sign"style="font-size:20px;"> <b>5</b></span></button>
+          <button id="capDown" class="btn btn-danger incr-btn-style"><i class="fa fa-minus-circle"style="font-size:20px;"></i> <b>5</b></span></button>
           <a class="hover" href="http://localhost:8080/#" data-toggle="tooltip" title="" data-original-title="Capnograph">Cap: <span id="capCtrl">35</span></a>
-          <button id="capUp" class="btn btn-success incr-btn-style"><span class="glyphicon glyphicon-plus-sign" style="font-size:20px;"> <b>5</b></span></button>
+          <button id="capUp" class="btn btn-success incr-btn-style"><i class="fa fa-plus-circle"style="font-size:20px;"></i> <b>5</b></span></button>
           <div class="badge">0 - 60mmHg</div>
           <hr class="line">
         </div>
         <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
           <br>
-          <button id="cvpDown" class="btn btn-danger incr-btn-style"><span class="glyphicon glyphicon-minus-sign"style="font-size:20px;"> <b>1</b></span></button>
+          <button id="cvpDown" class="btn btn-danger incr-btn-style"><i class="fa fa-minus-circle"style="font-size:20px;"></i><b>1</b></span></button>
           <a class="hover" href="http://localhost:8080/#" data-toggle="tooltip" title="" data-original-title="Central Venous Pressure">CVP: <span id="cvpCtrl">2</span></a>
-          <button id="cvpUp" class="btn btn-success incr-btn-style"><span class="glyphicon glyphicon-plus-sign"style="font-size:20px;"> <b>1</b></span></button>
+          <button id="cvpUp" class="btn btn-success incr-btn-style"><i class="fa fa-plus-circle"style="font-size:20px;"></i> <b>1</b></span></button>
           <div class="badge">0 - 20mmHg</div>
           <hr class="line">
         </div>
         <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
           <br>
-          <button id="bisDown" class="btn btn-danger incr-btn-style"><span class="glyphicon glyphicon-minus-sign"style="font-size:20px;"> <b>3</b></span></button>
+          <button id="bisDown" class="btn btn-danger incr-btn-style"><i class="fa fa-minus-circle"style="font-size:20px;"></i> <b>3</b></span></button>
           <a class="hover" href="http://localhost:8080/#" data-toggle="tooltip" title="" data-original-title="Bispectral Analysis">BIS: <span id="bisCtrl">50</span></a>
-          <button id="bisUp" class="btn btn-success incr-btn-style"><span class="glyphicon glyphicon-plus-sign" style="font-size:20px;"> <b>3</b></span></button>
+          <button id="bisUp" class="btn btn-success incr-btn-style"><i class="fa fa-plus-circle"style="font-size:20px;"></i> <b>3</b></span></button>
           <div class="badge">15 - 65</div>
           <hr class="line">
         </div>
         <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
           <br>
-          <button id="esoTempDown" class="btn btn-danger incr-btn-style"><span class="glyphicon glyphicon-minus-sign"style="font-size:20px;"> <b>1</b></span></button>
+          <button id="esoTempDown" class="btn btn-danger incr-btn-style"><i class="fa fa-minus-circle"style="font-size:20px;"></i> <b>1</b></span></button>
           <a class="hover" href="http://localhost:8080/#" data-toggle="tooltip" title="" data-original-title="Esophageal Temperature">ESO: <span id="esoCtrl">37</span></a>
-          <button id="esoTempUp" class="btn btn-success incr-btn-style  "><span class="glyphicon glyphicon-plus-sign"style="font-size:20px;"> <b>1</b></span></button>
+          <button id="esoTempUp" class="btn btn-success incr-btn-style  "><i class="fa fa-plus-circle"style="font-size:20px;"></i> <b>1</b></span></button>
           <div class="badge">18℃ - 38℃</div>
           <hr class="line">
         </div>
         <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
           <br>
           <!--col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xs-offset-3 col-sm-offset-3 col-md-offset-3 col-lg-offset-3-->
-          <button id="bladTempDown" class="btn btn-danger incr-btn-style"><span class="glyphicon glyphicon-minus-sign"style="font-size:20px;"> <b>1</b></span></button>
+          <button id="bladTempDown" class="btn btn-danger incr-btn-style"><i class="fa fa-minus-circle"style="font-size:20px;"></i> <b>1</b></span></button>
           <a class="hover" href="http://localhost:8080/#" data-toggle="tooltip" title="" data-original-title="Bladder Temperature">BLD: <span id="bldCtrl">37</span></a>
-          <button id="bladTempUp" class="btn btn-success incr-btn-style"><span class="glyphicon glyphicon-plus-sign"style="font-size:20px;"> <b>1</b></span></button>
+          <button id="bladTempUp" class="btn btn-success incr-btn-style"><i class="fa fa-plus-circle"style="font-size:20px;"></i> <b>1</b></span></button>
           <div class="badge">18℃ - 38℃</div>
           <hr class="line">
         </div>

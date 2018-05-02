@@ -1,4 +1,8 @@
 *{
+	@font-face {
+  font-family: Exo ;
+  src: url( css/fonts/Exo-Medium.ttf );
+}
 font-family: 'Exo', sans-serif;
 }
 
