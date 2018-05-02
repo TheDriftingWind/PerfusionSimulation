@@ -2,9 +2,9 @@ angular
 .module('mainApp')
 .controller('InstructorController', InstructorController);
 
-InstructorController.$inject = ['$scope', '$location', '$window', '$rootScope', 'AuthFactory'];
+InstructorController.$inject = ['$scope', '$location', '$window', '$rootScope', 'AuthFactory', 'ArduinoFactory'];
 
-function InstructorController($scope, $location, $window, $rootScope, AuthFactory){
+function InstructorController($scope, $location, $window, $rootScope, AuthFactory, ArduinoFactory){
 	$scope.logout = logout;
 
 	activate();
@@ -42,6 +42,15 @@ function InstructorController($scope, $location, $window, $rootScope, AuthFactor
 		    ecgSlow = document.getElementById('ecgSlow'),
 		    ecgFlat = document.getElementById('ecgFlat'),
 		    ecgFib = document.getElementById('ecgFib');
+
+		var bleedingBtn = document.getElementById('bleedingBtn');
+		    dissectionBtn = document.getElementById('dissectionBtn'),
+		    dilationBtn = document.getElementById('dilationBtn'),
+		    bypassBtn = document.getElementById('bypassBtn'),
+		    pumpOff = document.getElementById('pumpOff'),
+		    pumpOn = document.getElementById('pumpOn'),
+		    fillTankBtn = document.getElementById('fillTankBtn');
+
 
 		var oxyfail = document.getElementById('oxyfail'),
 		    anesthfail = document.getElementById('anesthfail'),
@@ -170,6 +179,44 @@ function InstructorController($scope, $location, $window, $rootScope, AuthFactor
 			socket.emit('leaveSimulation', {room: 'instr-simulation'})
 		    socket.emit('end', {});
 		    window.location.href = '/#!/data-portal'
+		  });
+
+		  bypassBtn.addEventListener('click', function(){
+			ArduinoFactory.bypass().then(function(res){
+				console.log(res.message)
+			})
+		  });
+
+		  dilationBtn.addEventListener('click', function(){
+			ArduinoFactory.dilation().then(function(res){
+				console.log(res.message)
+			})
+		  });
+
+		  dissectionBtn.addEventListener('click', function(){
+			ArduinoFactory.dissection().then(function(res){
+				console.log(res.message)
+			})
+		  });
+
+		  bleedingBtn.addEventListener('click', function(){
+			ArduinoFactory.bleeding().then(function(res){
+			})
+		  });
+
+		  pumpOn.addEventListener('click', function(){
+			ArduinoFactory.setPump(1).then(function(res){
+			})
+		  });
+
+		  pumpOff.addEventListener('click', function(){
+			ArduinoFactory.setPump(0).then(function(res){
+			})
+		  });
+
+		  fillTankBtn.addEventListener('click', function(){
+			ArduinoFactory.fillTank().then(function(res){
+			})
 		  });
 
 		  socket.on('vitals', function(data){

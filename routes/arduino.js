@@ -95,11 +95,107 @@ module.exports = function(app){
 			if(err){
 				console.log(err);
 			}
+		})
+	});
 
-			if(success){
-				console.log(success)
-				res.end(success)
+	app.get('/arduino/bleeding', function(req, res){
+   	    request({
+			url: 'http://arduino.local/arduino/pump/1',
+			method: 'GET',
+			json: true
+		}, function(err, body, success){
+			if(err){
+				console.log(err);
 			}
 		})
+		request({
+			url: 'http://arduino.local/arduino/valve0/1',
+			method: 'GET',
+			json: true
+		}, function(err, body, success){
+			if(err){
+				console.log(err);
+			}
+		})
+		request({
+			url: 'http://arduino.local/arduino/valve1/0',
+			method: 'GET',
+			json: true
+		}, function(err, body, success){
+			if(err){
+				console.log(err);
+			}
+		})
+		res.end()
+	});
+
+	app.get('/arduino/dissection', function(req, res){
+	    res.json({message:'dissection'})
+	});
+
+	app.get('/arduino/dilation', function(req, res){
+	    res.json({message:'dilation'})
+	});
+
+	app.get('/arduino/bypass', function(req, res){
+	    request({
+			url: 'http://arduino.local/arduino/pump/0',
+			method: 'GET',
+			json: true
+		}, function(err, body, success){
+			if(err){
+				console.log(err);
+			}
+		})
+		request({
+			url: 'http://arduino.local/arduino/valve0/0',
+			method: 'GET',
+			json: true
+		}, function(err, body, success){
+			if(err){
+				console.log(err);
+			}
+		})
+		request({
+			url: 'http://arduino.local/arduino/valve1/1',
+			method: 'GET',
+			json: true
+		}, function(err, body, success){
+			if(err){
+				console.log(err);
+			}
+		})
+		res.end()
+	});
+
+	app.get('/arduino/fill', function(req, res){
+	    request({
+			url: 'http://arduino.local/arduino/pump/0',
+			method: 'GET',
+			json: true
+		}, function(err, body, success){
+			if(err){
+				console.log(err);
+			}
+		})
+		request({
+			url: 'http://arduino.local/arduino/valve0/1',
+			method: 'GET',
+			json: true
+		}, function(err, body, success){
+			if(err){
+				console.log(err);
+			}
+		})
+		request({
+			url: 'http://arduino.local/arduino/valve1/0',
+			method: 'GET',
+			json: true
+		}, function(err, body, success){
+			if(err){
+				console.log(err);
+			}
+		})
+		res.end()
 	});
 }

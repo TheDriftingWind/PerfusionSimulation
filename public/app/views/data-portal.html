@@ -45,11 +45,13 @@
             <br>
             <table id="t01" style="text-align: center;">
                <tr>
+                  <th>Student</th>
                   <th>Medication</th>
                   <th>Dose</th>
                   <th>Time Administered</th>
                </tr>
                <tr ng-repeat="administration in administrations | orderBy:'-'">
+                  <td> {{ administration.email }} </td>
                   <td> {{ administration.medication }} </td>
                   <td> {{ administration.dosage}} {{administration.units}}</td>
                   <td> {{ administration.time }} </td>
