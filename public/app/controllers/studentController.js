@@ -55,7 +55,11 @@ function StudentController($scope, $location, $window, $rootScope, $route, AuthF
 		ph2Ctrl = document.getElementById('ph2Ctrl'),
 		naCtrl = document.getElementById('naCtrl'),
 		lidCtrl = document.getElementById('lidCtrl'),
-		magCtrl = document.getElementById('magCtrl');
+		magCtrl = document.getElementById('magCtrl'),
+		esoCtrl = document.getElementById('esoCtrl'),
+		bldCtrl = document.getElementById('bldCtrl'),
+		svo2Ctrl = document.getElementById('svo2Ctrl');
+
 
 		let hepUp = document.getElementById('hepUp'),
 		hepDown = document.getElementById('hepDown');
@@ -71,6 +75,15 @@ function StudentController($scope, $location, $window, $rootScope, $route, AuthF
 
 		let magUp = document.getElementById('magUp'),
 		magDown = document.getElementById('magDown');
+
+		let esoUp = document.getElementById('esoUp'),
+		esoDown = document.getElementById('esoDown');
+
+		let bldUp = document.getElementById('bldUp'),
+		bldDown = document.getElementById('bldDown');
+
+		let svo2Up = document.getElementById('svo2Up'),
+		svo2Down = document.getElementById('svo2Down');
 
 		// Emit events
 		hepUp.addEventListener('click', function(){
@@ -103,6 +116,40 @@ function StudentController($scope, $location, $window, $rootScope, $route, AuthF
 		magDown.addEventListener('click', function(){
 			magCtrl.textContent = magCtrl.textContent * 1.0 - 0.001 >= 0.0 ? Math.round((magCtrl.textContent * 1.0 - 0.001) * 1000)/1000 : 0.0;
 		});
+		bldUp.addEventListener('click', function(){
+		    bldCtrl.textContent = bldCtrl.textContent * 1 + 1 > 38 ? 38 : bldCtrl.textContent * 1 + 1;
+		    vitals.bld = bldCtrl.textContent;
+		    socket.emit('vitals', vitals);
+		});
+		  bldDown.addEventListener('click', function(){
+		    bldCtrl.textContent = bldCtrl.textContent * 1 - 1 < 18 ? 18 : bldCtrl.textContent * 1 - 1;
+		    vitals.bld = bldCtrl.textContent;
+		    socket.emit('vitals', vitals);
+		  });
+
+		  svo2Up.addEventListener('click', function(){
+		    svo2Ctrl.textContent = svo2Ctrl.textContent * 1 + 5 > 100 ? 100 : svo2Ctrl.textContent * 1 + 5;
+		    vitals.svo2 = svo2Ctrl.textContent;
+		    socket.emit('vitals', vitals);
+		  });
+		  svo2Down.addEventListener('click', function(){
+		    svo2Ctrl.textContent = svo2Ctrl.textContent * 1 - 5 < 25 ? 25 : svo2Ctrl.textContent * 1 - 5;
+		    vitals.svo2 = svo2Ctrl.textContent;
+		    socket.emit('vitals', vitals);
+		  });
+
+		  esoUp.addEventListener('click', function(){
+		    esoCtrl.textContent = esoCtrl.textContent * 1 + 1 > 38 ? 38 : esoCtrl.textContent * 1 + 1;
+		    vitals.eso = esoCtrl.textContent;
+		    socket.emit('vitals', vitals);
+		  });
+		  esoDown.addEventListener('click', function(){
+		    esoCtrl.textContent = esoCtrl.textContent * 1 - 1 < 18 ? 18 : esoCtrl.textContent * 1 - 1;
+		    vitals.eso = esoCtrl.textContent;
+		    socket.emit('vitals', vitals);
+		  });
+
+
 		submit.addEventListener('click', function(){
 
 			let administrations = [];
@@ -218,6 +265,10 @@ function StudentController($scope, $location, $window, $rootScope, $route, AuthF
 				svo2Series.addPoint([time, data.adjustedData.svo2], true, svo2Series.data.length > 150);
 				capSeries.addPoint([time, data.adjustedData.cap], true, capSeries.data.length > 150);
 				cvpSeries.addPoint([time, data.adjustedData.cvp], true, cvpSeries.data.length > 150);
+
+		          svo2Ctrl.textContent = data.realData.svo2;
+		          esoCtrl.textContent = data.realData.eso;
+		          bldCtrl.textContent = data.realData.bld;
 
 				stuAbpDisplay.textContent = data.adjustedData.abp;
 				stuSvo2Display.textContent = data.adjustedData.svo2;
