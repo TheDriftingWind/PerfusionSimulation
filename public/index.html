@@ -2,22 +2,15 @@
 <html ng-app="mainApp">
 <head>
 	<title>Perfusion Simulation</title>
-
 	<meta charset="UTF-8">
-
-
 	<link rel="stylesheet" href="lib/bootstrap.min.css">
 	<link rel="stylesheet" href="css/styles.css">
-	<!--<link href="https://fonts.googleapis.com/css?family=Exo" rel="stylesheet">-->
-<!--	<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">-->
-	   <link href="css/styles.css" rel="stylesheet">
-	   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-	  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"><script defer src="https://use.fontawesome.com/releases/v5.0.9/js/all.js" integrity="sha384-8iPTk2s/jMVj81dnzb/iFR2sdA7u06vHJyyLlAd4snFpCl/SnyUjRrbdJsw1pGIl" crossorigin="anonymous"></script>-->
-		<link rel="stylesheet" type="text/css" href="css/fontawesome-all.min.css">
-		<link rel="stylesheet" type="text/css" href="css/fontawesome.min.css">
-		<link rel="stylesheet" type="text/css" href="css/bootstrap-glyphicons.css">
-		
-		<link rel="stylesheet" type="text/css" href="css/fonts/fonts.css" />
+    <link href="css/styles.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="css/fontawesome-all.min.css">
+	<link rel="stylesheet" type="text/css" href="css/fontawesome.min.css">
+	<link rel="stylesheet" type="text/css" href="css/bootstrap-glyphicons.css">
+	<link rel="stylesheet" type="text/css" href="css/fonts/fonts.css" />
 	<script src="lib/jquery.min.js"></script>
 	<script src="lib/angular.min.js"></script>
 	<script src="lib/angular-routes.min.js"></script>
@@ -25,35 +18,19 @@
 	<script src="lib/bootstrap.min.js"></script>
 	<script src="lib/highstock.src.js"></script>
     <script src="lib/socketio.js"></script>
-
-    <script type="text/javascript">
-		var socket = io.connect(window.location.href);
-		socket.on('connect', function(){
-		  console.log('connected to socket')
-		})
-    	window.myData = {
-    		charts: {
-    			prof: {},
-    			stu: {},
-    			portal: {}
-    		}
-    	}
-	</script>
+    <script src="js/initClient.js"></script>
 </head>
 <body>
-	<!-- <div ng-include="'app/views/nav.html'"></div> -->
+	<!-- Angular Template -->
 	<div ng-view></div>
-	<!-- Main Angular Module -->
+	
+	<!-- Main Angular Configurations -->
 	<script src="app/app.js"></script>
 	<script src="app/app.config.js"></script>
 	<script src="app/app.routes.js"></script>
 
-	<!-- Controllers -->
-	<script src="app/controllers/ChartController.js"></script>
-	<script src="app/controllers/NavController.js"></script>
+	<!-- Angular Controllers -->
 	<script src="app/controllers/LoginController.js"></script>
-	<script src="app/controllers/SessionController.js"></script>
-	<script src="app/controllers/TestController.js"></script>
 	<script src="app/controllers/StudentController.js"></script>
 	<script src="app/controllers/InstructorController.js"></script>
 	<script src="app/controllers/DataPortalController.js"></script>
@@ -61,7 +38,7 @@
 	<script src="app/controllers/RegisterController.js"></script>
 	<script src="app/controllers/ArduinoController.js"></script>
 
-	<!-- Services -->
+	<!-- Angular Services -->
 	<script src="app/services/SessionFactory.js"></script>
 	<script src="app/services/AuthFactory.js"></script>
 	<script src="app/services/AdministrationFactory.js"></script>

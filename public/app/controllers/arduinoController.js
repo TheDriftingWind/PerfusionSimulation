@@ -4,12 +4,8 @@ angular
 
 ArduinoController.$inject = ['$scope', '$location', 'ArduinoFactory'];
 
-function ArduinoController($scope, $location, ArduinoFactory){
-	$scope.outputPin13 = 'n/a'
-	$scope.intervalRes = 'n/a'
-
-	$scope.setLEDInterval = setLEDInterval;
-	$scope.setLEDStatus = setLEDStatus;
+// THIS CONTROLLER IS FOR TESTING PURPOSES ONLY
+function ArduinoController($scope, $location, ArduinoFactory){	
 	
 	activate();
 
@@ -51,13 +47,11 @@ function ArduinoController($scope, $location, ArduinoFactory){
 		setInterval(function(){
 			ArduinoFactory.getHeight().then(function(res){
 				document.getElementById('heightSensorValue').textContent = res.height;
-				});
+			});
+			ArduinoFactory.getPressure().then(function(res){
+				document.getElementById('pressureTransducerValue').textContent = res.pressure;
+			});
 		}, 5000)	
-		
-		
-		// ArduinoFactory.getPressure().then(function(res){
-		// 	document.getElementById('pressureTransducerValue').textContent = res.pressure;
-		// });
 	}
 
 	function getPin13(){
@@ -66,14 +60,4 @@ function ArduinoController($scope, $location, ArduinoFactory){
 			getPin13()
 		})
 	}
-
-	function setLEDInterval(interval, ticks){
-		ArduinoFactory.setLEDInterval(interval, ticks).then(function(data){
-		})
-	}
-	function setLEDStatus(status){
-		ArduinoFactory.setLEDStatus(status).then(function(data){
-		})
-	}
-
 }

@@ -228,7 +228,9 @@ function StudentController($scope, $location, $window, $rootScope, $route, AuthF
 		socket.on('administration', function(data){
 			document.getElementById('modal-body').innerHTML = '';
 			for(let i = data.length - 1; i >=0; i--){
-				document.getElementById('modal-body').innerHTML += '<p> ' + data[i] + '</p>' + '<hr>';
+				let administration = data[i].time + ' ' +  data[i].email +  ' administered ' + data[i].dosage + 
+					data[i].units + ' of ' + data[i].medication + '.';
+				document.getElementById('modal-body').innerHTML += '<p> ' + administration + '</p>' + '<hr>';
 			}
 			$('#recent-notification').fadeIn();
 		})
@@ -245,38 +247,38 @@ function StudentController($scope, $location, $window, $rootScope, $route, AuthF
 		})
 
 		socket.on('initCharts', function(data){
-			studentCharts.abp.series[0].setData(data.abp.slice(data.abp.length > 150 ? data.abp.length - 29 : 0, data.abp.length), false)
-			studentCharts.svo2.series[0].setData(data.svo2.slice(data.svo2.length > 150 ? data.svo2.length - 29 : 0, data.svo2.length), false)
-			studentCharts.cap.series[0].setData(data.cap.slice(data.cap.length > 150 ? data.cap.length - 29 : 0, data.cap.length), false)
-			studentCharts.cvp.series[0].setData(data.cvp.slice(data.cvp.length > 150 ? data.cvp.length - 29 : 0, data.cvp.length), false)
+			studentCharts.abp.series[0].setData(data.abp.slice(data.abp.length > 60 ? data.abp.length - 29 : 0, data.abp.length), false)
+			studentCharts.svo2.series[0].setData(data.svo2.slice(data.svo2.length > 60 ? data.svo2.length - 29 : 0, data.svo2.length), false)
+			studentCharts.cap.series[0].setData(data.cap.slice(data.cap.length > 60 ? data.cap.length - 29 : 0, data.cap.length), false)
+			studentCharts.cvp.series[0].setData(data.cvp.slice(data.cvp.length > 60 ? data.cvp.length - 29 : 0, data.cvp.length), false)
 			chartsOn = true;
 		})
 
 		socket.on('vitals', function(data){
 			if(chartsOn){
-				vitals = data.realData;  
-		        let time = data.adjustedData.time;
+				vitals = data.unadjustedVitals;  
+		        let time = data.adjustedVitals.time;
 				let abpSeries = studentCharts.abp.series[0];
 				let svo2Series = studentCharts.svo2.series[0];
 				let capSeries = studentCharts.cap.series[0];
 				let cvpSeries = studentCharts.cvp.series[0];
 
-				abpSeries.addPoint([time, data.adjustedData.abp], true, abpSeries.data.length > 150);
-				svo2Series.addPoint([time, data.adjustedData.svo2], true, svo2Series.data.length > 150);
-				capSeries.addPoint([time, data.adjustedData.cap], true, capSeries.data.length > 150);
-				cvpSeries.addPoint([time, data.adjustedData.cvp], true, cvpSeries.data.length > 150);
+				abpSeries.addPoint([time, data.adjustedVitals.abp], true, abpSeries.data.length > 60);
+				svo2Series.addPoint([time, data.adjustedVitals.svo2], true, svo2Series.data.length > 60);
+				capSeries.addPoint([time, data.adjustedVitals.cap], true, capSeries.data.length > 60);
+				cvpSeries.addPoint([time, data.adjustedVitals.cvp], true, cvpSeries.data.length > 60);
 
-		          svo2Ctrl.textContent = data.realData.svo2;
-		          esoCtrl.textContent = data.realData.eso;
-		          bldCtrl.textContent = data.realData.bld;
+		        svo2Ctrl.textContent = data.unadjustedVitals.svo2;
+		        esoCtrl.textContent = data.unadjustedVitals.eso;
+		        bldCtrl.textContent = data.unadjustedVitals.bld;
 
-				stuAbpDisplay.textContent = data.adjustedData.abp;
-				stuSvo2Display.textContent = data.adjustedData.svo2;
-				stuCapDisplay.textContent = data.adjustedData.cap;
-				stuCvpDisplay.textContent = data.adjustedData.cvp;
-				stuBisDisplay.textContent = data.adjustedData.bis;
-				stuEsoDisplay.textContent = data.adjustedData.eso;
-				stuBldDisplay.textContent = data.adjustedData.bld;
+				stuAbpDisplay.textContent = data.adjustedVitals.abp;
+				stuSvo2Display.textContent = data.adjustedVitals.svo2;
+				stuCapDisplay.textContent = data.adjustedVitals.cap;
+				stuCvpDisplay.textContent = data.adjustedVitals.cvp;
+				stuBisDisplay.textContent = data.adjustedVitals.bis;
+				stuEsoDisplay.textContent = data.adjustedVitals.eso;
+				stuBldDisplay.textContent = data.adjustedVitals.bld;
 			}
 		});
 

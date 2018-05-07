@@ -221,42 +221,44 @@ function InstructorController($scope, $location, $window, $rootScope, AuthFactor
 
 		  socket.on('vitals', function(data){
 		      if(chartsOn){
-
-		          vitals = data.realData;
-		          let time = data.adjustedData.time;
+		          vitals = data.unadjustedVitals;
+		          let time = data.adjustedVitals.time;
 		          let abpSeries = profCharts.abp.series[0];
 		          let svo2Series = profCharts.svo2.series[0];
 		          let capSeries = profCharts.cap.series[0];
 		          let cvpSeries = profCharts.cvp.series[0];
 
-		          abpSeries.addPoint([time, data.adjustedData.abp], true, abpSeries.data.length > 150);
-		          svo2Series.addPoint([time, data.adjustedData.svo2], true, svo2Series.data.length > 150);
-		          capSeries.addPoint([time, data.adjustedData.cap], true, capSeries.data.length > 150);
-		          cvpSeries.addPoint([time, data.adjustedData.cvp], true, cvpSeries.data.length > 150);
+		          abpSeries.addPoint([time, data.adjustedVitals.abp], true, abpSeries.data.length > 60);
+		          svo2Series.addPoint([time, data.adjustedVitals.svo2], true, svo2Series.data.length > 60);
+		          capSeries.addPoint([time, data.adjustedVitals.cap], true, capSeries.data.length > 60);
+		          cvpSeries.addPoint([time, data.adjustedVitals.cvp], true, cvpSeries.data.length > 60);
 
-		          abpCtrl.textContent = data.realData.abp;
-		          svo2Ctrl.textContent = data.realData.svo2;
-		          capCtrl.textContent = data.realData.cap;
-		          cvpCtrl.textContent = data.realData.cvp;
-		          bisCtrl.textContent = data.realData.bis;
-		          esoCtrl.textContent = data.realData.eso;
-		          bldCtrl.textContent = data.realData.bld;
+		          abpCtrl.textContent = data.unadjustedVitals.abp;
+		          svo2Ctrl.textContent = data.unadjustedVitals.svo2;
+		          capCtrl.textContent = data.unadjustedVitals.cap;
+		          cvpCtrl.textContent = data.unadjustedVitals.cvp;
+		          bisCtrl.textContent = data.unadjustedVitals.bis;
+		          esoCtrl.textContent = data.unadjustedVitals.eso;
+		          bldCtrl.textContent = data.unadjustedVitals.bld;
 
-		          profAbpDisplay.textContent = data.adjustedData.abp;
-		          profSvo2Display.textContent = data.adjustedData.svo2;
-		          profCapDisplay.textContent = data.adjustedData.cap;
-		          profCvpDisplay.textContent = data.adjustedData.cvp;
-		          profBisDisplay.textContent = data.adjustedData.bis;
-		          profEsoDisplay.textContent = data.adjustedData.eso;
-		          profBldDisplay.textContent = data.adjustedData.bld;
+		          profAbpDisplay.textContent = data.adjustedVitals.abp;
+		          profSvo2Display.textContent = data.adjustedVitals.svo2;
+		          profCapDisplay.textContent = data.adjustedVitals.cap;
+		          profCvpDisplay.textContent = data.adjustedVitals.cvp;
+		          profBisDisplay.textContent = data.adjustedVitals.bis;
+		          profEsoDisplay.textContent = data.adjustedVitals.eso;
+		          profBldDisplay.textContent = data.adjustedVitals.bld;
 		      }
 		  });
 
 		socket.on('administration', function(data){
 			document.getElementById('modal-body').innerHTML = '';
-		  for(let i = data.length - 1; i >=0; i--){
-		    document.getElementById('modal-body').innerHTML += '<p> ' + data[i] + '</p>' + '<hr>';
-		  }
+			for(let i = data.length - 1; i >=0; i--){
+				let administration = data[i].time + ' ' +  data[i].email +  ' administered ' + data[i].dosage + 
+					data[i].units + ' of ' + data[i].medication + '.';
+				document.getElementById('modal-body').innerHTML += '<p> ' + administration + '</p>' + '<hr>';
+			}
+			$('#recent-notification').fadeIn();
 		});
 
 		socket.on('end', function(data){
@@ -264,10 +266,10 @@ function InstructorController($scope, $location, $window, $rootScope, AuthFactor
 		});
 
 		socket.on('initCharts', function(data){
-		    profCharts.abp.series[0].setData(data.abp.slice(data.abp.length > 150 ? data.abp.length - 29 : 0, data.abp.length), false)
-		    profCharts.svo2.series[0].setData(data.svo2.slice(data.svo2.length > 150 ? data.svo2.length - 29 : 0, data.svo2.length), false)
-		    profCharts.cap.series[0].setData(data.cap.slice(data.cap.length > 150 ? data.cap.length - 29 : 0, data.cap.length), false)
-		    profCharts.cvp.series[0].setData(data.cvp.slice(data.cvp.length > 150 ? data.cvp.length - 29 : 0, data.cvp.length), false)
+		    profCharts.abp.series[0].setData(data.abp.slice(data.abp.length > 60 ? data.abp.length - 29 : 0, data.abp.length), false)
+		    profCharts.svo2.series[0].setData(data.svo2.slice(data.svo2.length > 60 ? data.svo2.length - 29 : 0, data.svo2.length), false)
+		    profCharts.cap.series[0].setData(data.cap.slice(data.cap.length > 60 ? data.cap.length - 29 : 0, data.cap.length), false)
+		    profCharts.cvp.series[0].setData(data.cvp.slice(data.cvp.length > 60 ? data.cvp.length - 29 : 0, data.cvp.length), false)
 		    chartsOn = true;
 		})
 

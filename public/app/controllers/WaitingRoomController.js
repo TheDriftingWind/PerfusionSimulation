@@ -9,6 +9,7 @@ function WaitingRoomController($scope, $location, $window, $route, AuthFactory){
 	$scope.users = [];
 	$scope.user = undefined;
 	$scope.startSession = startSession;
+	
 	activate();
 
 	///////////

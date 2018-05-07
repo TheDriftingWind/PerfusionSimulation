@@ -2,7 +2,6 @@ var mongoose = require('mongoose');
 var bcrypt = require('bcryptjs');
 var passport = require('passport');
 
-
 var User = mongoose.model('User', mongoose.Schema({
 	first_name:{
   		type: String,
@@ -56,9 +55,9 @@ function getUserById(id, callback){
 }
 
 module.exports = {
-	User,
-	createUser,
-	getUserByEmail,
-	comparePassword,
-	getUserById
+  User,
+  createUser,
+  getUserByEmail,
+  comparePassword,
+  getUserById
 };

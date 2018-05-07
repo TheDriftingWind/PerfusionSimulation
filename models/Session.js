@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 
 var Session = mongoose.model('Session', mongoose.Schema({
-	datapoints:{
+	sessionData:{
   		type: {
   			abp: Number,
 	  		cap: Number,
@@ -15,7 +15,7 @@ var Session = mongoose.model('Session', mongoose.Schema({
 	  	},
 	  	required: true
   	},
-  	activity:{
+  	administrations:{
   		type: {
 	  		time: String,
 	  		email: String,
@@ -29,6 +29,5 @@ var Session = mongoose.model('Session', mongoose.Schema({
   		required: true
   	}
 }));
-
 
 module.exports = Session;

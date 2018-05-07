@@ -2,6 +2,7 @@ var UserSchema = require('../models/User');
 let LocalStrategy = require('passport-local').Strategy;
 
 module.exports = function(app, passport){
+    // register a new user
     app.post('/authentication/register', function(req, res){
         let first_name = req.body.first_name;
         let last_name = req.body.last_name;
@@ -23,6 +24,7 @@ module.exports = function(app, passport){
         });
     });
 
+    // set up a strategy for passport
     passport.use(new LocalStrategy({
         usernameField: 'email',
         passwordField: 'password',
@@ -55,6 +57,7 @@ module.exports = function(app, passport){
         });
     });
 
+    // user our passport strategy as a middleware for authenticating users
     app.post('/authentication/login', passport.authenticate('local'), 
         function(req, res){
             res.status(200).json({
@@ -64,6 +67,7 @@ module.exports = function(app, passport){
         }
     );
 
+    // check if an email exists (used for user registration)
     app.post('/authentication/email_exists', function(req, res){
         UserSchema.getUserByEmail(req.body.email, function(err, user) {
             if(user){
@@ -74,11 +78,13 @@ module.exports = function(app, passport){
         });
     });
 
+    // log the user out
     app.get('/authentication/logout', function(req, res){
         req.logout();
         res.end();
     });
 
+    // check if the user is logged in
     app.get('/authentication/login', function(req, res){
         if(req.user){
             res.status(200).json({

@@ -1,13 +1,12 @@
 var app = angular.module('mainApp', ['ngRoute']);
 
-
 app.config(function ($routeProvider){
 	$routeProvider.when('/login', {
 		templateUrl: 'app/views/login.html',
 		controller: 'LoginController',
 		access: {
 			restricted: false,
-			student_access: false
+			student_access: true
 		}
 	})
 	.when('/register', {
@@ -18,7 +17,6 @@ app.config(function ($routeProvider){
 			student_access: true
 		}
 	})
-
 	.when('/waiting-room', {
 		templateUrl: 'app/views/waiting-room.html',
 		controller: 'WaitingRoomController',
@@ -40,23 +38,7 @@ app.config(function ($routeProvider){
 		controller: 'InstructorController',
 		access: {
 			restricted: true,
-			student_access: true
-		}
-	})
-	.when('/chart', {
-		templateUrl: 'app/views/highchart.html',
-		controller: 'ChartController',
-		access: {
-			restricted: true,
-			student_access: true
-		}
-	})
-	.when('/test', {
-		templateUrl: 'app/views/test.html',
-		controller: 'TestController',
-		access: {
-			restricted: true,
-			student_access: true
+			student_access: false
 		}
 	})
 	.when('/sync', {
@@ -75,14 +57,6 @@ app.config(function ($routeProvider){
 			student_access: true
 		}
 	})
-	.when('/sessions', {
-		templateUrl: 'app/views/session.html',
-		controller: 'SessionController',
-		access: {
-			restricted: true,
-			student_access: true
-		}
-	})
 	.when('/arduino', {
 		templateUrl: 'app/views/arduino.html',
 		controller: 'ArduinoController',
@@ -94,9 +68,13 @@ app.config(function ($routeProvider){
 	.otherwise('/login')
 });
 
+// runs everytime a route change is made
 app.run(function($rootScope, $location, $route, $window, AuthFactory) {
 	$rootScope.$on("$routeChangeStart", function(event, next, current) {
-		if(next.$$route && next.$$route.access.restricted && !AuthFactory.getUser()){
+		let user = AuthFactory.getUser();
+		// TODO: block student from instructor routes
+		// check if new route is protected and if user has permissions
+		if(next.$$route && next.$$route.access.restricted && !user){
 			$location.path('/login');
 			AuthFactory.isLoggedIn().then(function(res){
 				if(res.status == 200){
