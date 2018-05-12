@@ -247,10 +247,10 @@ function StudentController($scope, $location, $window, $rootScope, $route, AuthF
 		})
 
 		socket.on('initCharts', function(data){
-			studentCharts.abp.series[0].setData(data.abp.slice(data.abp.length > 60 ? data.abp.length - 29 : 0, data.abp.length), false)
-			studentCharts.svo2.series[0].setData(data.svo2.slice(data.svo2.length > 60 ? data.svo2.length - 29 : 0, data.svo2.length), false)
-			studentCharts.cap.series[0].setData(data.cap.slice(data.cap.length > 60 ? data.cap.length - 29 : 0, data.cap.length), false)
-			studentCharts.cvp.series[0].setData(data.cvp.slice(data.cvp.length > 60 ? data.cvp.length - 29 : 0, data.cvp.length), false)
+			studentCharts.abp.series[0].setData(data.abp.slice(data.abp.length > 30 ? data.abp.length - 29 : 0, data.abp.length), false)
+			studentCharts.svo2.series[0].setData(data.svo2.slice(data.svo2.length > 30 ? data.svo2.length - 29 : 0, data.svo2.length), false)
+			studentCharts.cap.series[0].setData(data.cap.slice(data.cap.length > 30 ? data.cap.length - 29 : 0, data.cap.length), false)
+			studentCharts.cvp.series[0].setData(data.cvp.slice(data.cvp.length > 30 ? data.cvp.length - 29 : 0, data.cvp.length), false)
 			chartsOn = true;
 		})
 
@@ -263,10 +263,10 @@ function StudentController($scope, $location, $window, $rootScope, $route, AuthF
 				let capSeries = studentCharts.cap.series[0];
 				let cvpSeries = studentCharts.cvp.series[0];
 
-				abpSeries.addPoint([time, data.adjustedVitals.abp], true, abpSeries.data.length > 60);
-				svo2Series.addPoint([time, data.adjustedVitals.svo2], true, svo2Series.data.length > 60);
-				capSeries.addPoint([time, data.adjustedVitals.cap], true, capSeries.data.length > 60);
-				cvpSeries.addPoint([time, data.adjustedVitals.cvp], true, cvpSeries.data.length > 60);
+				abpSeries.addPoint([time, data.adjustedVitals.abp], true, abpSeries.data.length > 30);
+				svo2Series.addPoint([time, data.adjustedVitals.svo2], true, svo2Series.data.length > 30);
+				capSeries.addPoint([time, data.adjustedVitals.cap], true, capSeries.data.length > 30);
+				cvpSeries.addPoint([time, data.adjustedVitals.cvp], true, cvpSeries.data.length > 30);
 
 		        svo2Ctrl.textContent = data.unadjustedVitals.svo2;
 		        esoCtrl.textContent = data.unadjustedVitals.eso;
